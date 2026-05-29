@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>冰箱贴算价客服端</title>
+<style>
+:root{--bg:#eef3f8;--card:#fff;--text:#111827;--muted:#667085;--blue:#1677ff;--green:#16a34a;--red:#dc2626;--bd:#d9e2ee;--soft:#f7f9fc;--shadow:0 3px 12px rgba(15,23,42,.08);--r:12px}*{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif;font-size:15px;display:flex;flex-direction:column}.top{height:70px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:0 1px 8px rgba(15,23,42,.08);flex:0 0 auto}.brand{font-size:30px;font-weight:800;white-space:nowrap;letter-spacing:.2px;color:#0f172a}.actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--bd);border-radius:16px;padding:8px 13px;font-size:15px;font-weight:600;cursor:pointer;background:#fff;color:#111827}.btn:hover{background:#f3f7ff}.btn.blue{background:var(--blue);color:#fff;border-color:var(--blue)}.btn.green{background:var(--green);color:#fff;border-color:var(--green)}.status{font-size:14px;color:var(--muted);white-space:nowrap}.notice{margin:7px 10px 0;border-radius:10px;padding:8px 13px;background:#fff;border:1px solid var(--bd);box-shadow:var(--shadow);flex:0 0 auto}.tipbar{margin:7px 10px 0;display:flex;justify-content:space-between;gap:10px;align-items:center;flex:0 0 auto}.tip{font-size:14px;color:#475467}.tabs{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.tab{border:1.5px solid transparent;background:#fff;border-radius:14px;padding:5px 9px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.05);display:flex;gap:5px;align-items:center}.tab.active{border-color:var(--blue);color:var(--blue);background:#eff6ff}.tab input{border:0;background:transparent;width:70px;font-size:14px;font-weight:600;outline:none;color:inherit}.main{padding:8px 10px 10px;flex:1 1 auto;min-height:0;overflow:hidden}.grid{height:100%;display:grid;gap:9px;min-height:0}.grid.n1{grid-template-columns:1fr;grid-template-rows:1fr}.grid.n2{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1fr}.grid.n3{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr}.grid.n4{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}.grid.n5,.grid.n6{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}.window{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}.window.active{border-color:var(--blue);box-shadow:0 0 0 3px rgba(22,119,255,.16),var(--shadow)}.window.exporting{box-shadow:none!important;border-color:#cbd5e1!important}.win-head{height:46px;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 9px;background:#f8fafc;border-bottom:1px solid var(--bd);flex:0 0 auto}.namebox{display:flex;align-items:center;gap:5px;min-width:0}.editicon{color:var(--blue);font-weight:700;font-size:14px}.win-name{font-size:18px;font-weight:600;border:1.5px dashed #93c5fd;border-radius:8px;background:#fff;padding:5px 7px;width:132px;outline:none}.win-tools{display:flex;gap:4px;align-items:center;flex-wrap:nowrap}.round{width:30px;height:30px;border-radius:50%;font-size:18px;font-weight:700;border:1px solid var(--bd);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.15s}.round.add{color:var(--green)}.round.add:hover{border-color:var(--green);background:#f0fdf4}.round.del{color:var(--red)}.round.del:hover{border-color:var(--red);background:#fef2f2}.tool{border:1px solid var(--bd);background:#fff;border-radius:8px;height:30px;width:46px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;cursor:pointer;color:#344054;padding:0;transition:0.15s}.tool:hover{border-color:var(--blue);color:var(--blue);background:#f8fbff}.rows{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:auto;padding:7px;background:#fbfdff}.quote-row{display:grid;gap:5px;align-items:end;background:#fff;border:1px solid #e5edf7;border-radius:10px;padding:8px;margin-bottom:7px;min-width:0;width:100%}.quote-row:hover{border-color:#bfdbfe}.cell{min-width:0}.cell>label{display:block;font-size:12px;font-weight:600;color:#526174;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}.seq{font-size:14px;font-weight:600;color:#667085;text-align:center;height:36px;display:flex;align-items:center;justify-content:center}.inp,.sel{width:100%;min-width:0;border:1.3px solid var(--bd);border-radius:7px;background:#fff;padding:6px 4px;font-size:14px;font-weight:500;outline:none;text-align:center;height:36px}.sel{text-align:left;padding-left:4px}.inp:focus,.sel:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(22,119,255,.12);background:#eff6ff}.money{height:36px;border-radius:7px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;font-weight:600;padding:3px 5px;line-height:1.12;white-space:nowrap;overflow:hidden}.money.totalcell{background:#eff6ff;color:#075bb5}.muted{color:#98a2b3}.small{display:inline-block;font-size:10px;color:#667085;font-weight:500;margin-left:2px}.foot{border-top:1px solid var(--bd);background:#fff;padding:7px 9px;display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center;flex:0 0 auto}.leftFees{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.fee{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:500;background:#f8fafc;border:1px solid var(--bd);border-radius:9px;padding:5px 7px;transition:0.2s}.fee input[type=number],.fee input[type=text]{width:60px;height:30px;border:1px solid var(--bd);border-radius:7px;padding:4px;text-align:center}.discount{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500}.discount input{width:50px;height:30px;border:1px solid var(--bd);border-radius:7px;padding:4px}.discountBtns{display:flex;gap:4px;flex-wrap:wrap}.dBtn{border:1px solid var(--bd);background:#fff;border-radius:12px;padding:4px 6px;font-size:12px;font-weight:600;cursor:pointer}.dBtn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.min-disc-tag{font-size:12px;color:#b45309;font-weight:700;background:#fef3c7;padding:4px 8px;border-radius:6px;white-space:nowrap;border:1px solid #fde68a}.grand{font-size:23px;font-weight:700;color:#0f172a;text-align:right;white-space:nowrap;line-height:1}.hidden{display:none!important}.onlyActive .window:not(.active){display:none}.onlyActive .grid{grid-template-columns:1fr!important;grid-template-rows:1fr!important}.discountHidden .discount{display:none!important}.minDiscHidden .min-disc-tag{display:none!important}.auth{position:fixed;inset:0;background:rgba(15,23,42,.72);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}.auth-card{background:#fff;border-radius:18px;box-shadow:0 24px 90px rgba(0,0,0,.32);padding:24px;max-width:520px;width:100%}.auth-card h2{margin:0 0 8px;font-size:24px}.auth-card p{font-size:15px;color:#475467;line-height:1.7}.auth-card input{width:100%;border:1.5px solid var(--bd);border-radius:11px;font-size:17px;padding:12px;outline:none}.auth-card input+input{margin-top:9px}.auth-actions{display:flex;gap:8px;margin-top:12px}.auth-actions .btn{flex:1}.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1f5f9;border:1px dashed #94a3b8;border-radius:10px;padding:10px;word-break:break-all;font-size:13px;margin:9px 0}.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;border-radius:999px;padding:10px 18px;font-size:14px;font-weight:600;z-index:30000;opacity:0;transition:.25s;pointer-events:none}.toast.show{opacity:1}.print-title{display:none}
+.tab.winAdd{border-color:#bbf7d0;color:#15803d;background:#f0fdf4}.tab.winRemove{border-color:#fecaca;color:#b91c1c;background:#fef2f2}
+.disabledcell .money{background:#f8fafc;color:#98a2b3}
+.lineBtns{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;height:36px;padding:0}
+.lineBtn{width:24px;height:16px;border-radius:4px;border:1px solid var(--bd);background:#fff;font-size:14px;font-weight:700;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:0.1s}
+.lineBtn.plus{color:var(--green)}.lineBtn.minus{color:var(--red)}.lineBtn:hover{background:#f8fbff;border-color:var(--blue)}
+
+/* 工艺配套弹窗专属样式 */
+.acc-cell{cursor:pointer;border:1.3px dashed var(--bd);border-radius:7px;min-height:36px;display:flex;flex-wrap:wrap;gap:4px;padding:4px 6px;align-items:center;justify-content:center;background:#fff;transition:.2s}.acc-cell:hover{border-color:var(--blue);background:#f0f7ff}
+.acc-tag{font-size:11px;padding:2px 6px;border-radius:4px;background:#e0f2fe;color:#0369a1;font-weight:600;white-space:nowrap}.acc-price{background:#f0fdf4;color:#15803d}.acc-meter{background:#fff7ed;color:#c2410c}.meter-lbl{cursor:pointer;border-radius:999px;padding:1px 4px;display:inline-block}.meter-lbl.on{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}.pop-sub{font-size:11px;color:#667085;font-weight:500;margin-left:auto}.pop-bundle{background:#f8fafc}.edgeBtns{display:flex;gap:4px;justify-content:center;margin-top:4px}.edgeBtn{border:1px solid var(--bd);border-radius:8px;background:#fff;font-size:11px;padding:2px 6px;cursor:pointer}.edgeBtn.active{border-color:#f97316;background:#fff7ed;color:#c2410c;font-weight:700}
+.acc-none{color:#94a3b8;font-size:12px;font-weight:500}
+.popover{position:fixed;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.15);border:1px solid var(--bd);z-index:10000;padding:8px;display:none;width:280px;max-height:360px;overflow-y:auto}
+.pop-item{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;border-radius:8px;font-size:14px;font-weight:600;color:#333;transition:background .15s}
+.pop-item:hover{background:#f1f5f9}
+.pop-item input{width:16px;height:16px;pointer-events:none;accent-color:var(--blue)}
+
+/* 多窗口适配逻辑 */
+.grid.n2 .inp, .grid.n3 .inp, .grid.n4 .inp, .grid.n5 .inp, .grid.n6 .inp,
+.grid.n2 .sel, .grid.n3 .sel, .grid.n4 .sel, .grid.n5 .sel, .grid.n6 .sel,
+.grid.n2 .money, .grid.n3 .money, .grid.n4 .money, .grid.n5 .money, .grid.n6 .money,
+.grid.n2 .seq, .grid.n3 .seq, .grid.n4 .seq, .grid.n5 .seq, .grid.n6 .seq { height:26px; font-size:13px; padding:2px 4px; min-width:0; }
+.grid.n2 .lineBtns, .grid.n3 .lineBtns, .grid.n4 .lineBtns, .grid.n5 .lineBtns, .grid.n6 .lineBtns { height:26px; gap:2px; }
+.grid.n2 .lineBtn, .grid.n3 .lineBtn, .grid.n4 .lineBtn, .grid.n5 .lineBtn, .grid.n6 .lineBtn { width:20px; height:12px; font-size:12px; border-radius:3px; }
+.grid.n2 .acc-cell, .grid.n3 .acc-cell, .grid.n4 .acc-cell, .grid.n5 .acc-cell, .grid.n6 .acc-cell { min-height:26px; padding:2px; gap:2px; }
+.grid.n2 .acc-tag, .grid.n3 .acc-tag, .grid.n4 .acc-tag, .grid.n5 .acc-tag, .grid.n6 .acc-tag { font-size:10px; padding:1px 4px; }
+.grid.n2 .acc-none, .grid.n3 .acc-none, .grid.n4 .acc-none, .grid.n5 .acc-none, .grid.n6 .acc-none { font-size:10px; }
+.grid.n2 .window, .grid.n3 .window, .grid.n4 .window, .grid.n5 .window, .grid.n6 .window {font-size:13px}
+.grid.n2 .quote-row, .grid.n3 .quote-row, .grid.n4 .quote-row, .grid.n5 .quote-row, .grid.n6 .quote-row {gap:4px; padding:5px 6px; margin-bottom:5px}
+.grid.n2 .cell>label, .grid.n3 .cell>label, .grid.n4 .cell>label, .grid.n5 .cell>label, .grid.n6 .cell>label {font-size:11px; margin-bottom:2px}
+.grid.n2 .win-head, .grid.n3 .win-head, .grid.n4 .win-head, .grid.n5 .win-head, .grid.n6 .win-head {height:36px; padding:0 6px}
+.grid.n2 .win-name, .grid.n3 .win-name, .grid.n4 .win-name, .grid.n5 .win-name, .grid.n6 .win-name {font-size:15px; padding:2px 4px; width:100px}
+.grid.n2 .tool, .grid.n3 .tool, .grid.n4 .tool, .grid.n5 .tool, .grid.n6 .tool {font-size:12px; padding:0; width:40px; border-radius:6px}
+.grid.n2 .round, .grid.n3 .round, .grid.n4 .round, .grid.n5 .round, .grid.n6 .round {width:24px; height:24px; font-size:16px}
+.grid.n2 .foot, .grid.n3 .foot, .grid.n4 .foot, .grid.n5 .foot, .grid.n6 .foot {padding:5px 6px; gap:5px}
+.grid.n2 .grand, .grid.n3 .grand, .grid.n4 .grand, .grid.n5 .grand, .grid.n6 .grand {font-size:18px}
+.grid.n2 .fee, .grid.n3 .fee, .grid.n4 .fee, .grid.n5 .fee, .grid.n6 .fee, .grid.n2 .discount, .grid.n3 .discount, .grid.n4 .discount, .grid.n5 .discount, .grid.n6 .discount {font-size:12px; padding:3px 5px}
+.grid.n2 .fee input[type=number],.grid.n2 .fee input[type=text], .grid.n3 .fee input[type=number],.grid.n3 .fee input[type=text], .grid.n4 .fee input[type=number],.grid.n4 .fee input[type=text], .grid.n5 .fee input[type=number],.grid.n5 .fee input[type=text], .grid.n6 .fee input[type=number],.grid.n6 .fee input[type=text] {width:46px; height:24px; font-size:12px}
+.grid.n2 .discount input, .grid.n3 .discount input, .grid.n4 .discount input, .grid.n5 .discount input, .grid.n6 .discount input {width:42px; height:24px}
+.grid.n2 .dBtn, .grid.n3 .dBtn, .grid.n4 .dBtn, .grid.n5 .dBtn, .grid.n6 .dBtn {padding:2px 4px; font-size:11px}
+.grid.n2 .min-disc-tag, .grid.n3 .min-disc-tag, .grid.n4 .min-disc-tag, .grid.n5 .min-disc-tag, .grid.n6 .min-disc-tag {font-size:11px; padding:2px 4px}
+
+/* 明细弹窗专属样式 */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.modal-box{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:380px;box-shadow:0 24px 80px rgba(0,0,0,.15)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:18px;font-weight:800;color:#0f172a}
+.modal-close{cursor:pointer;font-size:24px;color:#94a3b8;line-height:1;transition:.2s}
+.modal-close:hover{color:#ef4444}
+.detail-line{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;color:#475467;border-bottom:1px dashed #e2e8f0}
+.detail-line:last-child{border-bottom:none}
+.detail-line.bold{font-weight:700;color:#0f172a;border-top:2px solid #cbd5e1;margin-top:4px;padding-top:10px}
+.detail-link{font-size:12px;color:var(--blue);cursor:pointer;text-decoration:underline;margin-top:2px;font-weight:600;opacity:0.8;transition:.2s;text-align:right}
+.detail-link:hover{opacity:1}
+
+
+.ai-modal{position:fixed;inset:0;background:rgba(15,23,42,.62);z-index:10001;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(3px)}
+.ai-box{background:#fff;border-radius:18px;width:min(1080px,96vw);max-height:92vh;overflow:auto;box-shadow:0 24px 90px rgba(0,0,0,.28);padding:18px}.ai-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.ai-head h2{margin:0;font-size:22px}.ai-close{font-size:26px;color:#94a3b8;cursor:pointer}.ai-grid{display:grid;grid-template-columns:330px 1fr;gap:12px}.ai-panel{border:1px solid var(--bd);border-radius:14px;background:#fbfdff;padding:12px}.ai-panel textarea{width:100%;min-height:160px;border:1.3px solid var(--bd);border-radius:10px;padding:9px;font-size:14px;resize:vertical}.ai-drop{border:1.5px dashed #93c5fd;border-radius:12px;background:#f0f7ff;padding:12px;text-align:center;color:#475467;font-weight:600;margin-bottom:8px}.ai-imgs{display:flex;gap:6px;flex-wrap:wrap}.ai-imgs img{width:58px;height:58px;object-fit:cover;border-radius:8px;border:1px solid var(--bd)}.ai-preview-row{display:grid;grid-template-columns:34px 1.2fr 1fr .75fr .75fr .75fr 1fr 72px;gap:5px;align-items:end;background:#fff;border:1px solid #e5edf7;border-radius:10px;padding:7px;margin-bottom:6px}.ai-preview-row .cell>label{font-size:11px}.ai-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.ai-actions .btn{border-radius:10px}.ai-radio{display:inline-flex;gap:5px;align-items:center;font-size:13px;font-weight:600;color:#475467}.kb-search{display:grid;grid-template-columns:1fr auto auto;gap:8px;margin-bottom:10px}.kb-results{display:grid;gap:10px}.kb-chat{display:flex;flex-direction:column;gap:10px}.kb-chatbox{border:1px solid var(--bd);border-radius:14px;background:#f8fafc;padding:12px;min-height:360px;max-height:56vh;overflow:auto;margin-bottom:10px}.kb-inputbar{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end}.kb-inputbar textarea{width:100%;min-height:54px;max-height:120px;border:1.3px solid var(--bd);border-radius:12px;padding:10px;font-size:14px;resize:vertical;outline:none}.kb-inputbar textarea:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(22,119,255,.12)}.kb-bubble{max-width:86%;border-radius:16px;padding:10px 12px;line-height:1.6;white-space:pre-wrap}.kb-bubble.user{align-self:flex-end;background:#eff6ff;border:1px solid #bfdbfe;color:#075bb5}.kb-bubble.assistant{align-self:flex-start;background:#fff;border:1px solid var(--bd);box-shadow:0 2px 8px rgba(15,23,42,.05)}.kb-card{border:1px solid var(--bd);background:#fff;border-radius:12px;padding:10px}.kb-card h3{margin:0 0 6px;font-size:16px}.kb-meta{font-size:12px;color:#667085;margin-bottom:5px}.kb-answer{font-size:14px;line-height:1.6;white-space:pre-wrap;background:#f8fafc;border-radius:8px;padding:8px}.kb-related{font-size:12px;color:#667085;margin-top:6px}.ai-badge{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f2fe;color:#0369a1;font-weight:700}.tool.ai{width:62px;color:#075bb5;background:#eff6ff;border-color:#bfdbfe}.tool.ai:hover{background:#dbeafe}
+
+
+/* 优化：报价表、常用尺寸二级菜单、空行提示、总价突出、PDF/表格专用排版 */
+.tip{display:none!important}.tipbar{justify-content:flex-end}.rows{padding:10px 12px;background:#f5f7fb}.sizePresetBar{display:flex;justify-content:flex-end;align-items:center;padding:8px 0 10px;background:transparent;border-bottom:0;flex:0 0 auto}.presetMenu{position:relative}.presetMainBtn{height:34px;border:1px solid var(--bd);background:#fff;border-radius:10px;padding:0 12px;font-size:13px;font-weight:700;cursor:pointer;color:#334155;box-shadow:0 1px 3px rgba(0,0,0,.04)}.presetMainBtn:hover{border-color:var(--blue);color:var(--blue);background:#f8fbff}.presetDrop{position:absolute;right:0;top:40px;width:250px;background:#fff;border:1px solid var(--bd);border-radius:12px;box-shadow:0 14px 40px rgba(15,23,42,.14);padding:10px;display:none;z-index:30}.presetDrop.open{display:block}.presetSubTitle{font-size:12px;font-weight:800;color:#64748b;margin-bottom:8px}.presetQuickList{display:flex;flex-direction:column;gap:6px}.presetQuickBtn{height:34px;border:1px solid #d9e2ee;background:#fff;border-radius:9px;padding:0 10px;font-size:13px;font-weight:700;color:#334155;cursor:pointer;text-align:left}.presetQuickBtn:hover{background:#eff6ff;border-color:#bfdbfe;color:#075bb5}.presetQuickBtn span{float:right;color:#94a3b8}.presetMenuFooter{margin-top:10px;padding-top:10px;border-top:1px solid #e5edf7}.presetMenuManage{width:100%;height:34px;border:1px dashed #93c5fd;background:#f8fbff;border-radius:9px;font-size:13px;font-weight:700;color:#075bb5;cursor:pointer}.presetEmpty{font-size:12px;color:#94a3b8;padding:8px 2px}.quote-head{display:grid;gap:8px;align-items:center;padding:0 12px 8px;margin-bottom:6px;color:#64748b;font-size:12px;font-weight:800}.quote-head>div{text-align:center;line-height:1.2}.quote-head .left{text-align:left}.quote-head .size{display:flex;align-items:center;justify-content:center}.quote-head .size small{font-size:11px;font-weight:700;color:#94a3b8;margin-left:4px}.quote-row{display:grid;gap:8px;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:8px;min-width:0;width:100%}.quote-row:hover{border-color:#bfdbfe}.quote-row .cell>label{display:none}.quote-row .seq,.quote-row .inp,.quote-row .sel,.quote-row .money,.quote-row .acc-cell{height:38px;min-height:38px}.quote-row .seq{border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;font-size:14px;font-weight:800;color:#475569}.quote-row .sel{text-align:left;padding-left:10px}.quote-row .inp,.quote-row .sel{border-radius:10px;padding:0 10px}.quote-row .money{border-radius:10px;font-size:14px;padding:0 8px}.quote-row .acc-cell{border-radius:10px;padding:4px 8px;justify-content:flex-start}.quote-row .acc-none{width:100%;text-align:center}.size-cell .size-pair{display:grid;grid-template-columns:minmax(0,1fr)16px minmax(0,1fr);gap:6px;align-items:end}.size-sub{min-width:0;display:flex;flex-direction:column;gap:4px}.size-sub .meter-lbl{display:block;text-align:center;font-size:11px;line-height:1.1;white-space:nowrap;color:#64748b;font-weight:700;height:14px}.size-x{font-size:16px;font-weight:800;color:#94a3b8;text-align:center;padding-bottom:10px}.dim-inp{height:38px!important;padding:0 10px!important}.quote-row.empty-row{background:#fbfdff;border-style:dashed}.quote-row.incomplete-row{border-color:#fdba74;background:#fffaf3}.row-hint{grid-column:1/-1;font-size:12px;font-weight:700;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:7px 10px;line-height:1.35}.empty-row .row-hint{color:#667085;background:#f8fafc;border-color:#e2e8f0}.lineBtns{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;height:38px;padding:0}.lineBtn{width:24px;height:16px;border-radius:5px;border:1px solid var(--bd);background:#fff;font-size:13px;font-weight:800;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex:0 0 auto}.foot{padding:9px 12px}.grandBox{display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:170px}.grandLabel{font-size:12px;font-weight:700;color:#075bb5;background:#eff6ff;border:1px solid #bfdbfe;border-radius:999px;padding:2px 8px}.grandMeta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;font-size:11px;color:#667085}.grandMeta b{color:#0f172a}.grand{font-size:27px;font-weight:900;color:#075bb5;text-align:right;white-space:nowrap;line-height:1}.grandOps{display:flex;gap:8px;align-items:center}.miniLink{border:0;background:transparent;color:var(--blue);font-size:12px;font-weight:700;cursor:pointer;padding:0}.sizePresetModal .ai-box{width:min(560px,96vw)}.presetManagerList{display:flex;flex-direction:column;gap:8px;margin-top:10px}.presetManagerRow{display:grid;grid-template-columns:1.1fr .8fr .8fr auto;gap:8px;align-items:center}.presetManagerHead{display:grid;grid-template-columns:1.1fr .8fr .8fr auto;gap:8px;font-size:12px;font-weight:800;color:#64748b;margin-top:6px}.presetManagerRow .input{height:38px}.presetManagerActions{display:flex;justify-content:space-between;gap:8px;margin-top:12px}.presetAddBtn{border:1px dashed #93c5fd;background:#f8fbff;color:#075bb5;border-radius:9px;height:36px;padding:0 12px;font-size:13px;font-weight:700;cursor:pointer}.pdf-stage{position:absolute;left:-100000px;top:0;background:#fff;z-index:-1;pointer-events:none}.pdf-page{width:794px;min-height:1123px;background:#fff;padding:34px 38px;color:#111827;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif;box-sizing:border-box}.pdf-title{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111827;padding-bottom:12px;margin-bottom:16px}.pdf-title h1{margin:0;font-size:26px}.pdf-meta{font-size:13px;color:#475467;text-align:right;line-height:1.8}.pdf-table{width:100%;border-collapse:collapse;font-size:13px}.pdf-table th,.pdf-table td{border:1px solid #d9e2ee;padding:7px 6px;text-align:center;vertical-align:middle}.pdf-table th{background:#f1f5f9;color:#334155;font-weight:800}.pdf-table td.left{text-align:left}.pdf-summary{margin-top:18px;margin-left:auto;width:340px;border:none;border-radius:0;overflow:visible}.pdf-summary div{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px dashed #d9e2ee;font-size:14px}.pdf-summary div b{font-size:14px}.pdf-summary div:last-child{border-bottom:0;border-top:2px solid #111827;margin-top:6px;padding-top:10px;background:transparent!important;color:#111827!important;font-size:24px;font-weight:900}.pdf-summary div:last-child b{font-size:24px}.pdf-note{margin-top:14px;padding-top:10px;border-top:1px solid #e5edf7;font-size:12px;color:#667085;line-height:1.7}.pdf-page-no{text-align:right;font-size:12px;color:#94a3b8;margin-top:14px}.window.exporting .sizePresetBar{display:none!important}.window.exporting .quote-head{display:grid!important}@media(max-width:850px){.quote-head{display:none}.presetManagerRow,.presetManagerHead{grid-template-columns:1fr}.presetManagerRow .btn{width:100%}}
+
+
+@media(max-width:850px){.ai-grid{grid-template-columns:1fr}.ai-preview-row{grid-template-columns:1fr 1fr}.kb-search{grid-template-columns:1fr}.ai-box{padding:12px}}
+@media print{body{height:auto;overflow:visible;background:#fff}.top,.notice,.tipbar{display:none!important}.main{padding:0;overflow:visible}.grid{display:block!important}.window{display:none!important;box-shadow:none;border:0;border-radius:0}.window.active{display:flex!important}.win-head,.win-tools{display:none!important}.rows{overflow:visible;background:#fff}.print-title{display:block;font-size:24px;font-weight:700;margin:0 0 12px}.quote-row{page-break-inside:avoid}.foot{page-break-inside:avoid}}
+
+/* Modern size/menu and compact dimension overrides */
+.sizePresetBar{padding:6px 0 8px}.presetMainBtn{height:32px;border-radius:999px;background:#ffffff;border-color:#dbe5f0;padding:0 13px;font-size:13px;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+.presetDrop{width:280px;padding:12px;border-radius:16px;border-color:#dbe5f0;box-shadow:0 18px 50px rgba(15,23,42,.16);overflow:visible}.presetDropHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.presetDropHead b{font-size:13px;color:#0f172a}.presetDropHead button{border:0;background:#eff6ff;color:#075bb5;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800;cursor:pointer}.presetSubTitle,.presetMenuFooter{display:none!important}.presetQuickList{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.presetQuickBtn{height:36px;border-radius:10px;text-align:center;padding:0;background:#fff;font-size:14px;font-weight:800}.presetQuickBtn span{display:none!important}.presetQuickBtn:hover{transform:translateY(-1px)}
+.sizePresetModal .ai-box{width:min(520px,96vw);max-height:none;overflow:visible;padding:18px;border-radius:20px}.presetManagerPanel{border:1px solid #e2e8f0;background:#f8fafc;border-radius:16px;padding:14px}.presetManagerTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.presetManagerTop b{display:block;font-size:15px;color:#0f172a}.presetManagerTop span{display:block;margin-top:3px;font-size:12px;color:#64748b}.presetManagerHead{grid-template-columns:1fr 18px 1fr 68px;margin:4px 2px 6px}.presetManagerRow{grid-template-columns:1fr 18px 1fr 68px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:8px}.presetManagerRow .input{height:36px;border-radius:10px}.presetX{font-size:18px;font-weight:900;color:#94a3b8;text-align:center}.presetManagerActions{justify-content:flex-end}.presetAddBtn{height:34px;border-radius:999px;background:#eff6ff;border-color:#bfdbfe}
+.size-cell .size-pair-flat{display:grid;grid-template-columns:minmax(0,1fr)16px minmax(0,1fr);gap:6px;align-items:center}.size-pair-flat .size-x{padding:0;align-self:center}.size-pair-flat .dim-inp{height:38px!important;text-align:center}.size-pair-flat .dim-inp::placeholder{color:#94a3b8}.size-pair-flat .dim-inp.meter-on{border-color:#f97316;background:#fff7ed}.size-sub .meter-lbl{display:none!important}.quote-row{padding-top:9px;padding-bottom:9px}.quote-head{padding-bottom:6px}.quote-head .size small{font-size:12px;color:#64748b;margin-left:2px}.row-hint{padding:6px 10px}
+
+
+/* UI fix v4: blue axis state + compact same-UI multi-window */
+.axisChip{display:none!important}
+.acc-chipline{display:flex!important;align-items:center;gap:4px;max-width:100%;overflow:hidden;flex-wrap:nowrap}
+.dim-inp.meter-on,.size-pair-flat .dim-inp.meter-on{border-color:#1677ff!important;background:#eff6ff!important;box-shadow:inset 0 -2px 0 #1677ff!important;color:#075bb5!important}
+.acc-meter{background:#eff6ff!important;color:#075bb5!important}
+.acc-cell{overflow:hidden!important;flex-wrap:nowrap!important;white-space:nowrap!important;align-items:center!important;align-content:center!important}
+.acc-tag{display:inline-flex!important;align-items:center;max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acc-price{flex:0 0 auto}
+.grid.n2,.grid.n3,.grid.n4,.grid.n5,.grid.n6{gap:7px}
+.grid.n2 .window,.grid.n3 .window{font-size:13px}
+.grid.n4 .window,.grid.n5 .window,.grid.n6 .window{font-size:11px;border-width:1.5px}
+.grid.n2 .rows,.grid.n3 .rows{padding:8px 9px}
+.grid.n4 .rows,.grid.n5 .rows,.grid.n6 .rows{padding:6px 7px}
+.grid.n2 .win-head,.grid.n3 .win-head{height:38px;padding:0 7px}
+.grid.n4 .win-head,.grid.n5 .win-head,.grid.n6 .win-head{height:32px;padding:0 5px}
+.grid.n2 .win-name,.grid.n3 .win-name{font-size:15px;width:105px;height:28px;padding:2px 5px}
+.grid.n4 .win-name,.grid.n5 .win-name,.grid.n6 .win-name{font-size:13px;width:82px;height:24px;padding:1px 4px;border-radius:6px}
+.grid.n2 .tool,.grid.n3 .tool{height:26px;width:38px;font-size:12px;border-radius:7px}
+.grid.n4 .tool,.grid.n5 .tool,.grid.n6 .tool{height:22px;width:32px;font-size:10px;border-radius:6px}
+.grid.n2 .round,.grid.n3 .round{width:24px;height:24px;font-size:15px}
+.grid.n4 .round,.grid.n5 .round,.grid.n6 .round{width:20px;height:20px;font-size:13px}
+.grid.n2 .sizePresetBar,.grid.n3 .sizePresetBar{padding:5px 0 6px}
+.grid.n4 .sizePresetBar,.grid.n5 .sizePresetBar,.grid.n6 .sizePresetBar{padding:3px 0 4px}
+.grid.n2 .presetMainBtn,.grid.n3 .presetMainBtn{height:28px;font-size:12px;padding:0 10px}
+.grid.n4 .presetMainBtn,.grid.n5 .presetMainBtn,.grid.n6 .presetMainBtn{height:23px;font-size:10px;padding:0 8px}
+.grid.n2 .quote-head,.grid.n3 .quote-head{font-size:11px;gap:6px;padding:0 9px 6px}
+.grid.n4 .quote-head,.grid.n5 .quote-head,.grid.n6 .quote-head{font-size:9px;gap:3px;padding:0 5px 4px}
+.grid.n2 .quote-row,.grid.n3 .quote-row{gap:6px;padding:7px 9px;margin-bottom:6px;border-radius:10px}
+.grid.n4 .quote-row,.grid.n5 .quote-row,.grid.n6 .quote-row{gap:3px;padding:5px;margin-bottom:4px;border-radius:8px}
+.grid.n2 .sel,.grid.n3 .sel,.grid.n2 .inp,.grid.n3 .inp,.grid.n2 .money,.grid.n3 .money,.grid.n2 .acc-cell,.grid.n3 .acc-cell,.grid.n2 .seq,.grid.n3 .seq{height:32px!important;min-height:32px!important;font-size:12px!important;border-radius:8px!important;padding-left:6px!important;padding-right:6px!important}
+.grid.n4 .sel,.grid.n5 .sel,.grid.n6 .sel,.grid.n4 .inp,.grid.n5 .inp,.grid.n6 .inp,.grid.n4 .money,.grid.n5 .money,.grid.n6 .money,.grid.n4 .acc-cell,.grid.n5 .acc-cell,.grid.n6 .acc-cell,.grid.n4 .seq,.grid.n5 .seq,.grid.n6 .seq{height:25px!important;min-height:25px!important;font-size:10px!important;border-radius:6px!important;padding-left:3px!important;padding-right:3px!important}
+.grid.n2 .size-pair-flat,.grid.n3 .size-pair-flat{gap:4px!important;grid-template-columns:minmax(0,1fr)12px minmax(0,1fr)!important}
+.grid.n4 .size-pair-flat,.grid.n5 .size-pair-flat,.grid.n6 .size-pair-flat{gap:2px!important;grid-template-columns:minmax(0,1fr)8px minmax(0,1fr)!important}
+.grid.n2 .size-x,.grid.n3 .size-x{font-size:12px!important}
+.grid.n4 .size-x,.grid.n5 .size-x,.grid.n6 .size-x{font-size:10px!important}
+.grid.n2 .acc-tag,.grid.n3 .acc-tag{font-size:10px!important;padding:1px 4px!important;max-width:70px!important}
+.grid.n4 .acc-tag,.grid.n5 .acc-tag,.grid.n6 .acc-tag{font-size:8px!important;padding:0 3px!important;max-width:42px!important;border-radius:3px!important}
+.grid.n4 .acc-price,.grid.n5 .acc-price,.grid.n6 .acc-price{display:inline-flex!important;max-width:26px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.grid.n2 .lineBtns,.grid.n3 .lineBtns{height:32px!important}
+.grid.n4 .lineBtns,.grid.n5 .lineBtns,.grid.n6 .lineBtns{height:25px!important;gap:2px!important}
+.grid.n2 .lineBtn,.grid.n3 .lineBtn{width:21px;height:14px;font-size:11px}
+.grid.n4 .lineBtn,.grid.n5 .lineBtn,.grid.n6 .lineBtn{width:16px;height:10px;font-size:9px;border-radius:3px}
+.grid.n2 .foot,.grid.n3 .foot{padding:6px 8px;gap:5px}
+.grid.n4 .foot,.grid.n5 .foot,.grid.n6 .foot{padding:4px 5px;gap:3px}
+.grid.n4 .fee,.grid.n5 .fee,.grid.n6 .fee,.grid.n4 .discount,.grid.n5 .discount,.grid.n6 .discount{font-size:10px;padding:2px 4px;gap:2px}
+.grid.n4 .grand,.grid.n5 .grand,.grid.n6 .grand{font-size:17px!important}.grid.n4 .grandMeta,.grid.n5 .grandMeta,.grid.n6 .grandMeta,.grid.n4 .grandLabel,.grid.n5 .grandLabel,.grid.n6 .grandLabel,.grid.n4 .miniLink,.grid.n5 .miniLink,.grid.n6 .miniLink{font-size:9px!important}
+
+
+/* v6 acc compact + export full */
+.acc-cell{overflow:hidden}
+.accCompact{display:inline-flex;align-items:center;max-width:100%;min-width:0;border-radius:999px;background:#eff6ff;color:#075bb5;font-weight:800;font-size:11px;padding:2px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.accMore{color:#64748b;background:#f1f5f9}
+.accFullText{font-size:12px;font-weight:700;color:#334155;line-height:1.55;white-space:normal;word-break:break-word}
+.grid.n2 .accCompact,.grid.n3 .accCompact{font-size:10px;padding:1px 6px}
+.grid.n4 .accCompact,.grid.n5 .accCompact,.grid.n6 .accCompact{font-size:9px;padding:1px 5px;max-width:100%}
+.window.exporting .acc-cell{height:auto!important;min-height:38px!important;max-height:none!important;overflow:visible!important;white-space:normal!important;align-items:flex-start!important;justify-content:flex-start!important;padding:7px 8px!important}
+.window.exporting .acc-tag,.window.exporting .acc-price{display:inline-flex!important;max-width:none!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;font-size:11px!important;line-height:1.35!important;margin:1px 2px 2px 0!important}
+.window.exporting .accCompact{display:none!important}
+.window.exporting .quote-row{height:auto!important;min-height:0!important;align-items:start!important}
+.window.exporting .rows{overflow:visible!important}
+
+
+/* v7 common size inline row */
+.sizePresetBar{
+  justify-content:flex-start!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:8px 12px 10px!important;
+  background:#f5f7fb!important;
+  border-bottom:0!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  white-space:nowrap!important;
+}
+.presetInlineLabel{
+  font-size:12px;
+  font-weight:900;
+  color:#64748b;
+  flex:0 0 auto;
+}
+.presetInlineList{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:nowrap;
+  min-width:0;
+}
+.presetInlineBtn{
+  height:30px;
+  border:1px solid #bfdbfe;
+  background:#eff6ff;
+  color:#075bb5;
+  border-radius:999px;
+  padding:0 10px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.presetInlineBtn:hover{
+  background:#dbeafe;
+  border-color:#93c5fd;
+}
+.presetInlineManage{
+  height:30px;
+  border:1px dashed #93c5fd;
+  background:#fff;
+  color:#075bb5;
+  border-radius:999px;
+  padding:0 10px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.presetInlineEmpty{
+  font-size:12px;
+  color:#94a3b8;
+  font-weight:700;
+}
+.grid.n4 .sizePresetBar,.grid.n5 .sizePresetBar,.grid.n6 .sizePresetBar{
+  padding:5px 6px 6px!important;
+  gap:5px!important;
+}
+.grid.n4 .presetInlineLabel,.grid.n5 .presetInlineLabel,.grid.n6 .presetInlineLabel{
+  font-size:10px!important;
+}
+.grid.n4 .presetInlineBtn,.grid.n5 .presetInlineBtn,.grid.n6 .presetInlineBtn,
+.grid.n4 .presetInlineManage,.grid.n5 .presetInlineManage,.grid.n6 .presetInlineManage{
+  height:24px!important;
+  padding:0 7px!important;
+  font-size:10px!important;
+}
+
+
+/* v9: header presets + compact quote + no mold column */
+.sizePresetBar{display:none!important}
+.win-head{height:42px!important;padding:0 8px!important;gap:8px!important}
+.namebox{flex:0 0 auto}
+.win-name{height:30px!important;font-size:16px!important;padding:3px 7px!important}
+.headSizePresets{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:5px;overflow:hidden;white-space:nowrap}
+.headPresetLabel{font-size:12px;font-weight:900;color:#64748b;flex:0 0 auto}
+.headPresetList{display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden}
+.headPresetBtn{height:26px;border:1px solid #bfdbfe;background:#eff6ff;color:#075bb5;border-radius:999px;padding:0 9px;font-size:12px;font-weight:900;cursor:pointer;flex:0 0 auto}
+.headPresetBtn:hover{background:#dbeafe;border-color:#93c5fd}
+.headPresetManage{height:26px;border:1px dashed #93c5fd;background:#fff;color:#075bb5;border-radius:999px;padding:0 9px;font-size:12px;font-weight:900;cursor:pointer;flex:0 0 auto}
+.win-tools{flex:0 0 auto}
+.rows{padding:7px 10px 8px!important}
+.quote-head{padding:0 10px 5px!important;margin-bottom:3px!important}
+.quote-row{padding:7px 10px!important;margin-bottom:5px!important;border-radius:10px!important}
+.quote-row .seq,.quote-row .inp,.quote-row .sel,.quote-row .money,.quote-row .acc-cell{height:34px!important;min-height:34px!important}
+.dim-inp{height:34px!important}
+.lineBtns{height:34px!important}
+.foot{padding:5px 8px!important;gap:6px!important}
+.fee{padding:3px 6px!important}
+.fee input[type=number],.fee input[type=text],.discount input{height:26px!important}
+.grandBox{gap:2px!important}
+.grand{font-size:24px!important}
+.grandLabel{padding:1px 7px!important}
+.grandMeta{font-size:10.5px!important}
+.accReq{background:#eef2ff!important;color:#4338ca!important}
+.accWaived{background:#f1f5f9!important;color:#64748b!important;text-decoration:line-through}
+.grid.n2 .win-head,.grid.n3 .win-head{height:38px!important;padding:0 6px!important;gap:5px!important}
+.grid.n2 .win-name,.grid.n3 .win-name{height:26px!important;font-size:14px!important;width:88px!important}
+.grid.n2 .headPresetLabel,.grid.n3 .headPresetLabel{font-size:10px!important}
+.grid.n2 .headPresetBtn,.grid.n3 .headPresetBtn,.grid.n2 .headPresetManage,.grid.n3 .headPresetManage{height:22px!important;padding:0 6px!important;font-size:10px!important}
+.grid.n2 .tool,.grid.n3 .tool{height:26px!important;width:36px!important;font-size:11px!important}
+.grid.n2 .round,.grid.n3 .round{width:22px!important;height:22px!important;font-size:14px!important}
+.grid.n4 .win-head,.grid.n5 .win-head,.grid.n6 .win-head{height:34px!important;padding:0 5px!important;gap:4px!important}
+.grid.n4 .win-name,.grid.n5 .win-name,.grid.n6 .win-name{height:24px!important;font-size:12px!important;width:72px!important}
+.grid.n4 .headPresetLabel,.grid.n5 .headPresetLabel,.grid.n6 .headPresetLabel{display:none!important}
+.grid.n4 .headPresetBtn,.grid.n5 .headPresetBtn,.grid.n6 .headPresetBtn,.grid.n4 .headPresetManage,.grid.n5 .headPresetManage,.grid.n6 .headPresetManage{height:20px!important;padding:0 5px!important;font-size:9px!important}
+.grid.n4 .headPresetList,.grid.n5 .headPresetList,.grid.n6 .headPresetList{gap:3px!important}
+.grid.n4 .tool,.grid.n5 .tool,.grid.n6 .tool{height:24px!important;width:32px!important;font-size:10px!important}
+.grid.n4 .round,.grid.n5 .round,.grid.n6 .round{width:20px!important;height:20px!important;font-size:13px!important}
+.grid.n4 .rows,.grid.n5 .rows,.grid.n6 .rows{padding:5px 6px!important}
+.grid.n4 .quote-head,.grid.n5 .quote-head,.grid.n6 .quote-head{padding:0 6px 3px!important;margin-bottom:2px!important}
+.grid.n4 .quote-row,.grid.n5 .quote-row,.grid.n6 .quote-row{padding:4px 6px!important;margin-bottom:4px!important}
+.grid.n4 .quote-row .seq,.grid.n5 .quote-row .seq,.grid.n6 .quote-row .seq,
+.grid.n4 .quote-row .inp,.grid.n5 .quote-row .inp,.grid.n6 .quote-row .inp,
+.grid.n4 .quote-row .sel,.grid.n5 .quote-row .sel,.grid.n6 .quote-row .sel,
+.grid.n4 .quote-row .money,.grid.n5 .quote-row .money,.grid.n6 .quote-row .money,
+.grid.n4 .quote-row .acc-cell,.grid.n5 .quote-row .acc-cell,.grid.n6 .quote-row .acc-cell{height:26px!important;min-height:26px!important}
+.grid.n4 .dim-inp,.grid.n5 .dim-inp,.grid.n6 .dim-inp{height:26px!important}
+.grid.n4 .foot,.grid.n5 .foot,.grid.n6 .foot{padding:3px 5px!important}
+.window.exporting .headSizePresets{display:none!important}
+
+
+/* v14 compact totals, better accessory fit, max 4 windows */
+.compactTotal{min-width:0;align-items:flex-end;gap:3px}
+.compactTotalLine{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:nowrap;white-space:nowrap}
+.compactTotalLine span{font-size:11px;font-weight:800;color:#64748b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:2px 7px;line-height:1.25}
+.compactTotalLine span b{color:#0f172a;font-size:12px}
+.compactTotalLine .compactFinal{background:#eff6ff;border-color:#bfdbfe;color:#075bb5}
+.compactTotalLine .compactFinal b{font-size:20px;color:#075bb5}
+.compactTotalLine .miniLink{font-size:12px;background:transparent;border:0;padding:0;color:var(--blue)}
+.foot{padding:5px 8px!important;gap:6px!important}
+.grandBox .grandOps{display:none!important}
+.detailRows{display:flex;flex-direction:column;gap:8px}
+.detailRowCard{border:1px solid #e2e8f0;border-radius:10px;background:#fff;overflow:hidden}
+.detailRowHead{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#f8fafc;padding:8px 10px;font-size:13px;font-weight:900;color:#0f172a}
+.detailRowBody{padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.detailSubLine{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#475569;line-height:1.5}
+.detailSubLine b{white-space:nowrap;color:#0f172a}
+.detailSubLine.accLine{padding-left:12px;border-left:3px solid #dbeafe}
+.detailSubLine.accLine .tag{font-size:11px;border-radius:999px;padding:1px 6px;background:#eef2ff;color:#4338ca;margin-left:4px}
+.detailSubLine.accLine .waive{background:#f1f5f9;color:#64748b}
+.detailSummarySlim{margin-top:10px;border-top:1px solid #e2e8f0;padding-top:8px}
+.acc-cell{min-width:0}
+.accCompact{display:inline-flex;align-items:center;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acc-tag{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.grid.n4 .quote-head{font-size:11px!important;gap:5px!important}
+.grid.n4 .quote-row{gap:5px!important;padding:5px 6px!important}
+.grid.n4 .sel,.grid.n4 .inp,.grid.n4 .money,.grid.n4 .acc-cell,.grid.n4 .seq{height:30px!important;min-height:30px!important;font-size:11.5px!important}
+.grid.n4 .dim-inp{height:30px!important}
+.grid.n4 .acc-tag{font-size:9.8px!important;max-width:62px!important}
+.grid.n4 .accCompact{font-size:10.2px!important;max-width:100%!important}
+.grid.n4 .lineBtns{height:30px!important}
+.grid.n4 .lineBtn{width:19px!important;height:13px!important;font-size:10px!important}
+.grid.n4 .foot{padding:4px 6px!important}
+.grid.n4 .compactTotalLine{gap:4px}
+.grid.n4 .compactTotalLine span{font-size:9.5px;padding:1px 5px}
+.grid.n4 .compactTotalLine .compactFinal b{font-size:16px}
+.grid.n3 .quote-head{font-size:11.5px!important}
+.grid.n3 .sel,.grid.n3 .inp,.grid.n3 .money,.grid.n3 .acc-cell,.grid.n3 .seq{font-size:12px!important}
+.window.exporting .acc-cell{height:auto!important;min-height:34px!important;max-height:none!important;overflow:visible!important;white-space:normal!important;align-items:flex-start!important;justify-content:flex-start!important;padding:7px 8px!important}
+.window.exporting .acc-tag,.window.exporting .acc-price{display:inline-flex!important;max-width:none!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;font-size:11px!important;line-height:1.35!important;margin:1px 2px 2px 0!important}
+.window.exporting .accCompact{display:none!important}
+
+
+/* v16 knowledge assistant accuracy controls */
+.kb-inputbar{grid-template-columns:1fr auto!important}
+.kb-inputbar .btn:not(.blue){display:none!important}
+.kb-related{margin-top:8px}
+.kb-feedback{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.kb-feedback .btn{height:32px;border-radius:10px}
+.kb-feedback .warnBtn{border-color:#fed7aa;background:#fff7ed;color:#c2410c}
+.kb-noanswer{border:1px dashed #bfdbfe;background:#f8fbff;border-radius:14px;padding:14px;line-height:1.7}
+.kb-noanswer h3{margin:0 0 6px;font-size:16px;color:#0f172a}
+.kb-noanswer p{margin:0 0 10px;color:#64748b}
+.kb-noanswer .btn{height:34px;border-radius:10px}
+
+/* size ratio helper */
+.ratioModal .ai-box{width:min(860px,96vw)}
+.ratioGrid{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:12px}
+.ratioDrop{border:1.5px dashed #93c5fd;border-radius:16px;background:#f8fbff;min-height:260px;display:flex;align-items:center;justify-content:center;text-align:center;color:#64748b;font-weight:800;padding:18px;cursor:pointer;overflow:hidden}
+.ratioDrop.drag{background:#eff6ff;border-color:#1677ff}
+.ratioDrop img{display:block;max-width:100%;max-height:420px;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+.ratioPanel{border:1px solid var(--bd);border-radius:14px;background:#fbfdff;padding:12px}
+.ratioStats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ratioStat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:9px 10px}
+.ratioStat span{display:block;font-size:12px;font-weight:800;color:#64748b;margin-bottom:4px}
+.ratioStat b{display:block;font-size:16px;color:#0f172a}
+.ratioSizeRows{display:grid;gap:6px;margin:10px 0}
+.ratioSizeRow{display:flex;justify-content:space-between;gap:10px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:700;color:#334155}
+.ratioInputs{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;margin:10px 0}
+.ratioInputs label{font-size:12px;font-weight:900;color:#64748b}
+.ratioInputs input{width:100%;height:40px;border:1.3px solid var(--bd);border-radius:10px;padding:0 10px;font-size:16px;font-weight:800;text-align:center;outline:none}
+.ratioInputs input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(22,119,255,.12)}
+.ratioLock{height:40px;border:1px solid var(--bd);background:#fff;border-radius:999px;padding:0 12px;font-size:16px;font-weight:900;cursor:pointer;color:#075bb5}
+.ratioMsg{border-radius:12px;padding:9px 10px;font-size:13px;font-weight:900;margin-top:8px}
+.ratioMsg.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
+.ratioMsg.bad{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c}
+.ratioActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.ratioHint{font-size:12px;color:#64748b;line-height:1.6;margin-top:8px}
+@media(max-width:760px){.ratioGrid{grid-template-columns:1fr}.ratioStats{grid-template-columns:1fr}.ratioDrop{min-height:190px}}
+
+</style></head><body>
+<header class="top"><div class="brand" id="brand">🧲 冰箱贴算价工具</div><div class="actions"><span class="status" id="loginStatus">未登录</span><span class="status" id="syncStatus">未同步</span><button class="btn" onclick="syncConfig(true)">同步</button><button class="btn" onclick="openPasswordPanel()">修改密码</button><button class="btn" onclick="logout()">退出</button><button class="btn" onclick="toggleDiscount()">隐藏折扣</button><button class="btn" id="minDiscBtn" onclick="toggleMinDisc()">隐藏底价</button><button class="btn" onclick="openRatioModal()">📐 尺寸比例</button><button class="btn green" onclick="openKbModal()">产品知识助手</button><button class="btn blue" onclick="copyActiveWindowToClipboard()">复制报价图</button></div></header>
+<div class="notice hidden" id="notice"></div><div class="tipbar"><div class="tip" id="topTip"></div><div class="tabs" id="tabs"></div></div><main class="main"><div class="grid n1" id="grid"></div></main>
+<div class="auth" id="auth"><div class="auth-card"><h2>客服端登录</h2><p id="authText">请输入管理端创建的账号密码。</p><input id="loginUser" placeholder="账号" autocomplete="username"><input id="loginPass" type="password" placeholder="密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()"><button class="btn blue" style="width:100%;margin-top:12px" onclick="login()">登录</button><button class="btn" style="width:100%;margin-top:8px" onclick="syncConfig(true)">重新同步账号</button></div></div><div class="auth" id="pwdAuth"><div class="auth-card"><h2>修改密码</h2><p>请输入旧密码和新密码，修改成功后下次登录使用新密码。</p><input id="oldPass" type="password" placeholder="旧密码"><input id="newPass" type="password" placeholder="新密码"><input id="newPass2" type="password" placeholder="确认新密码" onkeydown="if(event.key==='Enter')changePassword()"><div class="auth-actions"><button class="btn blue" onclick="changePassword()">保存</button><button class="btn" onclick="closePasswordPanel()">取消</button></div></div></div><div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="detailModal" onclick="this.style.display='none'">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-head"><span>🧾 价格计算明细</span><span class="modal-close" onclick="document.getElementById('detailModal').style.display='none'">×</span></div>
+        <div id="detailContent"></div>
+    </div>
+</div>
+
+<div class="popover" id="accPopover"></div>
+
+<div class="ai-modal" id="aiImportModal" onclick="closeAiImport(event)"><div class="ai-box" onclick="event.stopPropagation()"><div class="ai-head"><h2>🤖 图片/文字识别导入 <span class="ai-badge" id="aiImportWinName">当前窗口</span></h2><span class="ai-close" onclick="closeAiImportNow()">×</span></div><div class="ai-grid"><div class="ai-panel"><div class="ai-drop" id="aiDrop">粘贴客户截图，或选择图片/输入文字</div><input type="file" accept="image/*" multiple onchange="addAiImageFiles(this.files);this.value=''" style="margin-bottom:8px"><div class="ai-imgs" id="aiImgs"></div><textarea id="aiText" placeholder="也可以手动输入，例如：&#10;30*40 3张&#10;5 20x30&#10;60-40 5张"></textarea><div class="ai-actions"><button class="btn green" onclick="startAiImportParse()">开始识别并预览</button><button class="btn" onclick="clearAiImport()">清空</button></div><div class="hint" style="white-space:normal;margin-top:8px">文字内容会优先用本地规则识别；图片会调用管理端设置的视觉接口。识别后先预览，可修改后再填入。</div></div><div class="ai-panel"><h3 class="sub">识别结果预览</h3><div id="aiPreview"></div><div class="ai-actions"><label class="ai-radio"><input type="radio" name="aiFillMode" value="replace" checked>清空当前窗口后导入</label><label class="ai-radio"><input type="radio" name="aiFillMode" value="append">追加到当前窗口</label><button class="btn blue" onclick="confirmAiFill()">确认填入当前窗口</button></div></div></div></div></div>
+<div class="ai-modal" id="kbModal" onclick="closeKbModal(event)"><div class="ai-box" onclick="event.stopPropagation()"><div class="ai-head"><h2>📚 产品知识助手 <span class="ai-badge">客服内部</span></h2><span class="ai-close" onclick="closeKbModalNow()">×</span></div><div class="hint" style="white-space:normal;margin-bottom:10px">这是给客服内部查询产品知识、规则和标准回答用的，不是客户聊天窗口。200条以内默认用全知识库交给AI匹配；也可以点“普通搜索”只做关键词检索。</div><div id="kbResults" class="kb-results kb-chatbox"></div><div class="kb-inputbar"><textarea id="kbQuery" placeholder="客服输入问题，例如：这个能不能定制尺寸？材质有什么区别？多久发货？" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();searchKb(true)}"></textarea><button class="btn blue" onclick="searchKb(true)">发送问题</button><button class="btn" onclick="searchKb(false)">普通搜索</button></div></div></div>
+
+
+<div class="ai-modal sizePresetModal" id="sizePresetModal" onclick="closeSizePresetManager(event)"><div class="ai-box" onclick="event.stopPropagation()"><div class="ai-head"><h2>📐 常用尺寸管理</h2><span class="ai-close" onclick="closeSizePresetManager()">×</span></div><div id="sizePresetManagerBody"></div></div></div>
+
+<div class="ai-modal ratioModal" id="ratioModal" onclick="closeRatioModal(event)"><div class="ai-box" onclick="event.stopPropagation()"><div class="ai-head"><h2>📐 尺寸比例 <span class="ai-badge">100dpi最低清晰度</span></h2><span class="ai-close" onclick="closeRatioModalNow()">×</span></div><div class="ratioGrid"><div class="ratioDrop" id="ratioDrop" onclick="document.getElementById('ratioFile').click()"><div id="ratioPreview">拖入图片、点击选择图片，或 Ctrl+V 粘贴图片</div></div><input id="ratioFile" type="file" accept="image/*" style="display:none" onchange="handleRatioFiles(this.files);this.value=''"><div class="ratioPanel"><div class="ratioStats"><div class="ratioStat"><span>原图像素</span><b id="ratioPx">—</b></div><div class="ratioStat"><span>图片比例</span><b id="ratioOriginal">—</b></div><div class="ratioStat"><span>当前目标比例</span><b id="ratioCurrent">—</b></div><div class="ratioStat"><span>当前输出dpi</span><b id="ratioDpi">—</b></div></div><div class="ratioSizeRows"><div class="ratioSizeRow"><span>300dpi 可做尺寸</span><b id="ratio300">—</b></div><div class="ratioSizeRow"><span>150dpi 可做尺寸</span><b id="ratio150">—</b></div><div class="ratioSizeRow"><span>100dpi 最大可做尺寸</span><b id="ratio100">—</b></div><div class="ratioSizeRow"><span>建议最大尺寸</span><b id="ratioSuggest">—</b></div></div><div class="ratioInputs"><label>宽 cm<input id="ratioWidth" type="number" min="0" step="0.1" oninput="ratioDimensionInput('w')"></label><button class="ratioLock" id="ratioLockBtn" onclick="toggleRatioLock()" title="锁定/解锁比例">🔒</button><label>高 cm<input id="ratioHeight" type="number" min="0" step="0.1" oninput="ratioDimensionInput('h')"></label></div><div class="ratioMsg" id="ratioMsg">请先导入图片。</div><div class="ratioActions"><button class="btn blue" onclick="fillRatioToQuoteRow()">填入当前报价行</button><button class="btn" onclick="clearRatioImage()">清空图片</button></div><div class="ratioHint">单位固定为 cm；不读取图片自带 dpi 元数据，只按像素和 100dpi 最低要求计算。</div></div></div></div></div>
+
+<script>
+// --- 核心配置 ---
+const GITHUB_CONFIG={token:'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',gistId:'679f9fa06d8462408ce533861b4ce0c7'};
+const FILE='fridge_magnet_config_cloud_v2.json', AUTH_FILE='fridge_magnet_auth_cloud_v2.json';
+const LEGACY_FILE='fridge_magnet_config.json', LEGACY_AUTH_FILE='fridge_magnet_auth.json';
+const defaults={ui:{clientTitle:'🧲 冰箱贴算价工具',topTip:'',notice:{text:'',fontSize:16,color:'#111827',fontFamily:'Microsoft YaHei'}},discountPresets:[60,70,80,90,100,110,120,130],packageFee:{enabled:true,defaultChecked:false,defaultAmount:0,allowClientEdit:true},materials:[{name:'软磁冰箱贴',defaultMode:'longest_side',unitName:'个',accessories:[{name:'卡纸',type:'qty',enabled:true,price:0.3,cost:0.1,min_from:50,min_to:50,cost_min_from:50,cost_min_to:50}],has_mold:false,mold_fee:300,mold_cost:300,mold_waive_type:'quantity',mold_waive_value:1000,size_prices:[{max_size:5,price:1.5,cost:0.8},{max_size:10,price:2.5,cost:1.2}],area_price_per_sqm:800,area_cost_per_sqm:400,min_qty_enabled:false,min_qty_from:1,min_qty_to:1,min_amount_enabled:true,min_amount_from:20,min_amount_to:20,min_area_enabled:false,min_area_from:0.01,min_area_to:0.01,custom_costs:[{name:'快递费',amount:0},{name:'推广费',amount:0}],min_margin_pct:50}],extraFees:[{name:'设计费',enabled:false,amount:0,allow_client_edit:true,is_percent:false},{name:'税费',enabled:false,amount:1,allow_client_edit:true,is_percent:true}],auth:{users:[]},updatedAt:''};
+
+let cfg=normalize(loadLocal('fridge_quote_cfg')||defaults);
+let state=loadLocal('fridge_quote_state')||makeState();
+let loginUser=localStorage.getItem('fridge_quote_login_user')||'';
+let authCloudChecked=false;
+const TEMP_TEST_LOGIN={enabled:false,username:'',password:'',name:''};
+
+function normalize(c){
+    c={...structuredClone(defaults),...(c||{})};
+    c.materials=(c.materials||defaults.materials).map(m=>{
+        let nm = {...defaults.materials[0],...m};
+        if(!nm.accessories) nm.accessories = [];
+        nm.accessories=(nm.accessories||[]).map(a=>({name:'新工艺',type:'qty',enabled:true,required:false,price:0,cost:0,min_from:1,min_to:1,cost_min_from:1,cost_min_to:1,bundle:'',waive_enabled:false,waive_type:'quantity',waive_value:0,...a,bundle:(a.bundle||'').trim(),required:!!a.required,waive_enabled:!!a.waive_enabled,waive_type:a.waive_type==='amount'?'amount':'quantity',waive_value:Number(a.waive_value)||0}));
+        return nm;
+    });
+    c.auth=normalizeAuth(c.auth);
+    c.ai=normalizeAi(c.ai);
+    c.aiKb=normalizeAiKb(c.aiKb);
+    return c;
+}
+
+function normalizeAi(ai){
+    const d={enabled:true,provider:'doubao',apiBase:'https://ark.cn-beijing.volces.com/api/v3/chat/completions',model:'ep-20260523170449-vp4jp',visionModel:'ep-20260523170449-vp4jp',apiKey:'ark-4d19b538-2f79-47bc-919e-ffefe60852f5-2c2a2',temperature:0.1,systemPrompt:'你是客服算价助手，只输出严格JSON，不要输出多余解释。'};
+    let merged={...d,...(ai||{}),enabled:(ai?.enabled!==false)};
+    const oldApi=String(merged.apiBase||'');
+    const oldModel=String(merged.model||'');
+    const oldVision=String(merged.visionModel||'');
+    const oldKey=String(merged.apiKey||'');
+    const shouldUseDoubao=!oldApi || /deepseek/i.test(oldApi) || /deepseek/i.test(oldModel) || /deepseek/i.test(oldVision) || oldKey==='sk-d81619049da74199bfd84f1e4cffedd4';
+    if(shouldUseDoubao){
+        merged.provider='doubao';
+        merged.apiBase=d.apiBase;
+        merged.model=d.model;
+        merged.visionModel=d.visionModel;
+        merged.apiKey=d.apiKey;
+        if(!merged.systemPrompt) merged.systemPrompt=d.systemPrompt;
+    }
+    return merged;
+}
+function normalizeAuth(auth){
+    let users = Array.isArray(auth?.users) ? auth.users : [];
+    return {users: users.map(u=>{
+        const username = cleanUsername(u.username || u.name);
+        return {
+            username,
+            name: username,
+            passwordHash: String(u.passwordHash||''),
+            role: u.role || 'staff',
+            enabled: u.enabled !== false,
+            createdAt: u.createdAt || '',
+            updatedAt: u.updatedAt || ''
+        };
+    }).filter(u=>u.username)};
+}
+function cleanUsername(s){return String(s||'').trim().toLowerCase()}
+async function hashPassword(text){
+    text=String(text||'');
+    if(window.crypto && crypto.subtle && window.TextEncoder){
+        let buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+        return 'sha256:'+Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    let h=2166136261;
+    for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619)}
+    return 'fnv1a:'+(h>>>0).toString(16);
+}
+
+function loadLocal(k){try{let d=localStorage.getItem(k);return d?JSON.parse(d):null}catch(e){return null}}
+function saveLocal(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function esc(s){return String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function money(v){return '¥'+Math.round(Number(v)||0).toLocaleString('zh-CN')}
+function moneyUnit(v){let n=Number(v)||0; return '¥'+(n%1===0?n:n.toFixed(2))}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),2200)}
+
+function makeState(){return{active:0,onlyActive:false,discountHidden:false,minDiscHidden:false,windows:[makeWindow(1)]}}
+function makeWindow(n){return{name:'报价'+n,rows:[defaultRow()],discount:100,packageChecked:cfg.packageFee.defaultChecked,packageAmount:cfg.packageFee.defaultAmount,extraFees:{},extraActive:{}}}
+function defaultRow(){return{material:'',mode:'',length:0,width:0,qty:0,acc:{},accMeterEdge:{}}}
+
+let ratioState={locked:true,pixelW:0,pixelH:0,preview:'',previewNote:'',objectUrl:'',previewCanvas:null,loadId:0,target:{wi:null,ri:null}};
+function openRatioModal(){if(!isLoggedIn()){checkAuth();return}document.getElementById('ratioModal').style.display='flex';renderRatioPanel()}
+function closeRatioModal(ev){if(ev&&ev.target!==document.getElementById('ratioModal'))return;closeRatioModalNow()}
+function closeRatioModalNow(){document.getElementById('ratioModal').style.display='none'}
+function ratioModalOpen(){return document.getElementById('ratioModal')?.style.display==='flex'}
+function ratioGcd(a,b){a=Math.abs(Math.round(a));b=Math.abs(Math.round(b));while(b){let t=b;b=a%b;a=t}return a||1}
+function ratioText(w,h,scale=1){w=Number(w)||0;h=Number(h)||0;if(w<=0||h<=0)return '—';let a=Math.round(w*scale),b=Math.round(h*scale),g=ratioGcd(a,b);return (a/g)+':'+(b/g)}
+function ratioCm(px,dpi){return (Number(px)||0)/dpi*2.54}
+function fmtRatioCm(v){v=Number(v)||0;return v?String(Number(v.toFixed(1))).replace(/\.0$/,''):'0'}
+function fmtRatioSize(w,h){return fmtRatioCm(w)+' × '+fmtRatioCm(h)+' cm'}
+function ratioDimensionInput(side){
+    if(!ratioState.pixelW||!ratioState.pixelH){renderRatioPanel();return}
+    let w=Number(document.getElementById('ratioWidth').value)||0;
+    let h=Number(document.getElementById('ratioHeight').value)||0;
+    if(ratioState.locked){
+        if(side==='w'&&w>0){h=w*ratioState.pixelH/ratioState.pixelW;document.getElementById('ratioHeight').value=fmtRatioCm(h)}
+        if(side==='h'&&h>0){w=h*ratioState.pixelW/ratioState.pixelH;document.getElementById('ratioWidth').value=fmtRatioCm(w)}
+    }
+    renderRatioPanel();
+}
+function toggleRatioLock(){ratioState.locked=!ratioState.locked;ratioDimensionInput('w')}
+function clearRatioImage(){
+    ratioState.loadId++;
+    releaseRatioImageResources();
+    ratioState.pixelW=0;ratioState.pixelH=0;ratioState.preview='';ratioState.previewNote='';
+    document.getElementById('ratioWidth').value='';document.getElementById('ratioHeight').value='';
+    renderRatioPanel();
+}
+function handleRatioFiles(files){
+    let file=Array.from(files||[]).find(f=>/^image\//.test(f.type));
+    if(!file)return toast('请选择图片文件');
+    loadRatioImage(file);
+}
+function loadRatioImage(file){
+    releaseRatioImageResources();
+    const loadId=++ratioState.loadId;
+    if(file.size>20*1024*1024)toast('图片较大，正在生成压缩预览');
+    const url=URL.createObjectURL(file);
+    ratioState.objectUrl=url;
+    const img=new Image();
+    img.onload=()=>{
+        try{
+            if(loadId!==ratioState.loadId)return;
+            ratioState.pixelW=img.naturalWidth||img.width;ratioState.pixelH=img.naturalHeight||img.height;
+            ratioState.preview='';ratioState.previewNote='';
+            if(file.size>40*1024*1024){
+                ratioState.previewNote='图片超过40MB，已读取尺寸，未生成预览以避免卡顿。';
+            }else{
+                const maxSide=900,scale=Math.min(1,maxSide/Math.max(ratioState.pixelW,ratioState.pixelH));
+                const canvas=document.createElement('canvas');
+                ratioState.previewCanvas=canvas;
+                canvas.width=Math.max(1,Math.round(ratioState.pixelW*scale));
+                canvas.height=Math.max(1,Math.round(ratioState.pixelH*scale));
+                const ctx=canvas.getContext('2d');
+                ctx.drawImage(img,0,0,canvas.width,canvas.height);
+                ratioState.preview=canvas.toDataURL('image/jpeg',0.84);
+                canvas.width=0;canvas.height=0;ratioState.previewCanvas=null;
+            }
+            document.getElementById('ratioWidth').value=fmtRatioCm(ratioCm(ratioState.pixelW,100));
+            document.getElementById('ratioHeight').value=fmtRatioCm(ratioCm(ratioState.pixelH,100));
+            renderRatioPanel();
+        }finally{if(ratioState.objectUrl===url)ratioState.objectUrl='';URL.revokeObjectURL(url)}
+    };
+    img.onerror=()=>{if(ratioState.objectUrl===url)ratioState.objectUrl='';URL.revokeObjectURL(url);if(loadId===ratioState.loadId)toast('图片读取失败')};
+    img.src=url;
+}
+function releaseRatioImageResources(){
+    if(ratioState.objectUrl){URL.revokeObjectURL(ratioState.objectUrl);ratioState.objectUrl=''}
+    if(ratioState.previewCanvas){ratioState.previewCanvas.width=0;ratioState.previewCanvas.height=0;ratioState.previewCanvas=null}
+    ratioState.preview='';
+}
+function renderRatioPanel(){
+    const has=!!(ratioState.pixelW&&ratioState.pixelH);
+    const preview=document.getElementById('ratioPreview');
+    if(preview)preview.innerHTML=has?(ratioState.preview?`<img src="${ratioState.preview}" alt="图片预览">`:`<div>${esc(ratioState.previewNote||'已读取图片尺寸')}</div>`):'拖入图片、点击选择图片，或 Ctrl+V 粘贴图片';
+    const set=(id,v)=>{let el=document.getElementById(id);if(el)el.textContent=v};
+    set('ratioPx',has?`${ratioState.pixelW} × ${ratioState.pixelH} px`:'—');
+    set('ratioOriginal',has?ratioText(ratioState.pixelW,ratioState.pixelH):'—');
+    const s300=has?fmtRatioSize(ratioCm(ratioState.pixelW,300),ratioCm(ratioState.pixelH,300)):'—';
+    const s150=has?fmtRatioSize(ratioCm(ratioState.pixelW,150),ratioCm(ratioState.pixelH,150)):'—';
+    const s100=has?fmtRatioSize(ratioCm(ratioState.pixelW,100),ratioCm(ratioState.pixelH,100)):'—';
+    set('ratio300',s300);set('ratio150',s150);set('ratio100',s100);set('ratioSuggest',s100);
+    let w=Number(document.getElementById('ratioWidth')?.value)||0,h=Number(document.getElementById('ratioHeight')?.value)||0;
+    set('ratioCurrent',w&&h?ratioText(w,h,100):'—');
+    let dpi=has&&w>0&&h>0?Math.floor(Math.min(ratioState.pixelW/(w/2.54),ratioState.pixelH/(h/2.54))):0;
+    set('ratioDpi',dpi?dpi+' dpi':'—');
+    let msg=document.getElementById('ratioMsg');
+    if(msg){
+        if(!has){msg.className='ratioMsg';msg.textContent='请先导入图片。'}
+        else if(!dpi){msg.className='ratioMsg';msg.textContent='请输入目标宽高。'}
+        else if(dpi<100){msg.className='ratioMsg bad';msg.textContent='低于100dpi，清晰度可能不足'}
+        else{msg.className='ratioMsg ok';msg.textContent='满足最低100dpi要求'}
+    }
+    let lock=document.getElementById('ratioLockBtn');if(lock)lock.textContent=ratioState.locked?'🔒':'🔓';
+}
+function rememberRatioTargetFromElement(el){
+    let row=el?.closest?.('.quote-row');if(!row)return;
+    let wi=Number(row.dataset.w),ri=Number(row.dataset.r);
+    if(Number.isInteger(wi)&&Number.isInteger(ri))ratioState.target={wi,ri};
+}
+function findRatioTargetRow(){
+    let wi=Number.isInteger(ratioState.target.wi)?ratioState.target.wi:state.active;
+    if(wi<0||wi>=state.windows.length)wi=state.active||0;
+    syncWindowRowsFromDOM(wi);
+    let rows=state.windows[wi].rows;
+    let ri=Number.isInteger(ratioState.target.ri)&&ratioState.target.wi===wi?ratioState.target.ri:-1;
+    if(ri<0||ri>=rows.length)ri=rows.findIndex(r=>rowHasAnyInput(r)&&!(Number(r.length)>0&&Number(r.width)>0));
+    if(ri<0)ri=rows.findIndex(r=>!rowHasAnyInput(r));
+    if(ri<0){rows.push(defaultRow());ri=rows.length-1}
+    return{wi,ri};
+}
+function fillRatioToQuoteRow(){
+    let w=Number(document.getElementById('ratioWidth')?.value)||0,h=Number(document.getElementById('ratioHeight')?.value)||0;
+    if(!(w>0&&h>0))return toast('请先输入宽高');
+    let pos=findRatioTargetRow(),row=state.windows[pos.wi].rows[pos.ri];
+    row.length=w;row.width=h;state.active=pos.wi;ratioState.target=pos;
+    persist();renderGrid();toast('已填入当前报价行 '+fmtRatioSize(w,h));
+}
+
+async function fetchCloud(){
+    let r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}?t=${Date.now()}`,{headers:{Accept:'application/vnd.github.v3+json',Authorization:'token '+GITHUB_CONFIG.token}});
+    if(!r.ok) throw new Error('同步失败:'+r.status);
+    let d=await r.json();
+    let cf=d.files?.[FILE]||d.files?.[LEGACY_FILE];
+    if(!cf||!cf.content) throw new Error('找不到云端配置');
+    let cloud=normalize(JSON.parse(cf.content));
+    let af=d.files?.[AUTH_FILE]||d.files?.[LEGACY_AUTH_FILE];
+    cloud.auth = af && af.content ? normalizeAuth(JSON.parse(af.content)) : {users:[]};
+    return cloud;
+}
+
+async function syncConfig(manual=false){
+    try{
+        cfg=await fetchCloud();
+        authCloudChecked=true;
+        saveLocal('fridge_quote_cfg',cfg);
+        document.getElementById('syncStatus').textContent='已同步 '+new Date().toLocaleTimeString();
+        applyUI();renderTabs();renderGrid();checkAuth();
+        if(manual)toast('已同步最新配置');
+    }catch(e){
+        let el = document.getElementById('syncStatus');
+        if(el) el.textContent='离线/本地';
+        if(manual)toast(e.message);
+        checkAuth();
+    }
+}
+
+function isTempLoginUser(name=loginUser){return false}
+function currentUser(){return (cfg.auth?.users||[]).find(u=>u.username===loginUser && u.enabled!==false)}
+function isLoggedIn(){return !!(loginUser && currentUser())}
+function showLogin(msg){
+    const authEl=document.getElementById('auth');
+    const authText=document.getElementById('authText');
+    authText.textContent=msg||'请输入管理端创建的账号密码。';
+    authEl.style.display='flex';
+    document.getElementById('loginStatus').textContent='未登录';
+}
+function checkAuth(){
+    const authEl=document.getElementById('auth');
+    const u=currentUser();
+    if(u){
+        authEl.style.display='none';
+        document.getElementById('loginStatus').textContent=(u.name||u.username)+' 已登录';
+    }else{
+        let hadLogin=!!loginUser;
+        if(authCloudChecked && loginUser){localStorage.removeItem('fridge_quote_login_user');loginUser=''}
+        showLogin(hadLogin&&authCloudChecked?'账号不存在、已停用或已删除，请重新登录。':'请输入管理端创建的账号密码。');
+    }
+}
+async function login(){
+    let username=cleanUsername(document.getElementById('loginUser').value), password=document.getElementById('loginPass').value||'';
+    if(!username||!password)return toast('请输入账号和密码');
+    try{
+        cfg=await fetchCloud();authCloudChecked=true;saveLocal('fridge_quote_cfg',cfg);
+        let u=(cfg.auth.users||[]).find(x=>x.username===username && x.enabled!==false);
+        if(!u)return showLogin('账号不存在、已停用或已删除。');
+        if(u.passwordHash!==await hashPassword(password))return toast('密码错误');
+        loginUser=username;localStorage.setItem('fridge_quote_login_user',username);
+        document.getElementById('loginPass').value='';
+        applyUI();renderTabs();renderGrid();checkAuth();toast('登录成功');
+    }catch(e){toast('登录失败:'+e.message)}
+}
+function logout(){localStorage.removeItem('fridge_quote_login_user');loginUser='';showLogin('已退出，请重新登录。')}
+function openPasswordPanel(){if(!isLoggedIn()){checkAuth();return}document.getElementById('pwdAuth').style.display='flex'}
+function closePasswordPanel(){document.getElementById('pwdAuth').style.display='none';oldPass.value='';newPass.value='';newPass2.value=''}
+async function patchAuthFile(auth){
+    let r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`,{method:'PATCH',headers:{Authorization:`token ${GITHUB_CONFIG.token}`,'Content-Type':'application/json'},body:JSON.stringify({files:{[AUTH_FILE]:{content:JSON.stringify(normalizeAuth(auth),null,2)}}})});
+    if(!r.ok)throw new Error('保存失败:'+r.status);
+}
+async function changePassword(){
+    let oldV=oldPass.value||'', newV=newPass.value||'', newV2=newPass2.value||'';
+    if(!oldV||!newV||!newV2)return toast('请填写完整');
+    if(newV.length<4)return toast('新密码至少4位');
+    if(newV!==newV2)return toast('两次新密码不一致');
+    try{
+        let cloud=await fetchCloud();authCloudChecked=true;
+        let u=(cloud.auth.users||[]).find(x=>x.username===loginUser && x.enabled!==false);
+        if(!u){logout();return toast('账号已失效')}
+        if(u.passwordHash!==await hashPassword(oldV))return toast('旧密码错误');
+        u.passwordHash=await hashPassword(newV);u.updatedAt=new Date().toISOString();
+        await patchAuthFile(cloud.auth);
+        cfg.auth=normalizeAuth(cloud.auth);saveLocal('fridge_quote_cfg',cfg);closePasswordPanel();checkAuth();toast('密码已修改');
+    }catch(e){toast(e.message)}
+}
+
+function persist(){saveLocal('fridge_quote_state',state)}
+function applyUI(){
+    document.getElementById('brand').textContent=cfg.ui.clientTitle||defaults.ui.clientTitle;
+    document.getElementById('topTip').textContent=cfg.ui.topTip||'';
+    let n=cfg.ui.notice||{}; let noticeEl=document.getElementById('notice');
+    noticeEl.textContent=n.text||'';
+    noticeEl.classList.toggle('hidden',!n.text);
+    noticeEl.style.fontSize=(n.fontSize||16)+'px';
+    noticeEl.style.color=n.color||'#111827';
+    document.body.classList.toggle('discountHidden',!!state.discountHidden);
+    document.body.classList.toggle('minDiscHidden',!!state.minDiscHidden);
+    document.getElementById('minDiscBtn').textContent=state.minDiscHidden?'显示底价':'隐藏底价';
+}
+
+function renderTabs(){
+    const list=state.windows.map((w,i)=>`<button class="tab ${i===state.active?'active':''}" onclick="selectWindow(${i})"><span>${i+1}</span><input value="${esc(w.name)}" onclick="event.stopPropagation()" onchange="renameWindow(${i},this.value)"></button>`).join('');
+    document.getElementById('tabs').innerHTML=list+`<button class="tab winAdd" onclick="addWindow()">＋窗口</button><button class="tab winRemove" onclick="removeWindow(state.active)">－窗口</button>`;
+}
+function selectWindow(i){state.active=i;persist();renderGrid()}
+function onWindowBlankClick(e,i){const blocked='input,select,textarea,button,label,.quote-row,.foot,.win-tools,.tab,.fee,.check,.lineBtns,.money,.detail-link,.acc-cell,.sizePresetBar,.presetBtn,.presetMenu,.presetDrop,.presetQuickBtn,.presetMenuManage,.presetMainBtn,.size-pair,.row-hint,.miniLink';if(e.target.closest(blocked)) return;selectWindow(i);}
+function renameWindow(i,v){state.windows[i].name=v;persist();renderTabs()}
+function removeWindow(i){if(state.windows.length<=1)return toast('至少保留一个窗口');i=Number(i);if(!Number.isInteger(i)||i<0||i>=state.windows.length)return;state.windows.splice(i,1);state.active=Math.max(0,Math.min(state.active,state.windows.length-1));persist();renderGrid()}
+function matByName(n){return cfg.materials.find(m=>m.name===n)||cfg.materials[0]||defaults.materials[0]}
+function hasMaterial(n){return !!cfg.materials.find(m=>m.name===n)}
+function rowIsBillable(r){return hasMaterial(r.material) && !!r.mode && Number(r.length)>0 && Number(r.width)>0 && (parseInt(r.qty)||0)>0}
+
+function rowHasAnyInput(r){return !!(r.material||r.mode||Number(r.length)||Number(r.width)||Number(r.qty)||(r.acc&&Object.keys(r.acc).some(k=>r.acc[k])))}
+const SIZE_PRESET_KEY='fridge_quote_size_presets_v1';
+function defaultSizePresets(){return[{length:5,width:5},{length:6,width:6},{length:5,width:7},{length:7,width:5},{length:10,width:10}]}
+function loadSizePresets(){try{let a=JSON.parse(localStorage.getItem(SIZE_PRESET_KEY)||'null');return Array.isArray(a)&&a.length?a:defaultSizePresets()}catch(e){return defaultSizePresets()}}
+function saveSizePresets(a){localStorage.setItem(SIZE_PRESET_KEY,JSON.stringify(a||[]))}
+function parseSizePresetLine(line){let m=String(line||'').trim().replace(/[×Ｘｘ＊]/g,'x').match(/(\d+(?:\.\d+)?)\s*(?:x|\*)\s*(\d+(?:\.\d+)?)/i);if(!m)return null;let l=Number(m[1])||0,w=Number(m[2])||0;if(!l||!w)return null;return{length:l,width:w}}
+function fmtSizePreset(p){let l=Number(p?.length)||0,w=Number(p?.width)||0;return l&&w?((l%1?l.toFixed(1):l)+'×'+(w%1?w.toFixed(1):w)):''}
+function closeAllSizePresetMenus(){document.querySelectorAll('.presetDrop.open').forEach(el=>el.classList.remove('open'))}
+function toggleSizePresetMenu(wi){let el=document.getElementById('presetDrop_'+wi);if(!el)return;let open=el.classList.contains('open');closeAllSizePresetMenus();if(!open)el.classList.add('open')}
+let sizePresetDraft=[];
+function openSizePresetManager(){sizePresetDraft=loadSizePresets().map(p=>({length:Number(p.length)||0,width:Number(p.width)||0}));renderSizePresetManager();document.getElementById('sizePresetModal').style.display='flex';closeAllSizePresetMenus()}
+function closeSizePresetManager(ev){const modal=document.getElementById('sizePresetModal');if(!modal)return;if(ev&&ev.target&&ev.target!==modal)return;modal.style.display='none'}
+function renderSizePresetManager(){const box=document.getElementById('sizePresetManagerBody');if(!box)return;box.innerHTML=`<div class="presetManagerPanel"><div class="presetManagerTop"><div><b>常用尺寸</b><span>只填写长宽，显示为“数字×数字”</span></div><button class="presetAddBtn" onclick="addSizePresetDraft()">＋ 新增</button></div><div class="presetManagerHead"><div>长(cm)</div><div></div><div>宽(cm)</div><div></div></div><div class="presetManagerList">${sizePresetDraft.map((p,i)=>`<div class="presetManagerRow"><input class="input" type="number" value="${p.length||''}" placeholder="长" onchange="sizePresetField(${i},'length',this.value)"><div class="presetX">×</div><input class="input" type="number" value="${p.width||''}" placeholder="宽" onchange="sizePresetField(${i},'width',this.value)"><button class="btn red" onclick="removeSizePresetDraft(${i})">删除</button></div>`).join('')}</div><div class="presetManagerActions"><button class="btn" onclick="closeSizePresetManager()">取消</button><button class="btn blue" onclick="saveSizePresetManager()">保存</button></div></div>`}
+function sizePresetField(i,key,val){if(!sizePresetDraft[i])return;sizePresetDraft[i][key]=Number(val)||0}
+function addSizePresetDraft(){sizePresetDraft.push({length:0,width:0});renderSizePresetManager()}
+function removeSizePresetDraft(i){sizePresetDraft.splice(i,1);renderSizePresetManager()}
+function saveSizePresetManager(){let arr=sizePresetDraft.map(p=>{let l=Number(p.length)||0,w=Number(p.width)||0;return l>0&&w>0?{length:l,width:w}:null}).filter(Boolean);if(!arr.length)return toast('请至少保留一个尺寸');saveSizePresets(arr.slice(0,30));closeSizePresetManager();renderGrid();toast('常用尺寸已保存到本机')}
+
+function renderQuoteHead(){return `<div class="quote-head" style="grid-template-columns:${rowColumns()}"><div>序号</div><div class="left">材质</div><div>模式</div><div class="size">尺寸<small>cm</small></div><div>数量</div><div>综合单价</div><div>工艺配套</div><div>小计</div><div>操作</div></div>`}
+
+function enabledAccsForRow(r){if(!hasMaterial(r.material)) return []; return (matByName(r.material).accessories||[]).filter(a=>a.enabled)}
+function accOptionGroups(list){
+    let groups=[], used=new Set();
+    list.forEach(a=>{
+        let b=(a.bundle||'').trim();
+        if(b){
+            if(used.has('b:'+b)) return;
+            let items=list.filter(x=>(x.bundle||'').trim()===b);
+            used.add('b:'+b);
+            groups.push({key:'bundle:'+b,label:'组合：'+b,items,combo:true});
+        }else{
+            groups.push({key:'single:'+a.name,label:a.name,items:[a],combo:false});
+        }
+    });
+    return groups;
+}
+function meterEdgeFor(r, accName){
+    if(!r.accMeterEdge) r.accMeterEdge={};
+    let edge=r.accMeterEdge[accName]||r.meterEdge||'';
+    if(edge!=='length'&&edge!=='width') edge=(Number(r.length)||0)>=(Number(r.width)||0)?'length':'width';
+    return edge;
+}
+function getPrimaryMeterAcc(r){let arr=getActiveMeterAccs(r);return arr[0]||null;}
+
+function toggleAccItem(wi, ri, accName) { toggleAccGroup(wi, ri, 'single:'+accName); }
+function setMeterEdge(wi,ri,edge){
+    let r=state.windows[wi].rows[ri];
+    if(!r.accMeterEdge) r.accMeterEdge={};
+    getActiveMeterAccs(r).forEach(a=>r.accMeterEdge[a.name]=edge);
+    r.meterEdge=edge;
+    persist();
+    renderGrid();
+}
+
+function setRow(wi,ri,k,v,repaint=false){let r=state.windows[wi].rows[ri];if(['length','width'].includes(k))r[k]=parseFloat(v)||0;else if(k==='qty')r.qty=parseInt(v)||0;else r[k]=v;if(k==='material'){r.acc={};r.accMeterEdge={};if(!v){r.mode='';}else{let m=matByName(v);r.mode=m.defaultMode||r.mode||'longest_side';}}persist();if(repaint)renderGrid();else updateAll();}
+function addRow(wi,pos){wi=Number(wi);if(!Number.isInteger(wi)||wi<0||wi>=state.windows.length)return;let arr=state.windows[wi].rows;pos=pos==null?arr.length:Number(pos);if(!Number.isFinite(pos))pos=arr.length;pos=Math.max(0,Math.min(arr.length,Math.trunc(pos)));arr.splice(pos,0,defaultRow());persist();renderGrid()}
+function removeRow(wi,ri){wi=Number(wi);if(!Number.isInteger(wi)||wi<0||wi>=state.windows.length)return;let arr=state.windows[wi].rows;ri=Number(ri);if(!Number.isInteger(ri)||ri<0||ri>=arr.length)return;if(arr.length<=1)return toast('至少保留一行');arr.splice(ri,1);persist();renderGrid()}
+
+// --- AI识别导入 & AI知识库 ---
+let aiImportState={wi:0,rows:[],images:[]};
+let aiImportBusy=false,kbAiBusy=false;
+function closeAiImport(e){if(e&&e.target!==document.getElementById('aiImportModal'))return;closeAiImportNow()}
+function closeAiImportNow(){document.getElementById('aiImportModal').style.display='none'}
+function openAiImport(wi){if(!isLoggedIn()){checkAuth();return}aiImportState.wi=wi;aiImportState.rows=[];aiImportState.images=[];document.getElementById('aiText').value='';document.getElementById('aiImportWinName').textContent=state.windows[wi]?.name||'当前窗口';document.getElementById('aiImportModal').style.display='flex';renderAiImages();renderAiPreview()}
+function clearAiImport(){aiImportState.rows=[];aiImportState.images=[];document.getElementById('aiText').value='';renderAiImages();renderAiPreview()}
+async function addAiImageFiles(files){for(const f of Array.from(files||[])){if(!f.type.startsWith('image/'))continue;aiImportState.images.push(await fileToDataUrl(f))}renderAiImages()}
+function fileToDataUrl(file){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
+function renderAiImages(){let box=document.getElementById('aiImgs');if(!box)return;box.innerHTML=aiImportState.images.map((src,i)=>`<div style="position:relative"><img src="${src}"><button class="lineBtn minus" style="position:absolute;right:-5px;top:-5px;background:#fff" onclick="aiImportState.images.splice(${i},1);renderAiImages()">−</button></div>`).join('')}
+document.addEventListener('paste',async e=>{let m=document.getElementById('aiImportModal');if(!m||m.style.display!=='flex')return;let items=e.clipboardData?.items||[];for(const it of items){if(it.type&&it.type.startsWith('image/')){let f=it.getAsFile();if(f){aiImportState.images.push(await fileToDataUrl(f));renderAiImages();toast('图片已粘贴')}}}});
+function parseSizeQtyText(text){
+    text=String(text||'')
+        .replace(/[×Ｘｘ]/g,'x')
+        .replace(/[＊]/g,'*')
+        .replace(/[—–－~～]/g,'-')
+        .replace(/厘米|公分/g,'cm')
+        .replace(/，/g,';');
+    let chunks=text.split(/\r?\n|；|;/).map(s=>s.trim()).filter(Boolean), out=[];
+    for(let line of chunks){
+        let rows=parseOneSizeLine(line);
+        if(rows.length){out.push(...rows);continue;}
+        let nums=[...line.matchAll(/\d+(?:\.\d+)?/g)].map(m=>({v:num(m[0]),i:m.index,text:m[0]}));
+        if(nums.length>=3){
+            let explicit=findQty(line), len=0,width=0,qty=0;
+            if(explicit){
+                qty=explicit;
+                let qUsed=false;
+                let dims=[];
+                nums.forEach(n=>{if(!qUsed && Math.abs(n.v-explicit)<1e-9){qUsed=true;return}dims.push(n)});
+                len=dims[0]?.v||0;width=dims[1]?.v||0;
+            }else if(nums[0].v<=10 && nums[1].v>=5 && nums[2].v>=5){
+                qty=nums[0].v;len=nums[1].v;width=nums[2].v;
+            }else{
+                len=nums[0].v;width=nums[1].v;qty=nums[2].v;
+            }
+            if(len&&width&&qty)out.push({material:'',mode:'',length:len,width:width,qty:parseInt(qty)||1,raw:line});
+        }
+    }
+    return out;
+}
+function parseOneSizeLine(line){
+    const dimRe=/(\d+(?:\.\d+)?)\s*(?:cm)?\s*(?:x|X|\*|乘|[-])\s*(\d+(?:\.\d+)?)(?:\s*(?:cm))?/g;
+    let matches=[...line.matchAll(dimRe)], rows=[];
+    if(!matches.length)return rows;
+    matches.forEach((m,idx)=>{
+        let before=line.slice(0,m.index);
+        let after=line.slice(m.index+m[0].length, idx+1<matches.length?matches[idx+1].index:line.length);
+        let qty=findQtyNear(before,after);
+        if(!qty){
+            let rest=(before+' '+after).trim();
+            qty=findQty(rest)||1;
+        }
+        rows.push({material:'',mode:'',length:num(m[1]),width:num(m[2]),qty:parseInt(qty)||1,raw:line});
+    });
+    return rows.filter(x=>x.length&&x.width&&x.qty);
+}
+function findQtyNear(before,after){
+    before=String(before||'');after=String(after||'');
+    let m=after.match(/^\s*(?:数量|qty|共|范围)\s*(\d+)\s*(?:张|个|件|pcs|p|套|份)?/i);if(m)return parseInt(m[1])||0;
+    m=after.match(/^\s*(\d+)\s*(?:张|个|件|pcs|p|套|份)/i);if(m)return parseInt(m[1])||0;
+    m=before.match(/(?:数量|qty|共|范围)\s*(\d+)\s*(?:张|个|件|pcs|p|套|份)?\s*$/i);if(m)return parseInt(m[1])||0;
+    m=before.match(/(\d+)\s*(?:张|个|件|pcs|p|套|份)\s*$/i);if(m)return parseInt(m[1])||0;
+    m=before.match(/(?:^|[^\d.])(\d{1,5})\s*$/);if(m)return parseInt(m[1])||0;
+    m=after.match(/^\s*(\d{1,5})(?!\s*(?:x|\*|-|\.\d))/i);if(m)return parseInt(m[1])||0;
+    return 0;
+}
+function num(v){return parseFloat(String(v).replace(/,/g,''))||0}
+function findQty(s){s=String(s||'');let m=s.match(/(?:数量|qty|共|范围)?\s*(\d+)\s*(?:张|个|件|pcs|p|套|份)/i);if(m)return parseInt(m[1])||0;m=s.match(/(?:数量|qty|共|范围)\s*(\d+)/i);if(m)return parseInt(m[1])||0;return 0}
+async function startAiImportParse(){
+    if(aiImportBusy)return toast('正在识别，请不要重复点击');
+    let text=document.getElementById('aiText').value||'';
+    let local=parseSizeQtyText(text);
+    if(local.length){aiImportState.rows=local;renderAiPreview();toast('已识别 '+local.length+' 行');return}
+    if(!text.trim() && aiImportState.images.length===0)return toast('请输入尺寸数量，或粘贴/上传图片');
+    if(!cfg.ai?.enabled || !cfg.ai?.apiKey)return toast('没有识别到尺寸数量；图片识别需要配置AI接口');
+    aiImportBusy=true;
+    try{let rows=await callAiParse(text,aiImportState.images);if(!rows.length)return toast('没有识别到尺寸数量');aiImportState.rows=rows;renderAiPreview();toast('已识别 '+rows.length+' 行')}catch(e){toast('AI图片/文本识别失败：'+e.message+'；手动输入如 5 20x30 可直接识别')}finally{aiImportBusy=false}
+}
+async function callAiParse(text,images){
+    let ai=normalizeAi(cfg.ai);let prompt='请从用户提供的图片或文字中提取报价行。只输出JSON：{"rows":[{"length":20,"width":30,"qty":5,"material":"","mode":""}]}。规则：尺寸单位默认厘米；5 20x30表示数量5、尺寸20x30；30*40 3张表示30x40数量3；材质识别不到留空。用户文字：\n'+(text||'');
+    let userContent=images&&images.length?[{type:'text',text:prompt},...images.map(url=>({type:'image_url',image_url:{url}}))]:prompt;
+    let body={model:(images&&images.length?ai.visionModel:ai.model)||ai.model,temperature:Number(ai.temperature)||0.1,messages:[{role:'system',content:ai.systemPrompt||'只输出JSON'}, {role:'user',content:userContent}]};
+    let r=await fetch(ai.apiBase,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ai.apiKey},body:JSON.stringify(body)});if(!r.ok)throw new Error('接口返回 '+r.status);let d=await r.json();let content=d.choices?.[0]?.message?.content||'';return parseAiJsonRows(content)
+}
+function parseAiJsonRows(s){s=String(s||'').trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();let j;try{j=JSON.parse(s)}catch(e){let m=s.match(/\{[\s\S]*\}|\[[\s\S]*\]/);if(!m)return[];j=JSON.parse(m[0])}let arr=Array.isArray(j)?j:(j.rows||j.items||[]);return arr.map(x=>({material:String(x.material||''),mode:x.mode||'',length:num(x.length||x.long||x.l),width:num(x.width||x.w),qty:parseInt(x.qty||x.quantity||x.count)||1,raw:x.raw||''})).filter(x=>x.length&&x.width&&x.qty)}
+function renderAiPreview(){let box=document.getElementById('aiPreview');if(!box)return;let rows=aiImportState.rows||[];if(!rows.length){box.innerHTML='<div class="empty">暂无识别结果</div>';return}let mats='<option value="">请选择</option>'+cfg.materials.map(m=>`<option value="${esc(m.name)}">${esc(m.name)}</option>`).join('');box.innerHTML=rows.map((r,i)=>`<div class="ai-preview-row"><div class="seq">${i+1}</div><div class="cell"><label>材质</label><select class="sel" onchange="aiImportState.rows[${i}].material=this.value">${mats.replace('value="'+esc(r.material)+'"','value="'+esc(r.material)+'" selected')}</select></div><div class="cell"><label>模式</label><select class="sel" onchange="aiImportState.rows[${i}].mode=this.value"><option value="" ${!r.mode?'selected':''}>自动/空</option><option value="longest_side" ${r.mode==='longest_side'?'selected':''}>最长边</option><option value="area" ${r.mode==='area'?'selected':''}>面积</option></select></div><div class="cell"><label>长</label><input class="inp numonly" value="${r.length}" onchange="cleanNumberInput(this);aiImportState.rows[${i}].length=parseFloat(this.value)||0"></div><div class="cell"><label>宽</label><input class="inp numonly" value="${r.width}" onchange="cleanNumberInput(this);aiImportState.rows[${i}].width=parseFloat(this.value)||0"></div><div class="cell"><label>数量</label><input class="inp numonly" value="${r.qty}" onchange="cleanNumberInput(this);aiImportState.rows[${i}].qty=parseInt(this.value)||0"></div><div class="cell"><label>备注</label><div class="money" title="${esc(r.raw||'')}">${esc(r.raw||'-')}</div></div><button class="btn red" onclick="aiImportState.rows.splice(${i},1);renderAiPreview()">删除</button></div>`).join('')}
+function confirmAiFill(){let rows=(aiImportState.rows||[]).filter(r=>Number(r.length)>0&&Number(r.width)>0&&Number(r.qty)>0);if(!rows.length)return toast('没有可填入的数据');let wi=aiImportState.wi, mode=document.querySelector('input[name="aiFillMode"]:checked')?.value||'replace';let mapped=rows.map(r=>{let o=defaultRow();o.material=r.material||'';o.length=Number(r.length)||0;o.width=Number(r.width)||0;o.qty=parseInt(r.qty)||0;o.mode=r.mode||'';if(o.material){let m=matByName(o.material);o.mode=o.mode||m.defaultMode||'longest_side'}return o});if(mode==='append'){let arr=state.windows[wi].rows;let onlyEmpty=arr.length===1&&!rowIsBillable(arr[0])&&!arr[0].material&&!arr[0].length&&!arr[0].width&&!arr[0].qty;if(onlyEmpty)state.windows[wi].rows=mapped;else state.windows[wi].rows=arr.concat(mapped)}else state.windows[wi].rows=mapped;state.active=wi;persist();renderGrid();closeAiImportNow();toast('已填入当前窗口')}
+function closeKbModal(e){if(e&&e.target!==document.getElementById('kbModal'))return;closeKbModalNow()}
+function closeKbModalNow(){document.getElementById('kbModal').style.display='none'}
+function openKbModal(){if(!isLoggedIn()){checkAuth();return}document.getElementById('kbModal').style.display='flex';renderKbResults([], '');setTimeout(()=>document.getElementById('kbQuery')?.focus(),30)}
+function kbAllItems(){return normalizeAiKb(cfg.aiKb).items.filter(x=>x.enabled!==false&&(x.question||x.answer))}
+function kbCandidates(q,limit=30){q=String(q||'').trim().toLowerCase();let items=kbAllItems();return items.map(x=>{let score=0,qq=(x.question||'').toLowerCase(),aa=(x.answer||'').toLowerCase(),kk=(x.keywords||'').toLowerCase(),cc=(x.category||'').toLowerCase(),hay=[qq,aa,kk,cc].join(' ');if(!q)score=1;else{let words=q.split(/\s+/).filter(Boolean);if(!words.length)words=[q];words.forEach(w=>{if(qq.includes(w))score+=12;if(kk.includes(w))score+=9;if(cc.includes(w))score+=5;if(aa.includes(w))score+=3;if(hay.includes(w))score+=1});if(qq.includes(q))score+=30;if(kk.includes(q))score+=18;if(aa.includes(q))score+=8;if(cc.includes(q))score+=6}return {...x,score}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit)}
+let kbRenderList=[];
+function copyKbAnswer(i){let ans=kbRenderList[i]?.answer||'';if(!ans)return toast('没有答案可复制');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ans).then(()=>toast('已复制答案')).catch(()=>fallbackCopy(ans));}else fallbackCopy(ans)}
+function fallbackCopy(text){let ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('已复制答案')}
+
+function setPackage(i,k,v){let w=state.windows[i];if(k==='checked')w.packageChecked=!!v;else w.packageAmount=Number(v)||0;persist();updateAll()}
+function setExtra(i,n,v){state.windows[i].extraFees[n]=Number(v)||0;persist();updateAll()}
+function toggleExtraActive(wi, name, checked){let w = state.windows[wi];if (!w.extraActive) w.extraActive = {};w.extraActive[name] = checked;persist(); renderGrid();}
+function setDiscount(i,v,repaint=true){state.windows[i].discount=Math.max(1,Math.min(200,Number(v)||100));persist();if(repaint) renderGrid(); else updateAll();}
+function toggleDiscount(){state.discountHidden=!state.discountHidden;persist();applyUI()}
+function toggleMinDisc(){state.minDiscHidden=!state.minDiscHidden;persist();applyUI()}
+
+function unitPriceLongest(m,size,isCost=false){let arr=[...(m.size_prices||[])].sort((a,b)=>a.max_size-b.max_size);for(let p of arr)if(size<=Number(p.max_size))return Number(isCost?p.cost:p.price)||0;return arr.length?Number(arr[arr.length-1][isCost?'cost':'price'])||0:0}
+
+function discountRateFor(w){let d=Number(w?.discount);return Number.isFinite(d)&&d>=0?d:100}
+function discountedAmount(amount,w){return Math.round((Number(amount)||0)*discountRateFor(w)/100)}
+function rowDiscountedTotal(c,w){return discountedAmount(c.total,w)}
+function rowComprehensiveUnit(c,w,r){let qty=Math.max(0,parseInt(r?.qty)||0);return c.isBillable&&qty>0?rowDiscountedTotal(c,w)/qty:0}
+
+function updateAll(){
+    state.windows.forEach((w,wi)=>{
+        let productGrossSum=0, productDiscountedSum=0, baseMinRev=0, maxCustomCosts={};
+        const rate=discountRateFor(w);
+        w.rows.forEach((r,ri)=>{
+            let c=calcRow(r);
+            let rowDisc=rowDiscountedTotal(c,w);
+            productGrossSum += c.total;
+            productDiscountedSum += rowDisc;
+            baseMinRev += c.minRev;
+            
+            if(c.isBillable){
+                (c.material.custom_costs || []).forEach(cc => {
+                    let amt = Number(cc.amount)||0;
+                    if (!maxCustomCosts[cc.name] || amt > maxCustomCosts[cc.name]) {
+                        maxCustomCosts[cc.name] = amt;
+                    }
+                });
+            }
+            
+            let uLbl=document.getElementById(`unitLbl_${wi}_${ri}`);
+            if(uLbl) uLbl.textContent = '综合单价';
+            
+            let u=document.getElementById(`unit_${wi}_${ri}`),mo=document.getElementById(`mold_${wi}_${ri}`),li=document.getElementById(`line_${wi}_${ri}`);
+            if(u) {
+                let qty=Math.max(0,parseInt(r.qty)||0);
+                let compUnit=rowComprehensiveUnit(c,w,r);
+                let grossUnit=c.isBillable&&qty>0?c.total/qty:0;
+                if(c.isBillable){
+                    u.innerHTML=moneyUnit(compUnit)+`<span class="small">/${esc(c.unitName)}</span>`;
+                    u.title = `折后综合单价：${moneyUnit(compUnit)}/${c.unitName}\n折前综合单价：${moneyUnit(grossUnit)}/${c.unitName}\n材质费：${money(c.materialFee)}\n工艺费：${money(c.accFeeTotal||0)}\n模具费：${money(c.moldFee)}\n折扣：${rate}%`;
+                    if(c.mode === 'area') u.title += `\n基准面积价：¥${c.material.area_price_per_sqm || 0}/㎡`;
+                    u.style.cursor = 'help';
+                }else{
+                    u.innerHTML='-';
+                    u.removeAttribute('title');
+                    u.style.cursor='';
+                }
+            }
+            if(mo){const mm=c.material;mo.textContent=mm.has_mold?money(c.moldFee):'—';}
+            if(li){
+                li.textContent=money(rowDisc);
+                if(c.isBillable && rowDisc!==c.total){
+                    li.title=`折前小计：${money(c.total)}\n折扣：${rate}%\n折后小计：${money(rowDisc)}`;
+                    li.style.cursor='help';
+                }else{
+                    li.removeAttribute('title');
+                    li.style.cursor='';
+                }
+            }
+            updateAccCell(wi,ri);
+        });
+        
+        let pkgFee=w.packageChecked?Math.round(Number(w.packageAmount)||0):0;
+        let hiddenCosts = 0;
+        for(let k in maxCustomCosts) hiddenCosts += maxCustomCosts[k];
+        
+        let extraFixed = 0;
+        let fixedFeesArr = [];
+        let percentFees = [];
+
+        (cfg.extraFees||[]).filter(e=>e.enabled).forEach(e=>{
+            let active = w.extraActive?.[e.name] !== false;
+            if(!active) return;
+            let val = Number(w.extraFees[e.name]??e.amount??0)||0;
+            if (e.is_percent) {
+                percentFees.push({name: e.name, pct: val});
+            } else {
+                val = Math.round(val);
+                extraFixed += val;
+                fixedFeesArr.push({name: e.name, val: val});
+            }
+        });
+        
+        let beforePercentTotal = productDiscountedSum + pkgFee + extraFixed;
+        let extraPctAmt = 0;
+        percentFees.forEach(f => {
+            let pAmt = Math.round(beforePercentTotal * (f.pct / 100));
+            extraPctAmt += pAmt;
+            f.val = pAmt;
+        });
+        
+        let final = beforePercentTotal + extraPctAmt;
+
+        let winMinRev = Math.round(baseMinRev + hiddenCosts + pkgFee + extraFixed + extraPctAmt);
+        
+        let subNode=document.getElementById('sub_'+wi);
+        if(subNode)subNode.textContent=money(productDiscountedSum);
+        let feeNode=document.getElementById('feeSum_'+wi);
+        if(feeNode)feeNode.textContent=money(final-productDiscountedSum);
+        let g=document.getElementById('grand_'+wi);
+        if(g)g.textContent=money(final);
+        
+        let minDiscNode=document.getElementById('minDisc_'+wi);
+        if(minDiscNode){
+            let calcDisc = 100;
+            if (productGrossSum > 0) {
+                let totalPct = percentFees.reduce((sum, f) => sum + f.pct, 0);
+                let requiredBeforePct = winMinRev / (1 + totalPct / 100);
+                let requiredProductAfterDisc = requiredBeforePct - pkgFee - extraFixed;
+                calcDisc = Math.ceil((requiredProductAfterDisc / productGrossSum) * 100);
+            }
+            calcDisc = Math.max(0, Math.min(100, calcDisc));
+            minDiscNode.textContent=calcDisc;
+        }
+    })
+}
+
+function exportCSV(wi){
+    const d=collectQuotePdfData(wi);
+    const now=new Date().toLocaleString();
+    const rowsHtml=d.rows.length?d.rows.map((r,i)=>`<tr class="${i%2?'alt':''}"><td>${r.idx}</td><td class="left">${esc(r.material)}</td><td>${esc(r.mode)}</td><td>${esc(r.size)}</td><td>${r.qty}</td><td class="left">${esc(r.acc)}</td><td>${esc(r.unit)}</td><td class="moneyCell">${esc(r.line)}</td></tr>`).join(''):`<tr><td colspan="8" class="emptyXls">暂无报价内容</td></tr>`;
+    let summary=[];
+    summary.push(['商品合计'+(d.rate!==100?'（折后）':''), money(d.productDiscountedSum)]);
+    if(d.rate!==100) summary.push(['折前商品合计', money(d.productGrossSum)]);
+    if(d.pkgFee) summary.push(['包装费', money(d.pkgFee)]);
+    if(d.extraFixed) summary.push(['固定费用', money(d.extraFixed)]);
+    d.percentFees.forEach(f=>summary.push([`${f.name} ${f.pct}%`, money(f.val)]));
+    summary.push(['最终报价', money(d.final)]);
+    const summaryHtml=summary.map((x,i)=>`<tr class="${i===summary.length-1?'finalRow':''}"><td colspan="6"></td><td class="sumLabel">${esc(x[0])}</td><td class="sumValue">${esc(x[1])}</td></tr>`).join('');
+    const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+        body{font-family:'Microsoft YaHei',Arial,sans-serif;color:#111827;background:#fff;margin:0;padding:0}
+        table{border-collapse:collapse;width:980px;table-layout:fixed;font-size:12pt}
+        td,th{border:1px solid #cbd5e1;padding:8px 10px;text-align:center;vertical-align:middle;mso-number-format:'\\@'}
+        .title td{background:#0f172a;color:#fff;font-size:22pt;font-weight:800;text-align:left;border-color:#0f172a;padding:14px 16px}
+        .meta td{background:#f8fafc;color:#475569;font-size:11pt;text-align:left;height:28px}
+        .head th{background:#dbeafe;color:#0f172a;font-weight:800;height:32px;border-color:#93c5fd}
+        .alt td{background:#f8fafc}.left{text-align:left}.moneyCell{font-weight:800;color:#075bb5}.emptyXls{height:48px;color:#94a3b8;background:#f8fafc}
+        .sumLabel{background:#f1f5f9;font-weight:800;text-align:right}.sumValue{background:#fff;font-weight:800;color:#075bb5;text-align:right}
+        .finalRow .sumLabel{background:#0f172a;color:#fff;font-size:15pt;border-color:#0f172a}.finalRow .sumValue{background:#0f172a;color:#fff;font-size:16pt;border-color:#0f172a}
+        .note td{border:none;color:#64748b;font-size:10pt;text-align:left;padding-top:12px}
+        .w1{width:48px}.w2{width:160px}.w3{width:80px}.w4{width:110px}.w5{width:70px}.w6{width:240px}.w7{width:120px}.w8{width:120px}
+    
+
+/* UI fix v3: partial highlight, compact multi-window, axis chips */
+.row-hint{display:none!important}
+.quote-row.empty-row{border-color:#e2e8f0;background:#fff}
+.quote-row.incomplete-row{border-color:#f59e0b;background:#fffaf3}
+.quote-row.incomplete-row .miss,
+.quote-row.incomplete-row .miss .inp,
+.quote-row.incomplete-row .miss .sel,
+.quote-row.incomplete-row .miss.acc-cell,
+.quote-row.incomplete-row .miss .acc-cell{border-color:#f59e0b!important;background:#fffbeb!important}
+.quote-row.incomplete-row .miss .inp:focus,
+.quote-row.incomplete-row .miss .sel:focus{box-shadow:0 0 0 2px rgba(245,158,11,.16)!important}
+.dim-inp.meter-on{border-color:var(--bd)!important;background:#fff7ed!important;box-shadow:inset 0 -2px 0 #f97316}
+.acc-cell{overflow:hidden;min-width:0;align-content:center}
+.acc-tag{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.acc-chipline{display:flex;gap:4px;align-items:center;min-width:0;max-width:100%;overflow:hidden}
+.axisChip{border:1px solid #fed7aa;background:#fff7ed;color:#c2410c;border-radius:999px;padding:1px 6px;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap;line-height:16px}
+.axisChip.active{background:#f97316;border-color:#f97316;color:#fff}
+.accCompact{display:inline-flex;align-items:center;justify-content:center;min-width:0;max-width:100%;height:22px;border-radius:999px;background:#eef6ff;color:#075bb5;font-size:11px;font-weight:800;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.presetDrop{width:232px;border-radius:14px;padding:12px}
+.presetDropHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.presetDropHead b{font-size:13px;color:#334155}
+.presetDropHead button{border:0;background:#eff6ff;color:#075bb5;border-radius:999px;height:26px;padding:0 10px;font-size:12px;font-weight:800;cursor:pointer}
+.presetQuickList{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important}
+.presetQuickBtn{height:34px!important;text-align:center!important;padding:0!important;border-radius:10px!important;font-weight:800!important}
+.presetManagerPanel{background:#f8fbff;border:1px solid #dbeafe;border-radius:14px;padding:12px}
+.presetManagerTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.presetManagerTop b{font-size:16px;color:#0f172a}
+.presetManagerTop span{display:block;font-size:12px;color:#667085;margin-top:3px}
+.presetManagerHead{grid-template-columns:1fr 18px 1fr auto!important}
+.presetManagerRow{grid-template-columns:1fr 18px 1fr auto!important}
+.presetX{text-align:center;font-size:18px;font-weight:800;color:#94a3b8}
+@media(max-width:1050px){
+  .presetQuickList{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.grid.n4 .quote-head,.grid.n5 .quote-head,.grid.n6 .quote-head{font-size:10px;gap:4px;padding:0 6px 5px}
+.grid.n4 .quote-row,.grid.n5 .quote-row,.grid.n6 .quote-row{gap:4px;padding:6px}
+.grid.n4 .sel,.grid.n5 .sel,.grid.n6 .sel,
+.grid.n4 .inp,.grid.n5 .inp,.grid.n6 .inp,
+.grid.n4 .money,.grid.n5 .money,.grid.n6 .money,
+.grid.n4 .acc-cell,.grid.n5 .acc-cell,.grid.n6 .acc-cell,
+.grid.n4 .seq,.grid.n5 .seq,.grid.n6 .seq{height:28px!important;min-height:28px!important;font-size:11px!important;border-radius:7px!important;padding-left:4px!important;padding-right:4px!important}
+.grid.n4 .size-x,.grid.n5 .size-x,.grid.n6 .size-x{padding-bottom:5px;font-size:12px}
+.grid.n4 .size-pair-flat,.grid.n5 .size-pair-flat,.grid.n6 .size-pair-flat{gap:3px!important;grid-template-columns:minmax(0,1fr)10px minmax(0,1fr)!important}
+.grid.n4 .acc-tag,.grid.n5 .acc-tag,.grid.n6 .acc-tag{font-size:9px;padding:1px 4px;max-width:52px}
+.grid.n4 .acc-price,.grid.n5 .acc-price,.grid.n6 .acc-price{display:none}
+.grid.n4 .axisChip,.grid.n5 .axisChip,.grid.n6 .axisChip{font-size:9px;padding:0 4px;line-height:14px}
+.grid.n4 .lineBtns,.grid.n5 .lineBtns,.grid.n6 .lineBtns{height:28px!important}
+.grid.n4 .lineBtn,.grid.n5 .lineBtn,.grid.n6 .lineBtn{width:18px;height:12px;font-size:10px}
+
+
+/* v6 acc compact + export full */
+.acc-cell{overflow:hidden}
+.accCompact{display:inline-flex;align-items:center;max-width:100%;min-width:0;border-radius:999px;background:#eff6ff;color:#075bb5;font-weight:800;font-size:11px;padding:2px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.accMore{color:#64748b;background:#f1f5f9}
+.accFullText{font-size:12px;font-weight:700;color:#334155;line-height:1.55;white-space:normal;word-break:break-word}
+.grid.n2 .accCompact,.grid.n3 .accCompact{font-size:10px;padding:1px 6px}
+.grid.n4 .accCompact,.grid.n5 .accCompact,.grid.n6 .accCompact{font-size:9px;padding:1px 5px;max-width:100%}
+.window.exporting .acc-cell{height:auto!important;min-height:38px!important;max-height:none!important;overflow:visible!important;white-space:normal!important;align-items:flex-start!important;justify-content:flex-start!important;padding:7px 8px!important}
+.window.exporting .acc-tag,.window.exporting .acc-price{display:inline-flex!important;max-width:none!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;font-size:11px!important;line-height:1.35!important;margin:1px 2px 2px 0!important}
+.window.exporting .accCompact{display:none!important}
+.window.exporting .quote-row{height:auto!important;min-height:0!important;align-items:start!important}
+.window.exporting .rows{overflow:visible!important}
+
+
+/* v7 common size inline row */
+.sizePresetBar{
+  justify-content:flex-start!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:8px 12px 10px!important;
+  background:#f5f7fb!important;
+  border-bottom:0!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  white-space:nowrap!important;
+}
+.presetInlineLabel{
+  font-size:12px;
+  font-weight:900;
+  color:#64748b;
+  flex:0 0 auto;
+}
+.presetInlineList{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:nowrap;
+  min-width:0;
+}
+.presetInlineBtn{
+  height:30px;
+  border:1px solid #bfdbfe;
+  background:#eff6ff;
+  color:#075bb5;
+  border-radius:999px;
+  padding:0 10px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.presetInlineBtn:hover{
+  background:#dbeafe;
+  border-color:#93c5fd;
+}
+.presetInlineManage{
+  height:30px;
+  border:1px dashed #93c5fd;
+  background:#fff;
+  color:#075bb5;
+  border-radius:999px;
+  padding:0 10px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.presetInlineEmpty{
+  font-size:12px;
+  color:#94a3b8;
+  font-weight:700;
+}
+.grid.n4 .sizePresetBar,.grid.n5 .sizePresetBar,.grid.n6 .sizePresetBar{
+  padding:5px 6px 6px!important;
+  gap:5px!important;
+}
+.grid.n4 .presetInlineLabel,.grid.n5 .presetInlineLabel,.grid.n6 .presetInlineLabel{
+  font-size:10px!important;
+}
+.grid.n4 .presetInlineBtn,.grid.n5 .presetInlineBtn,.grid.n6 .presetInlineBtn,
+.grid.n4 .presetInlineManage,.grid.n5 .presetInlineManage,.grid.n6 .presetInlineManage{
+  height:24px!important;
+  padding:0 7px!important;
+  font-size:10px!important;
+}
+
+
+/* v9: header presets + compact quote + no mold column */
+.sizePresetBar{display:none!important}
+.win-head{height:42px!important;padding:0 8px!important;gap:8px!important}
+.namebox{flex:0 0 auto}
+.win-name{height:30px!important;font-size:16px!important;padding:3px 7px!important}
+.headSizePresets{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:5px;overflow:hidden;white-space:nowrap}
+.headPresetLabel{font-size:12px;font-weight:900;color:#64748b;flex:0 0 auto}
+.headPresetList{display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden}
+.headPresetBtn{height:26px;border:1px solid #bfdbfe;background:#eff6ff;color:#075bb5;border-radius:999px;padding:0 9px;font-size:12px;font-weight:900;cursor:pointer;flex:0 0 auto}
+.headPresetBtn:hover{background:#dbeafe;border-color:#93c5fd}
+.headPresetManage{height:26px;border:1px dashed #93c5fd;background:#fff;color:#075bb5;border-radius:999px;padding:0 9px;font-size:12px;font-weight:900;cursor:pointer;flex:0 0 auto}
+.win-tools{flex:0 0 auto}
+.rows{padding:7px 10px 8px!important}
+.quote-head{padding:0 10px 5px!important;margin-bottom:3px!important}
+.quote-row{padding:7px 10px!important;margin-bottom:5px!important;border-radius:10px!important}
+.quote-row .seq,.quote-row .inp,.quote-row .sel,.quote-row .money,.quote-row .acc-cell{height:34px!important;min-height:34px!important}
+.dim-inp{height:34px!important}
+.lineBtns{height:34px!important}
+.foot{padding:5px 8px!important;gap:6px!important}
+.fee{padding:3px 6px!important}
+.fee input[type=number],.fee input[type=text],.discount input{height:26px!important}
+.grandBox{gap:2px!important}
+.grand{font-size:24px!important}
+.grandLabel{padding:1px 7px!important}
+.grandMeta{font-size:10.5px!important}
+.accReq{background:#eef2ff!important;color:#4338ca!important}
+.accWaived{background:#f1f5f9!important;color:#64748b!important;text-decoration:line-through}
+.grid.n2 .win-head,.grid.n3 .win-head{height:38px!important;padding:0 6px!important;gap:5px!important}
+.grid.n2 .win-name,.grid.n3 .win-name{height:26px!important;font-size:14px!important;width:88px!important}
+.grid.n2 .headPresetLabel,.grid.n3 .headPresetLabel{font-size:10px!important}
+.grid.n2 .headPresetBtn,.grid.n3 .headPresetBtn,.grid.n2 .headPresetManage,.grid.n3 .headPresetManage{height:22px!important;padding:0 6px!important;font-size:10px!important}
+.grid.n2 .tool,.grid.n3 .tool{height:26px!important;width:36px!important;font-size:11px!important}
+.grid.n2 .round,.grid.n3 .round{width:22px!important;height:22px!important;font-size:14px!important}
+.grid.n4 .win-head,.grid.n5 .win-head,.grid.n6 .win-head{height:34px!important;padding:0 5px!important;gap:4px!important}
+.grid.n4 .win-name,.grid.n5 .win-name,.grid.n6 .win-name{height:24px!important;font-size:12px!important;width:72px!important}
+.grid.n4 .headPresetLabel,.grid.n5 .headPresetLabel,.grid.n6 .headPresetLabel{display:none!important}
+.grid.n4 .headPresetBtn,.grid.n5 .headPresetBtn,.grid.n6 .headPresetBtn,.grid.n4 .headPresetManage,.grid.n5 .headPresetManage,.grid.n6 .headPresetManage{height:20px!important;padding:0 5px!important;font-size:9px!important}
+.grid.n4 .headPresetList,.grid.n5 .headPresetList,.grid.n6 .headPresetList{gap:3px!important}
+.grid.n4 .tool,.grid.n5 .tool,.grid.n6 .tool{height:24px!important;width:32px!important;font-size:10px!important}
+.grid.n4 .round,.grid.n5 .round,.grid.n6 .round{width:20px!important;height:20px!important;font-size:13px!important}
+.grid.n4 .rows,.grid.n5 .rows,.grid.n6 .rows{padding:5px 6px!important}
+.grid.n4 .quote-head,.grid.n5 .quote-head,.grid.n6 .quote-head{padding:0 6px 3px!important;margin-bottom:2px!important}
+.grid.n4 .quote-row,.grid.n5 .quote-row,.grid.n6 .quote-row{padding:4px 6px!important;margin-bottom:4px!important}
+.grid.n4 .quote-row .seq,.grid.n5 .quote-row .seq,.grid.n6 .quote-row .seq,
+.grid.n4 .quote-row .inp,.grid.n5 .quote-row .inp,.grid.n6 .quote-row .inp,
+.grid.n4 .quote-row .sel,.grid.n5 .quote-row .sel,.grid.n6 .quote-row .sel,
+.grid.n4 .quote-row .money,.grid.n5 .quote-row .money,.grid.n6 .quote-row .money,
+.grid.n4 .quote-row .acc-cell,.grid.n5 .quote-row .acc-cell,.grid.n6 .quote-row .acc-cell{height:26px!important;min-height:26px!important}
+.grid.n4 .dim-inp,.grid.n5 .dim-inp,.grid.n6 .dim-inp{height:26px!important}
+.grid.n4 .foot,.grid.n5 .foot,.grid.n6 .foot{padding:3px 5px!important}
+.window.exporting .headSizePresets{display:none!important}
+
+
+/* v14 compact totals, better accessory fit, max 4 windows */
+.compactTotal{min-width:0;align-items:flex-end;gap:3px}
+.compactTotalLine{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:nowrap;white-space:nowrap}
+.compactTotalLine span{font-size:11px;font-weight:800;color:#64748b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:2px 7px;line-height:1.25}
+.compactTotalLine span b{color:#0f172a;font-size:12px}
+.compactTotalLine .compactFinal{background:#eff6ff;border-color:#bfdbfe;color:#075bb5}
+.compactTotalLine .compactFinal b{font-size:20px;color:#075bb5}
+.compactTotalLine .miniLink{font-size:12px;background:transparent;border:0;padding:0;color:var(--blue)}
+.foot{padding:5px 8px!important;gap:6px!important}
+.grandBox .grandOps{display:none!important}
+.detailRows{display:flex;flex-direction:column;gap:8px}
+.detailRowCard{border:1px solid #e2e8f0;border-radius:10px;background:#fff;overflow:hidden}
+.detailRowHead{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#f8fafc;padding:8px 10px;font-size:13px;font-weight:900;color:#0f172a}
+.detailRowBody{padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.detailSubLine{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#475569;line-height:1.5}
+.detailSubLine b{white-space:nowrap;color:#0f172a}
+.detailSubLine.accLine{padding-left:12px;border-left:3px solid #dbeafe}
+.detailSubLine.accLine .tag{font-size:11px;border-radius:999px;padding:1px 6px;background:#eef2ff;color:#4338ca;margin-left:4px}
+.detailSubLine.accLine .waive{background:#f1f5f9;color:#64748b}
+.detailSummarySlim{margin-top:10px;border-top:1px solid #e2e8f0;padding-top:8px}
+.acc-cell{min-width:0}
+.accCompact{display:inline-flex;align-items:center;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acc-tag{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.grid.n4 .quote-head{font-size:11px!important;gap:5px!important}
+.grid.n4 .quote-row{gap:5px!important;padding:5px 6px!important}
+.grid.n4 .sel,.grid.n4 .inp,.grid.n4 .money,.grid.n4 .acc-cell,.grid.n4 .seq{height:30px!important;min-height:30px!important;font-size:11.5px!important}
+.grid.n4 .dim-inp{height:30px!important}
+.grid.n4 .acc-tag{font-size:9.8px!important;max-width:62px!important}
+.grid.n4 .accCompact{font-size:10.2px!important;max-width:100%!important}
+.grid.n4 .lineBtns{height:30px!important}
+.grid.n4 .lineBtn{width:19px!important;height:13px!important;font-size:10px!important}
+.grid.n4 .foot{padding:4px 6px!important}
+.grid.n4 .compactTotalLine{gap:4px}
+.grid.n4 .compactTotalLine span{font-size:9.5px;padding:1px 5px}
+.grid.n4 .compactTotalLine .compactFinal b{font-size:16px}
+.grid.n3 .quote-head{font-size:11.5px!important}
+.grid.n3 .sel,.grid.n3 .inp,.grid.n3 .money,.grid.n3 .acc-cell,.grid.n3 .seq{font-size:12px!important}
+.window.exporting .acc-cell{height:auto!important;min-height:34px!important;max-height:none!important;overflow:visible!important;white-space:normal!important;align-items:flex-start!important;justify-content:flex-start!important;padding:7px 8px!important}
+.window.exporting .acc-tag,.window.exporting .acc-price{display:inline-flex!important;max-width:none!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;font-size:11px!important;line-height:1.35!important;margin:1px 2px 2px 0!important}
+.window.exporting .accCompact{display:none!important}
+
+
+/* v16 knowledge assistant accuracy controls */
+.kb-inputbar{grid-template-columns:1fr auto!important}
+.kb-inputbar .btn:not(.blue){display:none!important}
+.kb-related{margin-top:8px}
+.kb-feedback{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.kb-feedback .btn{height:32px;border-radius:10px}
+.kb-feedback .warnBtn{border-color:#fed7aa;background:#fff7ed;color:#c2410c}
+.kb-noanswer{border:1px dashed #bfdbfe;background:#f8fbff;border-radius:14px;padding:14px;line-height:1.7}
+.kb-noanswer h3{margin:0 0 6px;font-size:16px;color:#0f172a}
+.kb-noanswer p{margin:0 0 10px;color:#64748b}
+.kb-noanswer .btn{height:34px;border-radius:10px}
+
+</style></head><body><table>
+        <col class="w1"><col class="w2"><col class="w3"><col class="w4"><col class="w5"><col class="w6"><col class="w7"><col class="w8">
+        <tr class="title"><td colspan="8">${esc(d.w.name||'报价单')}</td></tr>
+        <tr class="meta"><td colspan="4">报价时间：${esc(now)}</td><td colspan="2">折扣：${d.rate}%</td><td colspan="2">导出类型：报价表</td></tr>
+        <tr class="head"><th>序号</th><th>材质</th><th>模式</th><th>尺寸(cm)</th><th>数量</th><th>工艺配套</th><th>综合单价</th><th>小计</th></tr>
+        ${rowsHtml}${summaryHtml}
+        <tr class="note"><td colspan="8">金额以当前窗口计算结果为准。</td></tr>
+    </table></body></html>`;
+    const blob=new Blob(['\ufeff'+html],{type:'application/vnd.ms-excel;charset=utf-8'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=safeFileName(d.w.name||'报价')+'.xls';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast('已导出专业报价表');
+}
+
+function formatAccDetailText(d){
+    if(!d)return '';
+    return [d.name, money(d.fee), d.tip||'', d.required?'必选':'', d.waived?'已减免':''].filter(Boolean).join(' ');
+}
+function exportPDF(wi){
+    exportCanvasPDF(wi);
+}
+function loadHtml2Canvas(){
+    return new Promise((resolve,reject)=>{
+        if(window.html2canvas) return resolve(window.html2canvas);
+        const old=document.getElementById('html2canvas_lib');
+        if(old){ old.addEventListener('load',()=>resolve(window.html2canvas)); old.addEventListener('error',reject); return; }
+        const sc=document.createElement('script');
+        sc.id='html2canvas_lib';
+        sc.src='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+        sc.onload=()=>resolve(window.html2canvas);
+        sc.onerror=()=>reject(new Error('截图组件加载失败'));
+        document.head.appendChild(sc);
+    });
+}
+function loadJsPDF(){
+    return new Promise((resolve,reject)=>{
+        const found=window.jspdf&&window.jspdf.jsPDF;
+        if(found) return resolve(found);
+        const old=document.getElementById('jspdf_lib');
+        if(old){ old.addEventListener('load',()=>resolve(window.jspdf&&window.jspdf.jsPDF)); old.addEventListener('error',reject); return; }
+        const sc=document.createElement('script');
+        sc.id='jspdf_lib';
+        sc.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
+        sc.onload=()=>window.jspdf&&window.jspdf.jsPDF?resolve(window.jspdf.jsPDF):reject(new Error('PDF组件初始化失败'));
+        sc.onerror=()=>reject(new Error('PDF组件加载失败'));
+        document.head.appendChild(sc);
+    });
+}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function safeFileName(s){return String(s||'报价').replace(/[\\/:*?"<>|]/g,'_').replace(/\s+/g,' ').trim()||'报价'}
+function syncCloneFormValues(src, clone){
+    const srcInputs=src.querySelectorAll('input,textarea,select');
+    const cloneInputs=clone.querySelectorAll('input,textarea,select');
+    srcInputs.forEach((el,i)=>{
+        const c=cloneInputs[i];
+        if(!c) return;
+        if(el.tagName==='SELECT') c.value=el.value;
+        else if(el.type==='checkbox'||el.type==='radio') c.checked=el.checked;
+        else c.value=el.value;
+    });
+}
+function prepareExportClone(win){
+    const width=Math.ceil(Math.max(win.getBoundingClientRect().width, win.scrollWidth, 860));
+    const clone=win.cloneNode(true);
+    syncCloneFormValues(win, clone);
+    clone.classList.add('active','exporting');
+    clone.style.width=width+'px';
+    clone.style.height='auto';
+    clone.style.maxHeight='none';
+    clone.style.minHeight='0';
+    clone.style.overflow='visible';
+    clone.style.position='static';
+    clone.style.flex='0 0 auto';
+    const rows=clone.querySelector('.rows');
+    if(rows){
+        rows.style.height='auto';
+        rows.style.maxHeight='none';
+        rows.style.minHeight='0';
+        rows.style.overflow='visible';
+        rows.style.overflowX='visible';
+        rows.style.overflowY='visible';
+        rows.style.flex='0 0 auto';
+    }
+    clone.querySelectorAll('.quote-row').forEach(row=>{
+        row.style.breakInside='avoid';
+        row.style.pageBreakInside='avoid';
+        const wi=Number(row.dataset.w), ri=Number(row.dataset.r);
+        const r=state.windows?.[wi]?.rows?.[ri];
+        if(!r)return;
+        const cell=row.querySelector('.acc-cell');
+        if(cell)cell.innerHTML=fullAccExportHtml(r);
+    });
+    const stage=document.createElement('div');
+    stage.id='exportStage_'+Date.now();
+    stage.style.cssText='position:absolute;left:-100000px;top:0;width:'+width+'px;background:#fff;z-index:-1;pointer-events:none;overflow:visible;';
+    stage.appendChild(clone);
+    document.body.appendChild(stage);
+    return {stage,clone,width};
+}
+async function renderWindowCanvas(wi){
+    selectWindow(wi);
+    await sleep(180);
+    const win=document.querySelectorAll('.window')[wi];
+    if(!win) throw new Error('没有找到窗口');
+    const html2canvas=await loadHtml2Canvas();
+    const {stage,clone,width}=prepareExportClone(win);
+    try{
+        await sleep(80);
+        const fullW=Math.ceil(Math.max(clone.scrollWidth, clone.offsetWidth, width));
+        const fullH=Math.ceil(Math.max(clone.scrollHeight, clone.offsetHeight, clone.getBoundingClientRect().height));
+        let scale=Math.min(2, window.devicePixelRatio||1.5);
+        const maxSide=30000;
+        if(Math.max(fullW,fullH)*scale>maxSide) scale=Math.max(1, maxSide/Math.max(fullW,fullH));
+        return await html2canvas(clone,{
+            backgroundColor:'#ffffff',
+            scale,
+            useCORS:true,
+            allowTaint:true,
+            logging:false,
+            scrollX:0,
+            scrollY:0,
+            windowWidth:fullW,
+            windowHeight:fullH,
+            width:fullW,
+            height:fullH
+        });
+    }finally{
+        stage.remove();
+    }
+}
+async function copyActiveWindowToClipboard(){
+    const wi=state.active||0;
+    try{
+        if(!navigator.clipboard || typeof ClipboardItem==='undefined') return toast('请用导出JPG');
+        toast('正在生成完整长图…');
+        const canvas=await renderWindowCanvas(wi);
+        canvas.toBlob(async blob=>{
+            if(!blob) return toast('生成失败');
+            try{
+                await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+                toast('已复制完整窗口长图');
+            }catch(err){
+                toast('复制失败，请用导出JPG');
+            }
+        },'image/png');
+    }catch(err){
+        console.error(err);
+        toast('截图失败：'+(err.message||err));
+    }
+}
+async function exportJPG(wi){
+    try{
+        toast('正在导出完整长图…');
+        const canvas=await renderWindowCanvas(wi);
+        canvas.toBlob(blob=>{
+            if(!blob) return toast('生成失败');
+            const a=document.createElement('a');
+            a.href=URL.createObjectURL(blob);
+            a.download=safeFileName(state.windows[wi]?.name||'报价')+'.jpg';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+            toast('已导出完整长图');
+        },'image/jpeg',0.95);
+    }catch(err){
+        console.error(err);
+        toast('导出JPG失败：'+(err.message||err));
+    }
+}
+function collectQuotePdfData(wi){
+    const w=state.windows[wi];const rate=discountRateFor(w);let rows=[],productGrossSum=0,productDiscountedSum=0;
+    (w.rows||[]).forEach((r,idx)=>{if(!rowHasAnyInput(r))return;let c=calcRow(r);let rowDisc=rowDiscountedTotal(c,w);let unit=rowComprehensiveUnit(c,w,r);productGrossSum+=c.total;productDiscountedSum+=rowDisc;rows.push({idx:idx+1,material:r.material||'未选',mode:r.mode?(r.mode==='area'?'面积':'最长边'):'未选',size:`${Number(r.length)||0}×${Number(r.width)||0}`,qty:parseInt(r.qty)||0,acc:(c.accDetailsArr||[]).map(formatAccDetailText).join('；')||'—',unit:c.isBillable?moneyUnit(unit):'—',line:c.isBillable?money(rowDisc):'—'});});
+    let pkgFee=w.packageChecked?Math.round(Number(w.packageAmount)||0):0,extraFixed=0,percentFees=[];(cfg.extraFees||[]).filter(e=>e.enabled).forEach(e=>{let active=w.extraActive?.[e.name]!==false;if(!active)return;let val=Number(w.extraFees[e.name]??e.amount??0)||0;if(e.is_percent)percentFees.push({name:e.name,pct:val});else extraFixed+=Math.round(val)});let beforePercentTotal=productDiscountedSum+pkgFee+extraFixed,extraPctAmt=0;percentFees.forEach(f=>{f.val=Math.round(beforePercentTotal*(f.pct/100));extraPctAmt+=f.val});let final=beforePercentTotal+extraPctAmt;return{w,rate,rows,productGrossSum,productDiscountedSum,pkgFee,extraFixed,percentFees,extraPctAmt,final};
+}
+function buildPdfSummaryHtml(d){let lines=`<div><span>商品合计${d.rate!==100?'（折后）':''}</span><b>${money(d.productDiscountedSum)}</b></div>`;if(d.rate!==100)lines+=`<div><span>折前商品合计</span><b>${money(d.productGrossSum)}</b></div>`;if(d.pkgFee)lines+=`<div><span>包装费</span><b>${money(d.pkgFee)}</b></div>`;if(d.extraFixed)lines+=`<div><span>固定费用</span><b>${money(d.extraFixed)}</b></div>`;d.percentFees.forEach(f=>{lines+=`<div><span>${esc(f.name)} ${f.pct}%</span><b>${money(f.val)}</b></div>`});lines+=`<div><span>最终报价</span><b>${money(d.final)}</b></div>`;return `<div class="pdf-summary">${lines}</div>`;}
+function buildPdfPages(wi){const d=collectQuotePdfData(wi);const perPage=16,chunks=[];if(d.rows.length){for(let i=0;i<d.rows.length;i+=perPage)chunks.push(d.rows.slice(i,i+perPage));}else chunks.push([]);const stage=document.createElement('div');stage.className='pdf-stage';chunks.forEach((chunk,pi)=>{const isLast=pi===chunks.length-1;const page=document.createElement('div');page.className='pdf-page';page.innerHTML=`<div class="pdf-title"><h1>${esc(d.w.name||'报价单')}</h1><div class="pdf-meta">报价时间：${new Date().toLocaleString()}<br>页码：${pi+1}/${chunks.length}</div></div>${chunk.length?`<table class="pdf-table"><thead><tr><th style="width:42px">序号</th><th>材质</th><th>模式</th><th>尺寸(cm)</th><th>数量</th><th>工艺配套</th><th>综合单价</th><th>小计</th></tr></thead><tbody>${chunk.map(r=>`<tr><td>${r.idx}</td><td class="left">${esc(r.material)}</td><td>${esc(r.mode)}</td><td>${esc(r.size)}</td><td>${r.qty}</td><td class="left">${esc(r.acc)}</td><td>${esc(r.unit)}</td><td><b>${esc(r.line)}</b></td></tr>`).join('')}</tbody></table>`:'<div class="empty">当前窗口暂无报价内容</div>'}${isLast?buildPdfSummaryHtml(d):''}<div class="pdf-note">金额以当前窗口计算结果为准。</div><div class="pdf-page-no">${esc(cfg.ui?.clientTitle||'冰箱贴算价工具')}</div>`;stage.appendChild(page);});document.body.appendChild(stage);return{stage,pages:[...stage.querySelectorAll('.pdf-page')],data:d};}
+async function exportCanvasPDF(wi){try{toast('正在生成PDF…');const jsPDF=await loadJsPDF();const html2canvas=await loadHtml2Canvas();const {stage,pages}=buildPdfPages(wi);const pdf=new jsPDF({orientation:'p',unit:'mm',format:'a4'});const pageW=210,pageH=297;for(let i=0;i<pages.length;i++){const canvas=await html2canvas(pages[i],{backgroundColor:'#ffffff',scale:2,useCORS:true,allowTaint:true,logging:false,windowWidth:794,width:794,height:pages[i].scrollHeight});const img=canvas.toDataURL('image/jpeg',0.95);if(i>0)pdf.addPage();pdf.addImage(img,'JPEG',0,0,pageW,pageH,undefined,'FAST');}stage.remove();pdf.save(safeFileName(state.windows[wi]?.name||'报价')+'.pdf');toast('已导出PDF')}catch(err){console.error(err);toast('导出PDF失败：'+(err.message||err));}}
+function cleanNumberInput(el){let v=String(el.value||'');if(el.dataset.num==='int'){v=v.replace(/[^\d]/g,'');}else{v=v.replace(/[^\d.]/g,'');let parts=v.split('.');if(parts.length>2) v=parts.shift()+'.'+parts.join('');}if(el.value!==v) el.value=v;}
+
+// Excel 级交互逻辑
+document.addEventListener('mousedown', e => {
+    let t = e.target;
+    if(t && t.tagName === 'INPUT' && (t.type==='text' || t.type==='number' || t.type==='tel') && !t.classList.contains('win-name') && !t.closest('.auth')){
+        if(document.activeElement !== t){
+            e.preventDefault(); 
+            t.focus();          
+        }
+    }
+});
+
+document.addEventListener('focusin', e => {
+    let t = e.target;
+    if(t && t.tagName === 'INPUT' && (t.type==='text' || t.type==='number' || t.type==='tel') && !t.classList.contains('win-name') && !t.closest('.auth')){
+        setTimeout(() => { if(document.activeElement === t) t.select(); }, 0);
+    }
+});
+
+document.addEventListener('click',()=>closeAllSizePresetMenus())
+document.addEventListener('click',e=>rememberRatioTargetFromElement(e.target))
+document.addEventListener('focusin',e=>rememberRatioTargetFromElement(e.target))
+document.addEventListener('paste',e=>{
+    if(!ratioModalOpen())return;
+    let file=[...(e.clipboardData?.items||[])].map(x=>x.kind==='file'?x.getAsFile():null).find(f=>f&&/^image\//.test(f.type));
+    if(file){e.preventDefault();loadRatioImage(file)}
+})
+document.addEventListener('dragover',e=>{
+    if(!ratioModalOpen()||!e.target.closest('#ratioDrop'))return;
+    e.preventDefault();document.getElementById('ratioDrop')?.classList.add('drag');
+})
+document.addEventListener('dragleave',e=>{
+    if(e.target.closest&&e.target.closest('#ratioDrop'))document.getElementById('ratioDrop')?.classList.remove('drag');
+})
+document.addEventListener('drop',e=>{
+    if(!ratioModalOpen()||!e.target.closest('#ratioDrop'))return;
+    e.preventDefault();document.getElementById('ratioDrop')?.classList.remove('drag');handleRatioFiles(e.dataTransfer?.files);
+})
+document.addEventListener('keydown',e=>{
+    const t=e.target;
+    const inEdit=t&&['INPUT','TEXTAREA','SELECT'].includes(t.tagName);
+    if(!inEdit && (e.key==='+' || e.key==='=' || e.key==='Add')) { addRow(state.active); return; }
+    if(e.key==='+' || e.key==='=' || e.key==='Add'){e.preventDefault();if(inEdit && t.closest('.quote-row')){const row=t.closest('.quote-row');addRow(Number(row.dataset.w), Number(row.dataset.r)+1);}else addRow(state.active);return;}
+    if(e.key==='-' || e.key==='−' || e.key==='Subtract'){e.preventDefault();if(inEdit && t.closest('.quote-row')){const row=t.closest('.quote-row');removeRow(Number(row.dataset.w), Number(row.dataset.r));}else{let w=state.windows[state.active];removeRow(state.active,w.rows.length-1);}return;}
+    
+    if(inEdit && t.classList.contains('nav-field')){
+        if(e.key==='ArrowLeft'){e.preventDefault();focusGridField(t,'left');}
+        if(e.key==='ArrowRight'){e.preventDefault();focusGridField(t,'right');}
+        if(e.key==='ArrowUp'){e.preventDefault();focusGridField(t,'up');}
+        if(e.key==='ArrowDown' || e.key==='Enter'){e.preventDefault();focusGridField(t,'down');} 
+    }
+    
+    if(inEdit && e.key === 'F2' && t.tagName === 'INPUT') {
+        e.preventDefault();
+        try { let len = t.value.length; t.setSelectionRange(len, len); } catch(err){}
+    }
+});
+function focusGridField(current,dir){const row=current.closest('.quote-row');if(!row) return;const rows=[...row.parentElement.querySelectorAll('.quote-row')];const fieldsIn=(rw)=>[...rw.querySelectorAll('.nav-field')].filter(el=>!el.disabled && el.offsetParent!==null);const ri=rows.indexOf(row);const fields=fieldsIn(row);const ci=fields.indexOf(current);let target=null;if(dir==='left') target=fields[Math.max(0,ci-1)];if(dir==='right') target=fields[Math.min(fields.length-1,ci+1)];if(dir==='up' && rows[ri-1]){const up=fieldsIn(rows[ri-1]); target=up[Math.min(ci,up.length-1)];}if(dir==='down' && rows[ri+1]){const down=fieldsIn(rows[ri+1]); target=down[Math.min(ci,down.length-1)];}if(target){target.focus(); if(target.select) target.select();}}
+
+applyUI();renderGrid();checkAuth();syncConfig(false);setInterval(()=>syncConfig(false),30000);
+
+
+/* UI fix v3: keep row data when applying size, no text warning, no axis overlap */
+function syncWindowRowsFromDOM(wi){
+    let w=state.windows[wi]; if(!w) return;
+    document.querySelectorAll(`.quote-row[data-w="${wi}"]`).forEach(rowEl=>{
+        let ri=Number(rowEl.dataset.r), r=w.rows[ri]; if(!r) return;
+        let sels=rowEl.querySelectorAll('select.nav-field');
+        if(sels[0]){
+            let oldMat=r.material;
+            r.material=sels[0].value||'';
+            if(oldMat!==r.material){
+                r.acc={}; r.accMeterEdge={};
+                if(!r.material) r.mode='';
+                else {
+                    let m=matByName(r.material);
+                    r.mode=(sels[1]&&sels[1].value)||m.defaultMode||r.mode||'longest_side';
+                }
+            }
+        }
+        if(sels[1]) r.mode=sels[1].value||r.mode||'';
+        let ins=rowEl.querySelectorAll('input.nav-field');
+        if(ins[0]) r.length=parseFloat(ins[0].value)||0;
+        if(ins[1]) r.width=parseFloat(ins[1].value)||0;
+        if(ins[2]) r.qty=parseInt(ins[2].value)||0;
+    });
+}
+function applySizePreset(wi,idx){
+    syncWindowRowsFromDOM(wi);
+    closeAllSizePresetMenus();
+    let p=loadSizePresets()[idx]; if(!p)return;
+    let rows=state.windows[wi].rows;
+    let ri=rows.findIndex(r=>rowHasAnyInput(r)&&!(Number(r.length)>0&&Number(r.width)>0));
+    if(ri<0) ri=rows.findIndex(r=>!rowHasAnyInput(r));
+    if(ri<0){rows.push(defaultRow());ri=rows.length-1}
+    rows[ri].length=Number(p.length)||0;
+    rows[ri].width=Number(p.width)||0;
+    persist();renderGrid();toast('已填入尺寸 '+fmtSizePreset(p));
+}
+function rowStatus(r){
+    let hasAny=rowHasAnyInput(r);
+    if(!hasAny)return{cls:'empty-row',msg:'',missing:{}};
+    let missing={};
+    if(!hasMaterial(r.material))missing.material=true;
+    if(!r.mode)missing.mode=true;
+    if(!(Number(r.length)>0&&Number(r.width)>0))missing.size=true;
+    if(!((parseInt(r.qty)||0)>0))missing.qty=true;
+    return Object.keys(missing).length?{cls:'incomplete-row',msg:'',missing}:{cls:'',msg:'',missing:{}};
+}
+function updateAccCell(wi, ri) {
+    let r = state.windows[wi].rows[ri];
+    let availableAccs = enabledAccsForRow(r);
+    let cell = document.getElementById(`accCell_${wi}_${ri}`);
+    if(!cell) return;
+    cell.innerHTML = buildAccCellHtml(r, availableAccs, wi, ri);
+}
+
+
+/* UI fix v4: remove axis text buttons; use blue active dimension */
+function setMeterEdgeSoft(ev,wi,ri,edge){
+    if(ev && ev.stopPropagation) ev.stopPropagation();
+    let r=state.windows?.[wi]?.rows?.[ri];
+    if(!r) return;
+    let active=getActiveMeterAccs(r);
+    if(!active.length) return;
+    if(!r.accMeterEdge) r.accMeterEdge={};
+    active.forEach(a=>r.accMeterEdge[a.name]=edge);
+    r.meterEdge=edge;
+    const row=document.querySelector(`.quote-row[data-w="${wi}"][data-r="${ri}"]`);
+    if(row){
+        const ins=row.querySelectorAll('.dim-inp');
+        if(ins[0]) ins[0].classList.toggle('meter-on',edge==='length');
+        if(ins[1]) ins[1].classList.toggle('meter-on',edge==='width');
+    }
+    persist();
+    updateAll();
+}
+function renderRow(r,wi,ri){
+    let st=rowStatus(r), miss=st.missing||{};
+    let mats=`<option value="" ${!r.material?'selected':''}>请选择</option>`+cfg.materials.map(m=>`<option value="${esc(m.name)}" ${m.name===r.material?'selected':''}>${esc(m.name)}</option>`).join('');
+    let availableAccs = enabledAccsForRow(r);
+    let accTags = buildAccCellHtml(r, availableAccs, wi, ri);
+    let accHtml = `<div class="cell ${miss.acc?'miss':''}"><label>工艺配套</label><div class="acc-cell" id="accCell_${wi}_${ri}" ${availableAccs.length>0 ? `onclick="event.stopPropagation();openAcc(event,${wi},${ri})"` : ''}>${accTags}</div></div>`;
+    let meterAcc = getPrimaryMeterAcc(r);
+    let meterEdge = meterAcc ? meterEdgeFor(r, meterAcc.name) : '';
+    let lenFocus = meterAcc ? `onfocus="setMeterEdgeSoft(event,${wi},${ri},'length')"` : '';
+    let widFocus = meterAcc ? `onfocus="setMeterEdgeSoft(event,${wi},${ri},'width')"` : '';
+    let sizeHtml = `<div class="cell size-cell ${miss.size?'miss':''}"><label>尺寸(cm)</label><div class="size-pair size-pair-flat"><input class="inp nav-field numonly dim-inp ${meterEdge==='length'?'meter-on':''}" type="text" placeholder="长" value="${r.length||''}" data-num="decimal" ${lenFocus} onchange="cleanNumberInput(this);setRow(${wi},${ri},'length',this.value)"><div class="size-x">×</div><input class="inp nav-field numonly dim-inp ${meterEdge==='width'?'meter-on':''}" type="text" placeholder="宽" value="${r.width||''}" data-num="decimal" ${widFocus} onchange="cleanNumberInput(this);setRow(${wi},${ri},'width',this.value)"></div></div>`;
+    return `<div class="quote-row ${st.cls}" style="grid-template-columns:${rowColumns()}" data-w="${wi}" data-r="${ri}"><div class="seq">${ri+1}</div><div class="cell"><label>材质</label><select class="sel nav-field ${miss.material?'miss':''}" title="${esc(r.material)}" onchange="setRow(${wi},${ri},'material',this.value,true)">${mats}</select></div><div class="cell"><label>模式</label><select class="sel nav-field ${miss.mode?'miss':''}" onchange="setRow(${wi},${ri},'mode',this.value)"><option value="" ${!r.mode?'selected':''}>请选择</option><option value="longest_side" ${r.mode==='longest_side'?'selected':''}>最长边</option><option value="area" ${r.mode==='area'?'selected':''}>面积</option></select></div>${sizeHtml}<div class="cell"><label>数量</label><input class="inp nav-field numonly ${miss.qty?'miss':''}" type="text" value="${r.qty||''}" data-num="int" onchange="cleanNumberInput(this);setRow(${wi},${ri},'qty',this.value)"></div><div class="cell unit"><label id="unitLbl_${wi}_${ri}">综合单价</label><div class="money" id="unit_${wi}_${ri}">-</div></div>${accHtml}<div class="cell total"><label>小计</label><div class="money totalcell" id="line_${wi}_${ri}">¥0</div></div><div class="lineBtns"><button class="lineBtn plus" title="在下方新增一行" onclick="event.stopPropagation();addRow(${wi},${ri}+1)">+</button><button class="lineBtn minus" title="删除本行" onclick="event.stopPropagation();removeRow(${wi},${ri})">−</button></div></div>`;
+}
+function rowColumns(){
+    if(state.windows.length>=4){
+        let cols=['22px','minmax(54px,1.25fr)','minmax(46px,.85fr)','minmax(72px,1.35fr)','minmax(34px,.62fr)','minmax(50px,.9fr)','minmax(70px,1.14fr)'];
+        cols.push('minmax(50px,.9fr)','18px');
+        return cols.join(' ');
+    }
+    if(state.windows.length>=2){
+        let cols=['26px','minmax(78px,1.28fr)','minmax(58px,.9fr)','minmax(96px,1.35fr)','minmax(42px,.68fr)','minmax(66px,1fr)','minmax(92px,1.45fr)'];
+        cols.push('minmax(62px,1fr)','22px');
+        return cols.join(' ');
+    }
+    let cols=['36px','minmax(160px,1.35fr)','minmax(120px,.9fr)','minmax(160px,1.2fr)','minmax(90px,.65fr)','minmax(150px,1fr)','minmax(210px,1.45fr)'];
+    cols.push('minmax(140px,1fr)','44px');
+    return cols.join(' ');
+}
+
+
+/* v6 acc compact + export full */
+function shortAccName(name){
+    name=String(name||'');
+    const map=[['实木挂轴','实木'],['铝合金挂轴','铝轴'],['挂轴','轴'],['配件','配'],['卡纸','卡'],['有机面板','面板']];
+    map.forEach(([a,b])=>{name=name.replaceAll(a,b)});
+    return name.length>6?name.slice(0,6)+'…':name;
+}
+function accFullList(r, availableAccs){
+    let selected=rowSelectedAccNames(r, availableAccs);
+    let c=calcRow(r);
+    return selected.map(k=>{
+        let d=(c.accDetailsArr||[]).find(x=>x.name===k);
+        let def=availableAccs.find(a=>a.name===k)||{};
+        let edge=def.type==='meter' ? ` · 按${meterEdgeFor(r,k)==='length'?'长':'宽'}` : '';
+        let tip=d&&d.tip?` · ${d.tip}`:'';
+        return {name:k,text:`${k}${edge} ${money(d?d.fee:0)}${tip}`};
+    });
+}
+
+
+/* v9: accessory required/waive strategy + no separate mold column + per-piece minimum amount */
+function renderSizePresetBar(wi){return ''}
+function renderHeadSizePresets(wi){
+    let list=loadSizePresets();
+    let btns=list.length?list.map((p,i)=>`<button class="headPresetBtn" onclick="event.stopPropagation();applySizePreset(${wi},${i})">${fmtSizePreset(p)}</button>`).join(''):'';
+    return `<div class="headSizePresets" onclick="event.stopPropagation()"><span class="headPresetLabel">常用</span><div class="headPresetList">${btns}<button class="headPresetManage" onclick="event.stopPropagation();openSizePresetManager()">管理</button></div></div>`;
+}
+function isAccRequired(a){return !!a && a.required===true}
+function isAccChosen(r,a){return isAccRequired(a) || !!(r.acc && r.acc[a.name])}
+function rowSelectedAccNames(r, availableAccs){return (availableAccs||[]).filter(a=>isAccChosen(r,a)).map(a=>a.name)}
+function getActiveMeterAccs(r){return enabledAccsForRow(r).filter(a=>a.type==='meter' && isAccChosen(r,a))}
+function accessoryWaived(accDef, qty, materialFee){
+    if(!accDef.waive_enabled)return false;
+    let v=Number(accDef.waive_value)||0;
+    if(v<=0)return false;
+    return accDef.waive_type==='amount' ? materialFee>=v : qty>=v;
+}
+function applyPerPieceAmountMin(unit, m, isCost=false){
+    let enabled=isCost?m.cost_min_amount_enabled:m.min_amount_enabled;
+    let from=Number(isCost?m.cost_min_amount_from:m.min_amount_from)||0;
+    let to=Number(isCost?m.cost_min_amount_to:m.min_amount_to)||from;
+    return enabled && unit<from ? to : unit;
+}
+/* v11: accessory row-based charge */
+function accUnitName(t){return t==='area'?'㎡':t==='meter'?'米':t==='row'?'行':'个'}
+function calcRow(r){
+    let m=matByName(r.material),len=Number(r.length)||0,wid=Number(r.width)||0,qty=Math.max(0,parseInt(r.qty)||0),longest=Math.max(len,wid),unit=0,unitCost=0,base=0,baseCost=0,cands=[],costCands=[];
+    if(!rowIsBillable(r)){
+        return {unit:0,materialFee:0,accFeeTotal:0,accDetailsArr:[],moldFee:0,total:0,minRev:0,material:m,unitName:m.unitName||'个',mode:r.mode,isBillable:false};
+    }
+    let area=(len*wid)/10000;
+    if(r.mode==='area'){
+        let usedArea=area,usedAreaCost=area;
+        if(m.min_area_enabled&&area<Number(m.min_area_from||0))usedArea=Number(m.min_area_to||m.min_area_from||area);
+        if(m.cost_min_area_enabled&&area<Number(m.cost_min_area_from||0))usedAreaCost=Number(m.cost_min_area_to||m.cost_min_area_from||area);
+        unit=usedArea*(Number(m.area_price_per_sqm)||0);
+        unitCost=usedAreaCost*(Number(m.area_cost_per_sqm)||0);
+    }else{
+        unit=unitPriceLongest(m,longest,false);
+        unitCost=unitPriceLongest(m,longest,true);
+    }
+    unit=applyPerPieceAmountMin(unit,m,false);
+    unitCost=applyPerPieceAmountMin(unitCost,m,true);
+    base=unit*qty; baseCost=unitCost*qty; cands.push(base); costCands.push(baseCost);
+    if(r.mode!=='area'){
+        if(m.min_qty_enabled&&qty<Number(m.min_qty_from||0))cands.push(unit*Number(m.min_qty_to||m.min_qty_from||qty));
+        if(m.cost_min_qty_enabled&&qty<Number(m.cost_min_qty_from||0))costCands.push(unitCost*Number(m.cost_min_qty_to||m.cost_min_qty_from||qty));
+    }
+    let materialFee=Math.round(Math.max(...cands,0));
+    let materialCostFee=Math.round(Math.max(...costCands,0));
+    let accFeeTotal = 0, accCostTotal = 0, accDetailsArr = [];
+    (m.accessories||[]).filter(a=>a.enabled).forEach(accDef => {
+        if (isAccChosen(r,accDef)) {
+            let aFee=0, aCost=0, aTip='', waived=accessoryWaived(accDef,qty,materialFee);
+            if (accDef.type === 'area') {
+                let billedArea=area, billedCostArea=area;
+                if(area<Number(accDef.min_from||0)) billedArea=Number(accDef.min_to||accDef.min_from||area);
+                if(area<Number(accDef.cost_min_from||0)) billedCostArea=Number(accDef.cost_min_to||accDef.cost_min_from||area);
+                aFee = Math.round(billedArea*(Number(accDef.price)||0)*qty);
+                aCost = Math.round(billedCostArea*(Number(accDef.cost)||0)*qty);
+                aTip=`${billedArea.toFixed(4).replace(/0+$/,'').replace(/\.$/,'')}㎡`;
+            } else if (accDef.type === 'meter') {
+                let edge = meterEdgeFor(r, accDef.name);
+                let rawMeter = (edge==='width'?wid:len)/100;
+                let billedMeter=rawMeter, billedCostMeter=rawMeter;
+                if(rawMeter<Number(accDef.min_from||0)) billedMeter=Number(accDef.min_to||accDef.min_from||rawMeter);
+                if(rawMeter<Number(accDef.cost_min_from||0)) billedCostMeter=Number(accDef.cost_min_to||accDef.cost_min_from||rawMeter);
+                aFee = Math.round(billedMeter*(Number(accDef.price)||0)*qty);
+                aCost = Math.round(billedCostMeter*(Number(accDef.cost)||0)*qty);
+                aTip=`按${edge==='length'?'长':'宽'} ${billedMeter.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')}米`;
+            } else if (accDef.type === 'row') {
+                aFee = Math.round(Number(accDef.price)||0);
+                aCost = Math.round(Number(accDef.cost)||0);
+                aTip='按行 1次';
+            } else {
+                let billedQty=qty, billedCostQty=qty;
+                if(qty<Number(accDef.min_from||0)) billedQty=Number(accDef.min_to||accDef.min_from||qty);
+                if(qty<Number(accDef.cost_min_from||0)) billedCostQty=Number(accDef.cost_min_to||accDef.cost_min_from||qty);
+                aFee = Math.round(billedQty*(Number(accDef.price)||0));
+                aCost = Math.round(billedCostQty*(Number(accDef.cost)||0));
+                aTip=`${billedQty}个`;
+            }
+            if(waived){aFee=0;aCost=0;aTip=(aTip?aTip+' · ':'')+'已减免'}
+            accFeeTotal += aFee;
+            accCostTotal += aCost;
+            accDetailsArr.push({ name: accDef.name, fee: aFee, cost: aCost, tip: aTip, type: accDef.type, unit: accUnitName(accDef.type), price: Number(accDef.price)||0, required:isAccRequired(accDef), waived });
+        }
+    });
+    let rowTotalCost = materialCostFee + accCostTotal;
+    let minMargin=Math.max(0,Math.min(99,Number(m.min_margin_pct)||0));
+    let minRev=Math.round(rowTotalCost/(1-(minMargin/100)));
+    let total = materialFee + accFeeTotal;
+    return{unit,materialFee,accFeeTotal,accDetailsArr,moldFee:0,total,minRev,material:m,unitName:m.unitName||'个',mode:r.mode,isBillable:true}
+}
+function openAcc(e, wi, ri){
+    e.stopPropagation();
+    let r = state.windows[wi].rows[ri], m = matByName(r.material);
+    let availableAccs = (m.accessories||[]).filter(a=>a.enabled);
+    if(availableAccs.length === 0) return;
+    let pop = document.getElementById('accPopover');
+    let groups = accOptionGroups(availableAccs);
+    pop.innerHTML = groups.map(g => {
+        let checked = g.items.every(a=>isAccChosen(r,a));
+        let required = g.items.some(a=>isAccRequired(a));
+        let sub = g.items.map(a=>`${esc(a.name)} ¥${Number(a.price)||0}/${accUnitName(a.type)}${a.required?' · 必选':''}${a.waive_enabled?' · 达标减免':''}`).join(' + ');
+        return `<label class="pop-item ${g.combo?'pop-bundle':''} ${required?'required':''}">
+            <input type="checkbox" onchange="toggleAccGroup(${wi},${ri},'${esc(g.key)}')" ${checked ? 'checked' : ''} ${required?'disabled':''}>
+            <span>${esc(g.label)}</span><span class="pop-sub">${sub}</span>
+        </label>`;
+    }).join('');
+    pop.style.display = 'block';
+    let rect = e.currentTarget.getBoundingClientRect(), top = rect.bottom + 5, left = rect.left;
+    if(top + 200 > window.innerHeight) top = rect.top - pop.offsetHeight - 5;
+    pop.style.top = top + 'px'; pop.style.left = left + 'px';
+    let closeAcc = (evt) => { if(!pop.contains(evt.target)) { pop.style.display = 'none'; document.removeEventListener('click', closeAcc); } };
+    setTimeout(() => document.addEventListener('click', closeAcc), 10);
+}
+function toggleAccGroup(wi, ri, key) {
+    let r = state.windows[wi].rows[ri];
+    if(!r.acc) r.acc = {};
+    if(!r.accMeterEdge) r.accMeterEdge = {};
+    let availableAccs = enabledAccsForRow(r);
+    let group = accOptionGroups(availableAccs).find(g=>g.key===key);
+    if(!group) return;
+    if(group.items.some(a=>isAccRequired(a))) return;
+    let turnOn = !group.items.every(a=>r.acc[a.name]);
+    group.items.forEach(a=>{
+        if(isAccRequired(a)){r.acc[a.name]=true;return;}
+        r.acc[a.name] = turnOn;
+        if(turnOn && a.type==='meter' && !r.accMeterEdge[a.name]) r.accMeterEdge[a.name] = (Number(r.length)||0)>=(Number(r.width)||0)?'length':'width';
+    });
+    persist(); renderGrid();
+}
+/* v14: compact totals, detail accessories, max 4 windows */
+function layoutClass(){let n=Math.min(4,Math.max(1,state.windows.length));return 'grid n'+n}
+function renderGrid(){
+    if(state.windows.length>4){state.windows=state.windows.slice(0,4);state.active=Math.min(state.active,3);persist();}
+    let g=document.getElementById('grid');g.className=layoutClass();g.innerHTML=state.windows.map((w,i)=>renderWindow(w,i)).join('');applyUI();updateAll();renderTabs()
+}
+function addWindow(){if(state.windows.length>=4)return toast('最多4个窗口');state.windows.push(makeWindow(state.windows.length+1));state.active=state.windows.length-1;persist();renderGrid()}
+function accDetailTitle(r, availableAccs){
+    let c=calcRow(r);
+    return (c.accDetailsArr||[]).map(formatAccDetailText).join('；');
+}
+function canShowAccFull(selected, n){
+    const len=selected.join('').length + selected.length*3;
+    if(n<=1)return len<=42;
+    if(n===2)return selected.length<=2 && len<=20;
+    if(n===3)return selected.length===1 && len<=10;
+    return selected.length===1 && len<=6;
+}
+function buildAccCellHtml(r, availableAccs, wi=null, ri=null){
+    if(availableAccs.length === 0) return `<span class="acc-none" style="cursor:not-allowed">暂无工艺</span>`;
+    let selected = rowSelectedAccNames(r, availableAccs);
+    if(selected.length === 0) return `<span class="acc-none">点击选择</span>`;
+    let c=calcRow(r), n=state.windows.length, title=esc(accDetailTitle(r,availableAccs));
+    if(!canShowAccFull(selected,n)){
+        return `<span class="accCompact" title="${title}">${shortAccName(selected[0])}${selected.length>1?' 等'+selected.length+'项':''}</span>`;
+    }
+    return selected.map(k=>{
+        let d=(c.accDetailsArr||[]).find(x=>x.name===k);
+        let def=availableAccs.find(a=>a.name===k)||{};
+        let cls=(def.type==='meter'?' acc-meter':'')+(d?.required?' accReq':'')+(d?.waived?' accWaived':'');
+        let edgeTxt=def.type==='meter' ? ` · 按${meterEdgeFor(r,k)==='length'?'长':'宽'}` : '';
+        let tip=d&&d.tip?` · ${d.tip}`:'';
+        let tags=(d?.required?' · 必选':'')+(d?.waived?' · 已减免':'');
+        return `<span class="acc-tag${cls}" title="${esc(formatAccDetailText(d)||k+edgeTxt)}">${esc(k)}${edgeTxt}</span><span class="acc-tag acc-price ${d?.waived?'accWaived':''}">${money(d?d.fee:0)}${tip}${tags}</span>`;
+    }).join('');
+}
+function fullAccExportHtml(r){
+    let availableAccs=enabledAccsForRow(r);
+    if(!availableAccs.length)return '<span class="acc-none">暂无工艺</span>';
+    let selected=rowSelectedAccNames(r,availableAccs);
+    if(!selected.length)return '<span class="acc-none">未选</span>';
+    let c=calcRow(r);
+    return selected.map(k=>{
+        let d=(c.accDetailsArr||[]).find(x=>x.name===k);
+        let def=availableAccs.find(a=>a.name===k)||{};
+        let cls=(def.type==='meter'?' acc-meter':'')+(d?.required?' accReq':'')+(d?.waived?' accWaived':'');
+        let edgeTxt=def.type==='meter'?` · 按${meterEdgeFor(r,k)==='length'?'长':'宽'}`:'';
+        let tip=d&&d.tip?` · ${d.tip}`:'';
+        let tags=(d?.required?' · 必选':'')+(d?.waived?' · 已减免':'');
+        return `<span class="acc-tag${cls}">${esc(k)}${edgeTxt}</span><span class="acc-tag acc-price ${d?.waived?'accWaived':''}">${money(d?d.fee:0)}${tip}${tags}</span>`;
+    }).join('');
+}
+function renderWindow(w,i){
+    let showMold = false;
+    let extras=(cfg.extraFees||[]).filter(e=>e.enabled).map(e=>{
+        let active = w.extraActive?.[e.name] !== false; 
+        let val = Number(w.extraFees[e.name]??e.amount??0);
+        let showVal = active ? val : '—';
+        let style = active ? '' : 'text-decoration:line-through;color:#98a2b3;background:#f1f5f9;pointer-events:none';
+        return `<label class="fee" style="${active?'':'opacity:0.8'}"><input type="checkbox" ${active?'checked':''} onchange="toggleExtraActive(${i},'${esc(e.name)}',this.checked)">${esc(e.name)}<input type="text" class="numonly" ${!e.allow_client_edit||!active?'disabled':''} value="${showVal}" onchange="cleanNumberInput(this);setExtra(${i},'${esc(e.name)}',this.value)" style="${style}">${e.is_percent?'<b style="color:var(--blue)">%</b>':''}</label>`;
+    }).join('');
+    let discBtns=(cfg.discountPresets||defaults.discountPresets).map(p=>`<button class="dBtn ${Number(w.discount)===Number(p)?'active':''}" onclick="setDiscount(${i},${p},true)">${p}%</button>`).join('');
+    return `<section class="window ${i===state.active?'active':''}" onclick="onWindowBlankClick(event,${i})"><div class="win-head"><div class="namebox"><span class="editicon">✎</span><input class="win-name" id="winName_${i}" value="${esc(w.name)}" onchange="renameWindow(${i},this.value)" onclick="event.stopPropagation()"></div>${renderHeadSizePresets(i)}<div class="win-tools"><button class="tool ai" onclick="event.stopPropagation();openAiImport(${i})">识别</button><button class="tool" onclick="event.stopPropagation();exportCSV(${i})">表格</button><button class="tool" onclick="event.stopPropagation();exportJPG(${i})">JPG</button><button class="tool" onclick="event.stopPropagation();exportPDF(${i})">PDF</button><div style="width:1px;height:16px;background:var(--bd);margin:0 2px"></div><button class="round add" onclick="event.stopPropagation();addRow(${i})">＋</button><button class="round del" onclick="event.stopPropagation();removeRow(${i},${w.rows.length-1})">－</button></div></div><div class="rows"><div class="print-title">${esc(w.name)}</div>${renderQuoteHead(showMold)}${w.rows.map((r,ri)=>renderRow(r,i,ri,showMold)).join('')}</div><div class="foot"><div class="leftFees">${cfg.packageFee.enabled?`<label class="fee"><input type="checkbox" ${w.packageChecked?'checked':''} onchange="setPackage(${i},'checked',this.checked)">包装费<input type="text" class="numonly" ${cfg.packageFee.allowClientEdit?'':'disabled'} value="${Number(w.packageAmount)||0}" onchange="cleanNumberInput(this);setPackage(${i},'amount',this.value)"></label>`:''}${extras}<div class="discount"><span>折扣</span><input type="text" class="numonly" value="${w.discount}" onchange="cleanNumberInput(this);setDiscount(${i},this.value,true)"><span>%</span><div class="discountBtns">${discBtns}</div></div><div class="min-disc-tag">底价 <span id="minDisc_${i}">100</span>%</div></div><div class="grandBox compactTotal"><div class="compactTotalLine"><span>商品 <b id="sub_${i}">¥0</b></span><span>附加 <b id="feeSum_${i}">¥0</b></span><span class="compactFinal">合计 <b id="grand_${i}">¥0</b></span><button class="miniLink" onclick="event.stopPropagation();showDetail(${i})">明细</button></div></div></div></section>`
+}
+function quoteTotalsForDetail(wi){
+    const w=state.windows[wi];let productGrossSum=0,productDiscountedSum=0;
+    (w.rows||[]).forEach(r=>{let c=calcRow(r);productGrossSum+=c.total;productDiscountedSum+=rowDiscountedTotal(c,w)});
+    let pkgFee=w.packageChecked?Math.round(Number(w.packageAmount)||0):0,extraFixed=0,percentFees=[];
+    (cfg.extraFees||[]).filter(e=>e.enabled).forEach(e=>{let active=w.extraActive?.[e.name]!==false;if(!active)return;let val=Number(w.extraFees[e.name]??e.amount??0)||0;if(e.is_percent)percentFees.push({name:e.name,pct:val});else extraFixed+=Math.round(val)});
+    let beforePercentTotal=productDiscountedSum+pkgFee+extraFixed,extraPctAmt=0;
+    percentFees.forEach(f=>{f.val=Math.round(beforePercentTotal*(f.pct/100));extraPctAmt+=f.val});
+    return {w,productGrossSum,productDiscountedSum,pkgFee,extraFixed,percentFees,final:beforePercentTotal+extraPctAmt};
+}
+function buildDetailHtmlV14(wi){
+    const w=state.windows[wi], rate=discountRateFor(w);
+    let rowsHtml=(w.rows||[]).map((r,idx)=>{
+        if(!rowHasAnyInput(r))return '';
+        let c=calcRow(r), rowDisc=rowDiscountedTotal(c,w);
+        let accHtml=(c.accDetailsArr||[]).length?(c.accDetailsArr||[]).map(d=>`<div class="detailSubLine accLine"><span>${esc(d.name)}${d.required?'<em class="tag">必选</em>':''}${d.waived?'<em class="tag waive">已减免</em>':''}${d.tip?` <small>${esc(d.tip)}</small>`:''}</span><b>${money(d.fee)}</b></div>`).join(''):'<div class="detailSubLine accLine"><span>配套工艺</span><b>—</b></div>';
+        return `<div class="detailRowCard"><div class="detailRowHead"><span>${idx+1}. ${esc(r.material||'未选')} · ${r.mode==='area'?'面积':'最长边'} · ${Number(r.length)||0}×${Number(r.width)||0} · ${parseInt(r.qty)||0}${esc(c.unitName||'个')}</span><b>${money(rowDisc)}</b></div><div class="detailRowBody"><div class="detailSubLine"><span>材质费</span><b>${money(c.materialFee)}</b></div>${accHtml}${rate!==100?`<div class="detailSubLine"><span>折扣 ${rate}% 后</span><b>${money(rowDisc)}</b></div>`:''}</div></div>`;
+    }).join('') || '<div class="empty">暂无报价内容</div>';
+    let t=quoteTotalsForDetail(wi);
+    let summary=`<div class="detailSummarySlim"><div class="detail-line"><span>商品合计${rate!==100?'（折后）':''}</span><span>${money(t.productDiscountedSum)}</span></div>`;
+    if(t.pkgFee)summary+=`<div class="detail-line"><span>包装费</span><span>${money(t.pkgFee)}</span></div>`;
+    if(t.extraFixed)summary+=`<div class="detail-line"><span>固定费用</span><span>${money(t.extraFixed)}</span></div>`;
+    t.percentFees.forEach(f=>summary+=`<div class="detail-line"><span>${esc(f.name)} ${f.pct}%</span><span>${money(f.val)}</span></div>`);
+    summary+=`<div class="detail-line bold" style="color:var(--green);font-size:16px;"><span>最终报价</span><span>${money(t.final)}</span></div></div>`;
+    return `<div class="detailRows">${rowsHtml}</div>${summary}`;
+}
+function showDetail(wi){document.getElementById('detailContent').innerHTML=buildDetailHtmlV14(wi);document.getElementById('detailModal').style.display='flex'}
+/* v16 knowledge assistant: strict matching + inaccurate feedback */
+function kbPlainText(s){return String(s||'').toLowerCase().replace(/[^\u4e00-\u9fa5a-z0-9]+/g,' ').trim()}
+function kbIsStrongLocalMatch(q,item){
+    q=kbPlainText(q); if(!q)return false;
+    let qq=kbPlainText(item.question), kk=kbPlainText(item.keywords), aa=kbPlainText(item.answer);
+    if(qq && (qq.includes(q)||q.includes(qq))) return true;
+    let chars=[...q.replace(/\s+/g,'')].filter(ch=>/[\u4e00-\u9fa5a-z0-9]/.test(ch));
+    if(chars.length<3)return false;
+    let hit=chars.filter(ch=>(qq+' '+kk).includes(ch)).length;
+    let ratio=hit/chars.length;
+    if(ratio>=0.55 && (kk||qq))return true;
+    let words=q.split(/\s+/).filter(w=>w.length>=2);
+    if(words.length && words.some(w=>qq.includes(w)||kk.includes(w))) return true;
+    return false;
+}
+function kbBestLocal(q,limit=30){
+    let list=kbCandidates(q,limit);
+    return list.filter(x=>kbIsStrongLocalMatch(q,x)||Number(x.score||0)>=18);
+}
+function renderKbNoAnswer(q,submitted=false,type='no_answer'){
+    const title=submitted?'已提交管理员处理':'暂时没有找到合适答案';
+    const msg=submitted?'管理端会在“待整理疑问”里看到，配置回答后会形成新的知识。':'可以把这个问题留给后台整理，管理员补充回答后会进入知识库。';
+    return `<div class="kb-chat"><div class="kb-bubble user">${esc(q)}</div><div class="kb-bubble assistant"><div class="kb-noanswer"><h3>${title}</h3><p>${msg}</p>${submitted?'':`<button class="btn blue" onclick="submitKbQuestion('${esc(q).replace(/'/g,'&#39;')}',null,'no_answer')">留下这个疑问</button>`}</div></div></div>`;
+}
+async function searchKb(useAi=true){
+    let q=(document.getElementById('kbQuery').value||'').trim();
+    if(!q){renderKbResults([],q);return}
+    let all=kbAllItems();
+    let local=kbBestLocal(q,30);
+    if(useAi&&kbAiBusy)return toast('正在匹配知识库，请不要重复点击');
+    if(useAi&&q&&all.length&&cfg.ai?.enabled&&cfg.ai?.apiKey){
+        kbAiBusy=true;
+        try{
+            toast('正在匹配知识库...');
+            let candidates=all.length<=200?all:(local.length?local.slice(0,20):kbCandidates(q,50).slice(0,50));
+            let best=await aiRankKb(q,candidates);
+            let conf=Number(best?.confidence||0);
+            if(best && best.id && !best.no_match && conf>=0.68){
+                let found=all.find(x=>x.id===best.id);
+                if(found && (conf>=0.82 || kbIsStrongLocalMatch(q,found))){
+                    let related=(local.length?local:candidates).filter(x=>x.id!==found.id).slice(0,4);
+                    renderKbResults([{...found,score:Math.round(conf*100),aiNote:best.reason||'AI匹配',aiMode:'AI匹配'},...related],q,{ai:true});
+                    return;
+                }
+            }
+        }catch(e){
+            console.warn(e);
+        }finally{kbAiBusy=false}
+    }
+    if(local.length)return renderKbResults(local,q,{ai:false});
+    renderKbResults([],q,{left:false,type:'no_answer'});
+}
+async function aiRankKb(q,cands){
+    let ai=normalizeAi(cfg.ai);
+    let slim=cands.map(x=>({id:x.id,category:x.category,question:x.question,keywords:x.keywords,answer:x.answer}));
+    let body={model:ai.model,temperature:0.05,messages:[
+        {role:'system',content:'你是客服内部产品知识库匹配助手。必须严格判断相关性，只输出JSON。不能硬匹配。'},
+        {role:'user',content:'客服问题：'+q+'\n知识库候选：'+JSON.stringify(slim)+'\n任务：判断候选中是否有能直接回答客服问题的知识。只有语义高度相关才选择；如果只是字面相似、主题不同、不能直接回答，必须返回 no_match。输出格式：{"id":"匹配id或空","confidence":0到1,"no_match":true或false,"reason":"一句话原因"}'}
+    ]};
+    let r=await fetch(ai.apiBase,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ai.apiKey},body:JSON.stringify(body)});
+    if(!r.ok)throw new Error(r.status);
+    let d=await r.json();
+    let raw=(d.choices?.[0]?.message?.content||'').trim();
+    let cleaned=raw.replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+    try{return JSON.parse(cleaned)}catch(e){let m=cleaned.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);throw e}
+}
+function renderKbResults(list,q,meta={}){
+    let box=document.getElementById('kbResults');if(!box)return;q=String(q||'').trim();
+    if(!q){kbRenderList=[];box.innerHTML='<div class="kb-chat"><div class="kb-bubble assistant">请输入客服想查询的产品问题，点击“发送问题”即可匹配知识库。</div></div>';return}
+    if(!list.length){kbRenderList=[];box.innerHTML=renderKbNoAnswer(q,!!meta.left,meta.type||'no_answer');return}
+    kbRenderList=list.slice(0,5);
+    let first=kbRenderList[0];
+    let modeText=first.aiMode||first.aiNote||(meta.ai?'AI匹配':'知识库匹配');
+    let related=kbRenderList.slice(1).map((x,i)=>`<div class="kb-card"><div class="kb-meta"><span class="ai-badge">${esc(x.category||'未分类')}</span> 相关问题 ${i+2}</div><h3>${esc(x.question||'未命名问题')}</h3><div class="kb-answer">${esc(x.answer||'')}</div><div class="ai-actions"><button class="btn" onclick="copyKbAnswer(${i+1})">复制这条答案</button></div></div>`).join('');
+    box.innerHTML=`<div class="kb-chat"><div class="kb-bubble user">${esc(q)}</div><div class="kb-bubble assistant"><div class="kb-meta"><span class="ai-badge">${esc(first.category||'未分类')}</span> ${esc(modeText)} · 可信度 ${first.score||'-'}</div><h3 style="margin:0 0 6px;font-size:16px">${esc(first.question||'未命名问题')}</h3><div class="kb-answer">${esc(first.answer||'')}</div><div class="kb-feedback"><button class="btn blue" onclick="copyKbAnswer(0)">复制标准答案</button><button class="btn warnBtn" onclick="submitKbQuestion('${esc(q).replace(/'/g,'&#39;')}',kbRenderList[0],'wrong_answer')">答案不准，提交管理员处理</button></div><div class="kb-related">如果回答不准，点击提交后管理端会收到这条反馈。</div></div></div>${related}`;
+    setTimeout(()=>{box.scrollTop=box.scrollHeight},20)
+}
+
+
+/* v27 final client knowledge stability override */
+function normalizeAiKb(kb){
+    let items=Array.isArray(kb?.items)?kb.items:[];
+    let pending=Array.isArray(kb?.pendingQuestions)?kb.pendingQuestions:[];
+    let categories=Array.isArray(kb?.categories)?kb.categories:[];
+    const itemCats=items.map(x=>String(x.category||'未分类').trim()||'未分类');
+    categories=[...new Set([...categories.map(x=>String(x||'').trim()).filter(Boolean),...itemCats,'未分类'])];
+    return {
+      pageSize:Number(kb?.pageSize)||20,
+      categories,
+      pendingQuestions:pending.map((x,i)=>({
+        id:String(x.id||('pq_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,7))),
+        question:String(x.question||'').trim(),
+        from:String(x.from||'客服端'),
+        user:String(x.user||''),
+        type:String(x.type||'no_answer'),
+        matchedId:String(x.matchedId||''),
+        matchedQuestion:String(x.matchedQuestion||''),
+        matchedAnswer:String(x.matchedAnswer||''),
+        note:String(x.note||''),
+        status:String(x.status||'pending'),
+        createdAt:x.createdAt||''
+      })).filter(x=>x.question),
+      items:items.map((x,i)=>({
+        id:String(x.id||('kb_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,7))),
+        category:String(x.category||'未分类').trim()||'未分类',
+        question:String(x.question||'').trim(),
+        keywords:Array.isArray(x.keywords)?x.keywords.join(','):String(x.keywords||''),
+        answer:String(x.answer||'').trim(),
+        enabled:x.enabled!==false,
+        updatedAt:x.updatedAt||''
+      })).filter(x=>x.question||x.answer)
+    };
+}
+async function submitKbQuestion(q, matched=null, type='no_answer'){
+    q=String(q||document.getElementById('kbQuery')?.value||'').trim();
+    if(!q)return toast('请先输入问题');
+    try{
+        toast('正在提交管理员处理...');
+        const r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}?t=${Date.now()}`,{cache:'no-store',headers:{Accept:'application/vnd.github.v3+json',Authorization:'token '+GITHUB_CONFIG.token}});
+        if(!r.ok)throw new Error('读取云端失败:'+r.status);
+        const d=await r.json();
+        const f=d.files?.[FILE]||d.files?.[LEGACY_FILE];
+        if(!f||!f.content)throw new Error('找不到云端配置');
+        const cloud=JSON.parse(f.content);
+        const latestKb=normalizeAiKb(cloud.aiKb||{});
+        const matchedId=String(matched?.id||'');
+        const duplicate=latestKb.pendingQuestions.some(x=>String(x.question||'').trim()===q&&String(x.type||'no_answer')===String(type||'no_answer')&&String(x.matchedId||'')===matchedId);
+        if(!duplicate){
+            latestKb.pendingQuestions.unshift({
+                id:'pq_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+                question:q,
+                from:'客服端',
+                user:loginUser||'',
+                type:String(type||'no_answer'),
+                matchedId,
+                matchedQuestion:String(matched?.question||''),
+                matchedAnswer:String(matched?.answer||''),
+                note:type==='wrong_answer'?'客服反馈：当前匹配答案不准确':'客服反馈：知识库没有匹配答案',
+                status:'pending',
+                createdAt:new Date().toISOString()
+            });
+        }
+        cloud.aiKb=normalizeAiKb(latestKb);
+        const pr=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`,{method:'PATCH',headers:{Authorization:'token '+GITHUB_CONFIG.token,'Content-Type':'application/json',Accept:'application/vnd.github.v3+json'},body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(cloud,null,2)}}})});
+        if(!pr.ok)throw new Error('提交失败:'+pr.status);
+        cfg.aiKb=normalizeAiKb(cloud.aiKb);
+        saveLocal('fridge_quote_cfg',cfg);
+        toast(duplicate?'这个反馈已在后台待整理':'已提交管理员处理');
+        renderKbResults([],q,{left:true,type});
+    }catch(e){toast(e.message||'提交失败')}
+}
+
+</script></body></html>
