@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>冰箱贴算价管理端</title>
+<style>
+:root{--bg:#eef3f8;--card:#fff;--text:#111827;--muted:#667085;--blue:#1677ff;--green:#16a34a;--red:#dc2626;--orange:#f59e0b;--bd:#d9e2ee;--soft:#f7f9fc;--shadow:0 2px 8px rgba(15,23,42,.06);--r:10px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif;font-size:13px}.top{height:52px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 1px 6px rgba(15,23,42,.06);position:sticky;top:0;z-index:10}.brand{font-size:18px;font-weight:700}.actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--bd);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#111827;display:inline-flex;align-items:center;justify-content:center;height:28px;transition:.15s}.btn:hover{background:#f3f7ff;border-color:var(--blue)}.btn.blue{background:var(--blue);color:#fff;border-color:var(--blue)}.btn.blue:hover{background:#0e65e5}.btn.green{background:var(--green);color:#fff;border-color:var(--green)}.btn.green:hover{background:#15803d}.btn.red{background:#fff1f2;color:var(--red);border-color:#fecdd3}.btn.red:hover{background:#ffe4e6}.status{font-size:12px;color:var(--muted)}.wrap{max-width:1380px;margin:0 auto;padding:12px}.layout{display:grid;grid-template-columns:300px 1fr;gap:12px;align-items:start}.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--shadow);padding:12px;margin-bottom:10px}.title{margin:0 0 10px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px}.sub{margin:0 0 10px 0;font-size:14px;font-weight:700;color:#1e293b;border-left:3px solid var(--blue);padding-left:6px;line-height:1}.hint{font-size:12px;color:var(--muted);line-height:1.4;white-space:nowrap}.form{display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center}.form label{font-size:12px;font-weight:600;color:#475467}.input,.select,textarea{width:100%;border:1px solid var(--bd);border-radius:6px;background:#fff;padding:2px 6px;font-size:13px;font-weight:500;outline:none;height:28px}.input:focus,.select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(22,119,255,.12)}textarea{height:46px;resize:vertical;padding:4px 6px}.input[type="number"] {text-align: center; font-weight: 600;}.toggle{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#344054;white-space:nowrap;cursor:pointer}.toggle input{width:14px;height:14px;accent-color:var(--blue);margin:0;cursor:pointer}.appItem{border:1px solid var(--bd);border-radius:8px;background:#f8fafc;padding:6px 8px;margin:6px 0;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#eef2f7;border:1px dashed #94a3b8;border-radius:6px;padding:4px;word-break:break-all;font-size:11px;margin-top:2px;color:#475467}.empty{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;padding:8px;color:#98a2b3;font-size:12px;font-weight:600;text-align:center}.matNav{position:sticky;top:52px;z-index:8;background:var(--bg);padding:0 0 8px;margin-bottom:2px}.matNavInner{background:#fff;border:1px solid var(--bd);border-radius:10px;box-shadow:var(--shadow);padding:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}.matBtn{border:1px solid var(--bd);background:#fff;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;cursor:grab;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:.15s}.matBtn:active{cursor:grabbing}.matBtn.active{background:#eff6ff;border-color:var(--blue);color:var(--blue)}.matPage{background:#fff;border:1px solid var(--bd);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}.matHead{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fafc;border-bottom:1px solid var(--bd);padding:10px 14px}.matName{font-size:17px;font-weight:700;display:flex;gap:6px;align-items:center}.badge{font-size:11px;font-weight:600;border-radius:999px;padding:2px 6px;background:#e0f2fe;color:#0369a1}.badge.warn{background:#fef3c7;color:#b45309}.matBody{padding:12px}.compactGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.box{border:1px solid var(--bd);border-radius:8px;background:#fbfdff;padding:12px}.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;z-index:30000;opacity:0;transition:.25s;pointer-events:none}.toast.show{opacity:1}.manualAuth{display:grid;grid-template-columns:60px 1fr auto;gap:4px;align-items:center;margin:6px 0}.accountAdd{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:6px;align-items:center;margin:6px 0}.userRow{border:1px solid var(--bd);border-radius:8px;background:#f8fafc;padding:8px;margin:6px 0;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.userMeta{font-size:12px;color:var(--muted);margin-top:3px}.userOps{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}.pbtn{padding:0;width:32px;height:28px;border-radius:6px}
+.area-row { display: flex; justify-content: space-between; background: #f0fdf4; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #dcfce7; }
+.area-item { display: flex; align-items: center; gap: 6px; }
+.tier-row { display: grid; grid-template-columns: 32px 1fr 28px 1fr 28px 1fr 34px; gap: 6px; align-items: center; margin-bottom: 6px; }
+.lbl { font-size: 12px; color: #475467; font-weight: 600; white-space: nowrap; text-align: center; }
+.lbl.green { color: #15803d; }
+.lbl.orange { color: #b45309; }
+.rule-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.mini { width: 70px; text-align: center; }
+.micro { width: 50px; text-align: center; }
+
+.aiKbCard{border-color:#bfdbfe;background:linear-gradient(180deg,#fff,#fbfdff)}
+.aiTabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+.aiTab{border:1px solid var(--bd);background:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;color:#334155}
+.aiTab.active{background:#eff6ff;border-color:var(--blue);color:var(--blue)}
+.aiToolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}.aiToolbar .input{max-width:260px}.aiToolbar .select{max-width:160px}.kbEditor{border:1px solid #bfdbfe;background:#eff6ff;border-radius:12px;padding:12px;margin:8px 0 12px}.kbEditorTitle{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}.kbEditorGrid{display:grid;grid-template-columns:120px 1fr 1fr;gap:8px;align-items:start}.kbEditorGrid textarea{height:100px}.kbEditorGrid .full{grid-column:1 / -1}.kbEditorActions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.aiKbList{display:grid;gap:8px}.kbRow{border:1px solid var(--bd);border-radius:10px;background:#fff;padding:10px;display:grid;grid-template-columns:90px 1fr 1fr 120px;gap:8px;align-items:start}.kbRow textarea{height:70px}.kbOps{display:flex;flex-direction:column;gap:6px}.kbTopMeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px}.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:10px}.aiImportBox{border:1px dashed #93c5fd;background:#f8fbff;border-radius:10px;padding:10px;margin-top:8px}.aiImportGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.aiSettingGrid{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center;max-width:760px}.aiSettingGrid textarea{height:88px}.secretTip{font-size:12px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px;margin-top:8px;line-height:1.5}
+
+/* 云端管理端优化：登录权限、分区导航、保存状态、试算预览 */
+.status.ok{color:#15803d;font-weight:700}.status.dirty{color:#b45309;font-weight:800;background:#fffbeb;border:1px solid #fde68a;border-radius:999px;padding:3px 8px}.status.bad{color:#b91c1c;font-weight:800;background:#fff1f2;border:1px solid #fecdd3;border-radius:999px;padding:3px 8px}.adminMenu{position:sticky;top:52px;z-index:9;background:var(--bg);padding:8px 12px 0}.adminMenuInner{max-width:1380px;margin:0 auto;background:#fff;border:1px solid var(--bd);border-radius:10px;box-shadow:var(--shadow);display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px}.adminTabBtn{border:1px solid var(--bd);background:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:800;cursor:pointer;color:#334155}.adminTabBtn.active{background:#eff6ff;border-color:var(--blue);color:var(--blue)}.adminLocked .wrap,.adminLocked .adminMenu{filter:blur(1.5px);pointer-events:none;user-select:none}.adminAuth{position:fixed;inset:0;background:rgba(15,23,42,.72);z-index:99999;display:none;align-items:center;justify-content:center;padding:18px}.adminAuthCard{background:#fff;border-radius:18px;box-shadow:0 24px 90px rgba(0,0,0,.32);padding:24px;width:min(520px,96vw)}.adminAuthCard h2{margin:0 0 8px;font-size:24px}.adminAuthCard p{font-size:14px;color:#475467;line-height:1.7;margin:0 0 12px}.adminAuthCard input{width:100%;border:1.5px solid var(--bd);border-radius:11px;font-size:16px;padding:10px 12px;outline:none;margin-top:8px}.adminAuthCard input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(22,119,255,.12)}.adminAuthActions{display:flex;gap:8px;margin-top:12px}.adminAuthActions .btn{flex:1;height:36px}.accountAdd{grid-template-columns:1fr 1fr 110px auto}.roleBadge{font-size:11px;font-weight:800;border-radius:999px;padding:2px 7px;background:#eef2ff;color:#4338ca}.roleBadge.super{background:#fef3c7;color:#b45309}.roleBadge.staff{background:#f1f5f9;color:#475467}.accountGroup{border:1px solid var(--bd);border-radius:10px;padding:10px;margin-top:10px;background:#fff}.accountGroup h3{margin:0 0 8px;font-size:14px}.dangerMenu{position:relative}.dangerMenu>summary{list-style:none}.dangerMenu>summary::-webkit-details-marker{display:none}.dangerMenu[open]{z-index:20}.dangerMenu .dangerDrop{position:absolute;right:0;top:32px;background:#fff;border:1px solid var(--bd);border-radius:8px;box-shadow:0 10px 30px rgba(15,23,42,.16);padding:8px;min-width:120px}.matSearch{width:170px;max-width:42vw}.previewBox{border:1px solid #bfdbfe;background:#f8fbff;border-radius:10px;margin:12px;padding:12px}.previewGrid{display:grid;grid-template-columns:repeat(8,minmax(80px,1fr));gap:8px;align-items:end}.previewGrid label{font-size:12px;font-weight:700;color:#475467}.previewKpi{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:7px 9px}.previewKpi b{display:block;font-size:16px;color:#075bb5;margin-top:3px}.previewKpi.warn b{color:#b91c1c}@media(max-width:1050px){.previewGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.accountAdd{grid-template-columns:1fr}.matSearch{width:100%}}
+
+@media(max-width:1050px){.kbRow{grid-template-columns:1fr}.aiImportGrid{grid-template-columns:1fr}.aiSettingGrid{grid-template-columns:1fr}.kbEditorGrid{grid-template-columns:1fr}}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.compactGrid{grid-template-columns:1fr}}
+
+/* 管理端统一排版补丁 */
+.top .btn{height:30px;border-radius:8px}.card{padding:14px}.form{grid-template-columns:90px 1fr;gap:9px 10px}.input,.select,textarea{height:32px;border-radius:8px}.rule-row{min-height:32px}.accountAdd{align-items:center}.matNavInner{gap:8px}.matBtn{height:30px}.previewBox{border:1px solid #bfdbfe;background:#f8fbff;border-radius:14px;margin:12px;padding:14px}.previewBox .sub{margin:0 0 12px;font-size:15px}.previewForm{display:grid;grid-template-columns:160px minmax(240px,1fr) 120px;gap:10px;align-items:end}.previewField{display:flex;flex-direction:column;gap:6px}.previewField span{font-size:12px;font-weight:800;color:#475467}.previewStatic,.previewField .input{height:38px}.previewStatic{display:flex;align-items:center;justify-content:center;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:800;color:#0f172a}.previewDims{display:grid;grid-template-columns:minmax(0,1fr)18px minmax(0,1fr);gap:8px;align-items:end}.previewDims .sizeX{font-size:18px;font-weight:800;color:#94a3b8;text-align:center;padding-bottom:8px}.previewKpiWrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:12px}.previewKpi{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:10px 12px;min-height:72px;display:flex;flex-direction:column;justify-content:center}.previewKpi span{font-size:12px;font-weight:700;color:#64748b}.previewKpi b{display:block;font-size:18px;color:#075bb5;margin-top:6px}.previewKpi.warn b{color:#b91c1c}@media(max-width:1050px){.previewForm{grid-template-columns:1fr}.previewKpiWrap{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* account ui v5 */
+.accountAdd{background:#f8fbff;border:1px solid #dbeafe;border-radius:14px;padding:10px;display:grid;grid-template-columns:1fr 1fr 110px auto;gap:8px;align-items:center}
+.accountToolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:8px 0 10px}
+.accountSearch{height:34px;border:1px solid var(--bd);border-radius:999px;padding:0 12px;font-size:13px;outline:none;min-width:220px;background:#fff}
+.accountSearch:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(22,119,255,.12)}
+.accountStats{font-size:12px;color:#64748b;font-weight:700}
+.accountGroup{border:1px solid var(--bd);border-radius:14px;padding:0;margin-top:12px;background:#fff;overflow:hidden}
+.accountGroup>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#f8fafc;border-bottom:1px solid #e5edf7;font-size:14px;font-weight:900;color:#0f172a}
+.accountGroup>summary::-webkit-details-marker{display:none}
+.accountGroup>summary .count{font-size:12px;color:#64748b;font-weight:800;background:#eef2ff;border-radius:999px;padding:2px 8px}
+.accountList{padding:10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.userCard{border:1px solid #e2e8f0;border-radius:12px;background:#fff;overflow:hidden}
+.userCard[open]{grid-column:span 2;border-color:#bfdbfe;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+.userCard>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:space-between;min-height:42px;padding:8px 10px;background:#fff}
+.userCard>summary::-webkit-details-marker{display:none}
+.userCardName{min-width:0;display:flex;align-items:center;gap:7px;font-weight:900;color:#0f172a}
+.userCardName b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.userStatusDot{width:8px;height:8px;border-radius:999px;background:#22c55e;flex:0 0 auto}
+.userStatusDot.off{background:#ef4444}
+.userCardBody{border-top:1px solid #e5edf7;background:#fbfdff;padding:10px}
+.userCardMeta{font-size:12px;color:#64748b;line-height:1.7;margin-bottom:10px}
+.userCardMeta .code{margin:4px 0 0;padding:6px 8px;font-size:12px;border-radius:8px;background:#f1f5f9}
+.userOps{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start}
+.userOps .btn{height:30px;border-radius:8px;font-size:12px;padding:0 9px}
+.roleBadge{font-size:11px;font-weight:900;border-radius:999px;padding:2px 7px;background:#eef2ff;color:#4338ca;white-space:nowrap}
+.roleBadge.super{background:#fef3c7;color:#b45309}.roleBadge.staff{background:#f1f5f9;color:#475467}
+.roleBadge.admin{background:#dbeafe;color:#075bb5}
+.userMiniRole{font-size:11px;color:#64748b;font-weight:800;white-space:nowrap}
+@media(max-width:900px){.accountAdd{grid-template-columns:1fr}.accountToolbar{align-items:stretch;flex-direction:column}.accountSearch{min-width:0;width:100%}.accountList{grid-template-columns:1fr}.userCard[open]{grid-column:span 1}}
+
+
+/* v9 accessory strategy settings */
+.rule-row .select{min-height:28px}
+.accountGroup .hint,.aiKbCard .hint{line-height:1.5}
+
+
+/* v11 account create modal */
+.accountAdd{display:none!important}
+.accountCreateOverlay{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:99998;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(2px)}
+.accountCreateOverlay.show{display:flex}
+.accountCreateCard{width:min(460px,96vw);background:#fff;border-radius:18px;box-shadow:0 24px 80px rgba(15,23,42,.28);padding:18px;border:1px solid #e2e8f0}
+.accountCreateHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.accountCreateHead h2{margin:0;font-size:20px;color:#0f172a}
+.accountCreateHead p{margin:4px 0 0;color:#64748b;font-size:13px}
+.accountCreateClose{border:0;background:#f1f5f9;color:#64748b;border-radius:999px;width:30px;height:30px;font-size:22px;line-height:1;cursor:pointer}
+.accountCreateClose:hover{background:#fee2e2;color:#b91c1c}
+.accountCreateForm{display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:center}
+.accountCreateForm label{font-size:13px;font-weight:800;color:#475569}
+.accountCreateForm .input,.accountCreateForm .select{height:38px;border-radius:10px}
+.accountCreateActions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.accountCreateActions .btn{height:36px;border-radius:10px;padding:0 16px}
+.accountToolbar .btn.green{height:34px;border-radius:999px;padding:0 14px;font-size:13px}
+@media(max-width:640px){.accountCreateForm{grid-template-columns:1fr}.accountCreateForm label{margin-top:4px}}
+
+
+/* v12 account panel cleanup */
+.adminPanel[data-panel="accounts"]{
+  padding:16px!important;
+}
+.adminPanel[data-panel="accounts"]>.hint,
+.adminPanel[data-panel="accounts"]>.accountAdd{
+  display:none!important;
+}
+.adminPanel[data-panel="accounts"] .title{
+  margin-bottom:12px!important;
+}
+.accountTop{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+  margin:0 0 8px;
+}
+.accountTop .accountSearch{
+  width:100%!important;
+  min-width:0!important;
+  height:36px!important;
+  border-radius:10px!important;
+  padding:0 12px!important;
+}
+.accountTop .btn{
+  height:36px!important;
+  border-radius:10px!important;
+  padding:0 12px!important;
+  white-space:nowrap!important;
+}
+.accountStatsLine{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:800;
+  color:#64748b;
+  margin-bottom:10px;
+}
+.accountStatsLine b{
+  color:#0f172a;
+}
+.accountGroup{
+  margin-top:8px!important;
+  border-radius:12px!important;
+}
+.accountGroup>summary{
+  padding:10px 12px!important;
+}
+.accountList{
+  padding:8px!important;
+  grid-template-columns:1fr!important;
+}
+.userCard[open]{
+  grid-column:span 1!important;
+}
+.userCard>summary{
+  min-height:40px!important;
+  padding:8px 10px!important;
+}
+.userCardBody{
+  padding:9px 10px!important;
+}
+@media(max-width:420px){
+  .accountTop{grid-template-columns:1fr}
+  .accountTop .btn{width:100%}
+  .accountStatsLine{flex-direction:column;align-items:flex-start}
+}
+
+
+/* v13 global spacing cleanup: prevent crowded labels */
+.hint{white-space:normal!important}
+.compactGrid{grid-template-columns:repeat(2,minmax(420px,1fr))!important;align-items:start!important}
+.box{border-radius:12px!important;padding:14px!important}
+.box .sub{margin-bottom:12px!important;line-height:1.25!important}
+.box .rule-row{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important;row-gap:7px!important;line-height:1.4!important;margin-bottom:9px!important;min-height:32px!important}
+.box .rule-row .toggle{width:auto!important;min-width:max-content!important;flex:0 0 auto!important;white-space:nowrap!important}
+.box .rule-row .lbl{white-space:nowrap!important;line-height:28px!important;flex:0 0 auto!important}
+.box .rule-row .input.mini{width:78px!important;flex:0 0 78px!important}
+.box .rule-row .input.micro{width:68px!important;flex:0 0 68px!important}
+.box .rule-row .select{height:30px!important;min-width:94px!important}
+.area-row{gap:10px!important;flex-wrap:wrap!important}
+.area-item{flex:1 1 210px!important;justify-content:flex-start!important}
+.tier-row{grid-template-columns:48px minmax(74px,1fr) 42px minmax(74px,1fr) 42px minmax(74px,1fr) 38px!important;gap:8px!important}
+.form{grid-template-columns:96px minmax(0,1fr)!important}
+.accountToolbar{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important}
+.accountStats{white-space:nowrap!important}
+.matNavInner{gap:8px!important}
+.aiSettingGrid{grid-template-columns:120px minmax(0,1fr)!important}
+@media(max-width:1250px){.compactGrid{grid-template-columns:1fr!important}.layout{grid-template-columns:280px 1fr!important}}
+@media(max-width:1050px){.layout{grid-template-columns:1fr!important}.accountToolbar{grid-template-columns:1fr!important}.accountStats{white-space:normal!important}.form,.aiSettingGrid{grid-template-columns:1fr!important}}
+
+
+/* v16 pending questions detail */
+.kbPendingBox{border:1px solid #fed7aa;background:#fff7ed;border-radius:12px;padding:10px;margin:10px 0 12px}
+.kbPendingHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.kbPendingHead b{font-size:14px;color:#9a3412}
+.kbPendingList{display:grid;gap:8px}
+.kbPendingRow{background:#fff;border:1px solid #fed7aa;border-radius:10px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.kbPendingQ{font-size:13px;font-weight:900;color:#0f172a;line-height:1.45}
+.kbPendingMeta{font-size:11px;color:#64748b;margin-top:4px}
+.kbPendingMatched{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px;margin-top:7px;line-height:1.5}
+.kbPendingMatched b{color:#0f172a}
+.kbPendingType{display:inline-block;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:900;margin-right:4px}
+.kbPendingType.no{background:#dbeafe;color:#075bb5}
+.kbPendingType.bad{background:#fee2e2;color:#b91c1c}
+.kbPendingOps{display:flex;gap:6px;align-items:center}
+.kbPendingOps .btn{height:30px;border-radius:8px}
+
+
+/* v17 pending question tabs + category delete */
+.kbPendingTabs{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:8px 0 10px}
+.kbPendingTab{height:30px;border:1px solid #fed7aa;background:#fff;border-radius:999px;padding:0 12px;font-size:12px;font-weight:900;color:#9a3412;cursor:pointer}
+.kbPendingTab.active{background:#f97316;border-color:#f97316;color:#fff}
+.kbPendingBox{border:1px solid #fed7aa;background:#fff7ed;border-radius:12px;padding:10px;margin:10px 0 12px}
+.kbPendingHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.kbPendingHead b{font-size:14px;color:#9a3412}
+.kbPendingList{display:grid;gap:8px}
+.kbPendingRow{background:#fff;border:1px solid #fed7aa;border-radius:10px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.kbPendingQ{font-size:13px;font-weight:900;color:#0f172a;line-height:1.45}
+.kbPendingMeta{font-size:11px;color:#64748b;margin-top:4px}
+.kbPendingMatched{font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px;margin-top:7px;line-height:1.5}
+.kbPendingMatched b{color:#0f172a}
+.kbPendingType{display:inline-block;border-radius:999px;padding:1px 7px;font-size:11px;font-weight:900;margin-right:4px}
+.kbPendingType.no{background:#dbeafe;color:#075bb5}
+.kbPendingType.bad{background:#fee2e2;color:#b91c1c}
+.kbPendingOps{display:flex;gap:6px;align-items:center}
+.kbPendingOps .btn{height:30px;border-radius:8px}
+.aiToolbar .dangerLite{border-color:#fecaca!important;background:#fff1f2!important;color:#b91c1c!important}
+
+
+/* v18 category management */
+.categoryManageBtns{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.categoryManageBtns .btn{height:30px;border-radius:8px}
+.categoryManageBtns .btn.warn{border-color:#fecaca;background:#fff1f2;color:#b91c1c}
+
+
+/* v19 knowledge center restructure */
+.aiTabs.v19Tabs{
+  border-bottom:1px solid var(--bd);
+  padding-bottom:10px;
+  margin-bottom:12px;
+  gap:8px;
+}
+.aiTabs.v19Tabs .aiTab{
+  height:34px;
+  border-radius:999px;
+  padding:0 14px;
+}
+.kbPanelHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.kbPanelTitle{
+  font-size:16px;
+  font-weight:900;
+  color:#0f172a;
+}
+.kbPanelSub{
+  font-size:12px;
+  color:#64748b;
+  margin-top:3px;
+}
+.kbToolbarV19{
+  display:grid;
+  grid-template-columns:minmax(220px,1fr) 170px auto;
+  gap:8px;
+  align-items:center;
+  margin:10px 0 12px;
+}
+.kbToolbarV19 .input,.kbToolbarV19 .select{
+  height:34px;
+  border-radius:10px;
+}
+.kbCardList{
+  display:grid;
+  gap:10px;
+}
+.kbCardRow{
+  border:1px solid #d9e2ee;
+  background:#fff;
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 2px 8px rgba(15,23,42,.04);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:start;
+}
+.kbCardQ{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:6px;
+}
+.kbCardQ b{
+  font-size:15px;
+  color:#0f172a;
+}
+.kbCardAnswer{
+  font-size:13px;
+  line-height:1.65;
+  color:#334155;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:8px 10px;
+  max-height:76px;
+  overflow:hidden;
+}
+.kbCardMeta{
+  margin-top:7px;
+  display:flex;
+  gap:6px;
+  align-items:center;
+  flex-wrap:wrap;
+  font-size:12px;
+  color:#64748b;
+}
+.kbCardOps{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width:86px;
+}
+.kbCardOps .btn{
+  height:30px;
+  border-radius:8px;
+}
+.kbStatus{
+  font-size:11px;
+  font-weight:900;
+  border-radius:999px;
+  padding:2px 7px;
+  background:#dcfce7;
+  color:#15803d;
+}
+.kbStatus.off{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+.kbEditModal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100000;
+  padding:18px;
+  background:rgba(15,23,42,.55);
+  backdrop-filter:blur(3px);
+}
+.kbEditModal.show{display:flex}
+.kbEditCard{
+  width:min(820px,96vw);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 24px 90px rgba(0,0,0,.30);
+  border:1px solid #d9e2ee;
+  padding:18px;
+}
+.kbEditHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+  padding-bottom:12px;
+  border-bottom:1px solid #e2e8f0;
+}
+.kbEditHead h2{
+  margin:0;
+  font-size:20px;
+  color:#0f172a;
+}
+.kbEditHead p{
+  margin:4px 0 0;
+  color:#64748b;
+  font-size:13px;
+}
+.kbEditClose{
+  width:30px;
+  height:30px;
+  border:0;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#64748b;
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+}
+.kbEditGrid{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:10px;
+  align-items:start;
+}
+.kbEditGrid label{
+  font-size:13px;
+  font-weight:900;
+  color:#475569;
+  padding-top:8px;
+}
+.kbEditGrid .input,.kbEditGrid .select{
+  height:36px;
+  border-radius:10px;
+}
+.kbEditGrid textarea{
+  min-height:92px;
+  border-radius:10px;
+}
+.kbEditGrid .answerArea{
+  min-height:150px;
+}
+.kbEditActions{
+  margin-top:14px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+.kbEditActions .btn{
+  height:36px;
+  border-radius:10px;
+  padding:0 16px;
+}
+.pendingTabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0 12px;
+}
+.pendingTab{
+  height:34px;
+  border:1px solid #fed7aa;
+  background:#fff;
+  color:#9a3412;
+  border-radius:999px;
+  padding:0 14px;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+}
+.pendingTab.active{
+  background:#f97316;
+  border-color:#f97316;
+  color:#fff;
+}
+.pendingList{
+  display:grid;
+  gap:10px;
+}
+.pendingCard{
+  background:#fff;
+  border:1px solid #fed7aa;
+  border-radius:14px;
+  padding:12px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:start;
+}
+.pendingQuestion{
+  font-size:15px;
+  font-weight:900;
+  line-height:1.45;
+  color:#0f172a;
+  margin-bottom:6px;
+}
+.pendingMeta{
+  font-size:12px;
+  color:#64748b;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.pendingMatched{
+  margin-top:8px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:12px;
+  color:#475569;
+  line-height:1.6;
+}
+.pendingType{
+  display:inline-block;
+  border-radius:999px;
+  padding:2px 8px;
+  font-size:12px;
+  font-weight:900;
+  margin-right:6px;
+}
+.pendingType.no{background:#dbeafe;color:#075bb5}
+.pendingType.bad{background:#fee2e2;color:#b91c1c}
+.pendingOps{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width:86px;
+}
+.pendingOps .btn{
+  height:30px;
+  border-radius:8px;
+}
+.categoryGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:10px;
+}
+.categoryCard{
+  border:1px solid #d9e2ee;
+  background:#fff;
+  border-radius:14px;
+  padding:12px;
+}
+.categoryName{
+  font-size:15px;
+  font-weight:900;
+  color:#0f172a;
+  margin-bottom:6px;
+}
+.categoryCount{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:10px;
+}
+.categoryOps{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.categoryOps .btn{
+  height:30px;
+  border-radius:8px;
+}
+.kbImportGridV19{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:900px){
+  .kbToolbarV19{grid-template-columns:1fr}
+  .kbCardRow,.pendingCard{grid-template-columns:1fr}
+  .kbCardOps,.pendingOps{flex-direction:row;flex-wrap:wrap}
+  .kbEditGrid{grid-template-columns:1fr}
+  .kbEditGrid label{padding-top:0}
+  .kbImportGridV19{grid-template-columns:1fr}
+}
+
+
+/* v20 category draft hint */
+.kbEditHead p::after{content:" 分类可直接在弹窗里输入新名称。";}
+
+
+/* v22 category select linkage */
+.kbCategoryInline{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+}
+.kbCategoryInline .select{
+  height:36px;
+  border-radius:10px;
+}
+.kbCategoryInline .btn{
+  height:36px;
+  border-radius:10px;
+}
+.categoryCard.emptyCat{
+  border-style:dashed;
+  background:#fbfdff;
+}
+
+
+/* v23 AI polish for knowledge editor */
+.kbEditFieldHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:6px;
+}
+.kbEditFieldHead label{padding:0!important}
+.aiPolishBtn{
+  height:28px;
+  border:1px solid #bfdbfe;
+  background:#eff6ff;
+  color:#075bb5;
+  border-radius:999px;
+  padding:0 10px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.aiPolishBtn:hover{background:#dbeafe;border-color:#93c5fd}
+.aiPolishBtn:disabled{opacity:.55;cursor:not-allowed}
+.kbEditGrid.v23{
+  grid-template-columns:1fr!important;
+  gap:12px!important;
+}
+.kbEditGrid.v23 .fieldBlock{display:block}
+.kbEditGrid.v23 .fieldLabel{
+  font-size:13px;
+  font-weight:900;
+  color:#475569;
+}
+.kbEditGrid.v23 .input,.kbEditGrid.v23 .select{
+  height:36px;
+  border-radius:10px;
+}
+.kbEditGrid.v23 textarea{
+  width:100%;
+  border-radius:10px;
+}
+.kbEditGrid.v23 .answerArea{
+  min-height:150px;
+}
+.aiPolishHint{
+  color:#64748b;
+  font-size:12px;
+  line-height:1.5;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:7px 9px;
+}
+
+
+/* v25 knowledge stable cleanup */
+.kbCardRow[data-kb-id],
+.pendingCard[data-pending-id]{
+  position:relative;
+}
+.kbCardOps .btn[disabled],
+.pendingOps .btn[disabled]{
+  opacity:.55;
+  cursor:not-allowed;
+}
+.kbSafeHint{
+  font-size:12px;
+  color:#64748b;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:7px 10px;
+  margin:8px 0 10px;
+}
+
+</style></head><body>
+<header class="top"><div class="brand" id="adminBrand">🧲 冰箱贴管理端</div><div class="actions"><span class="status" id="adminLoginStatus">未登录</span><span class="status" id="statusText">未同步</span><button class="btn" onclick="loadCloud(true)">📥 加载云端</button><button class="btn blue" onclick="uploadCloud(true)">☁️ 保存上传</button><button class="btn" onclick="restoreBackupCloud()">恢复备份</button><button class="btn" onclick="exportJson()">导出</button><label class="btn">导入<input type="file" accept=".json" onchange="importJson(event)" style="display:none"></label><button class="btn" onclick="adminLogout()">退出管理</button></div></header>
+<div class="adminAuth" id="adminAuth"><div class="adminAuthCard" id="adminAuthCard"></div></div>
+<nav class="adminMenu" id="adminMenu"><div class="adminMenuInner"><strong style="font-size:13px">管理模块：</strong><button class="adminTabBtn active" data-admin-tab="all" onclick="showAdminSection('all')">全部</button><button class="adminTabBtn" data-admin-tab="basic" onclick="showAdminSection('basic')">基础设置</button><button class="adminTabBtn" data-admin-tab="materials" onclick="showAdminSection('materials')">材质价格</button><button class="adminTabBtn" data-admin-tab="fees" onclick="showAdminSection('fees')">费用规则</button><button class="adminTabBtn" data-admin-tab="accounts" onclick="showAdminSection('accounts')">账号权限</button><button class="adminTabBtn" data-admin-tab="ai" onclick="showAdminSection('ai')">知识库/AI</button><span class="hint" style="white-space:normal;margin-left:auto">新版客服端只读取 cloud_v2 云端配置，旧管理端保存到老文件不会影响新版客服端。</span></div></nav>
+<div class="wrap"><div class="layout"><aside><section class="card adminPanel" data-panel="basic"><h2 class="title">⚙️ 基础显示</h2><div class="form"><label>管理端名称</label><input class="input" id="adminTitle" onchange="readBasic();saveLocal();renderBasic()"><label>客服端名称</label><input class="input" id="clientTitle" onchange="readBasic();saveLocal()"><label>公告文字</label><textarea id="noticeText" onchange="readBasic();saveLocal()"></textarea><label>公告字号</label><input class="input" type="number" id="noticeSize" onchange="readBasic();saveLocal()"><label>顶部提示</label><textarea id="topTip" onchange="readBasic();saveLocal()"></textarea><label>折扣选项</label><input class="input" id="discountPresets" onchange="readBasic();saveLocal()" placeholder="60,70,80,90,100,110,120,130"></div></section><section class="card adminPanel" data-panel="basic"><h2 class="title">📦 包装费</h2><div class="rule-row"><label class="toggle"><input type="checkbox" id="pkgEnabled" onchange="readBasic();saveLocal()">启用</label><label class="toggle"><input type="checkbox" id="pkgDefault" onchange="readBasic();saveLocal()">默认勾选</label><label class="toggle"><input type="checkbox" id="pkgEdit" onchange="readBasic();saveLocal()">可改</label></div><div class="rule-row"><span class="lbl">默认金额</span><input class="input mini" type="number" id="pkgAmount" onchange="readBasic();saveLocal()"><span class="hint">元</span></div></section><section class="card adminPanel" data-panel="accounts"><h2 class="title">🔐 账号权限</h2><div class="hint" style="white-space:normal;margin-bottom:8px">管理端创建客服账号；超级管理员可授权管理员，普通管理员只能管理客服账号。停用或删除后，该账号会自动失效。</div><div class="accountAdd"><input class="input" id="newUserAccount" placeholder="账号/姓名"><input class="input" id="newUserPassword" type="password" placeholder="初始密码"><select class="select" id="newUserRole"><option value="staff">客服</option><option value="admin">管理员</option></select><button class="btn green" onclick="addUser()">新增</button></div><div id="authUsers"></div></section></aside><main><section class="card adminPanel" data-panel="fees"><h2 class="title">💰 单项目费用 (全单独立加收)</h2><div id="extraFeesBox"></div><button class="btn green" onclick="addExtraFee()">＋ 新增单项目</button></section><section class="adminPanel" data-panel="materials"><div class="matNav"><div class="matNavInner"><strong style="font-size:13px">材质选择:</strong><div id="matBtns"></div><button class="btn green" onclick="addMaterial()" title="克隆当前材质作为新材质">＋ 复制新增</button></div></div><div id="materialsBox"></div></section><section class="card aiKbCard adminPanel" data-panel="ai"><h2 class="title">🤖 产品知识库 / AI设置</h2><div class="hint" style="white-space:normal;margin-bottom:8px">这是给客服内部查询产品知识和标准回答用的，不是客户聊天入口。知识库支持分页、关键词检索、增删、批量导入导出；接口设置放在本模块底部。</div><div class="aiTabs"><button class="aiTab active" id="aiTab_kb" onclick="setAiAdminTab('kb')">知识库问答</button><button class="aiTab" id="aiTab_import" onclick="setAiAdminTab('import')">导入 / 导出</button><button class="aiTab" id="aiTab_api" onclick="setAiAdminTab('api')">接口设置</button></div><div id="aiAdminPanel"></div></section></main></div></div><div class="toast" id="toast"></div>
+
+<div class="accountCreateOverlay" id="accountCreateOverlay" onclick="closeAccountCreatePanel(event)">
+  <div class="accountCreateCard" onclick="event.stopPropagation()">
+    <div class="accountCreateHead">
+      <div>
+        <h2>新增账号</h2>
+        <p>创建后会自动上传账号权限</p>
+      </div>
+      <button class="accountCreateClose" onclick="closeAccountCreatePanel()">×</button>
+    </div>
+    <div class="accountCreateForm">
+      <label>账号 / 姓名</label>
+      <input class="input" id="accountModalUser" placeholder="例如：zhangsan">
+      <label>初始密码</label>
+      <input class="input" id="accountModalPass" type="password" placeholder="至少4位">
+      <label>账号角色</label>
+      <select class="select" id="accountModalRole"></select>
+    </div>
+    <div class="accountCreateActions">
+      <button class="btn" onclick="closeAccountCreatePanel()">取消</button>
+      <button class="btn blue" onclick="addUser()">创建账号</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="kbEditModal" id="kbEditModal" onclick="closeKbEditModal(event)">
+  <div class="kbEditCard" onclick="event.stopPropagation()">
+    <div class="kbEditHead">
+      <div>
+        <h2 id="kbEditModalTitle">编辑问答</h2>
+        <p>问答保存后，客服端同步即可使用。</p>
+      </div>
+      <button class="kbEditClose" onclick="closeKbEditModal()">×</button>
+    </div>
+    <div id="kbEditModalBody"></div>
+  </div>
+</div>
+
+<script>
+const GITHUB_CONFIG={token:'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',gistId:'679f9fa06d8462408ce533861b4ce0c7'};function authHeaders(){const h={Accept:'application/vnd.github.v3+json'};if(GITHUB_CONFIG.token&&GITHUB_CONFIG.token.trim()){h.Authorization='token '+GITHUB_CONFIG.token.trim()}return h;}const FILE='fridge_magnet_config_cloud_v2.json';const BACKUP_FILE='fridge_magnet_config_cloud_v2_backup_latest.json';const AUTH_FILE='fridge_magnet_auth_cloud_v2.json';const LEGACY_FILE='fridge_magnet_config.json';const LEGACY_AUTH_FILE='fridge_magnet_auth.json';
+const defaults={ui:{adminTitle:'🧲 冰箱贴算价管理端',clientTitle:'🧲 冰箱贴算价工具',topTip:'',notice:{text:'',fontSize:16,color:'#111827',fontFamily:'Microsoft YaHei'}},discountPresets:[60,70,80,90,100,110,120,130],packageFee:{enabled:true,defaultChecked:false,defaultAmount:0,allowClientEdit:true},materials:[{name:'软磁冰箱贴',defaultMode:'longest_side',unitName:'个',accessories:[{name:'卡纸',type:'qty',enabled:true,price:0.3,cost:0.1,min_from:50,min_to:50,cost_min_from:50,cost_min_to:50}],has_mold:false,mold_fee:300,mold_cost:300,mold_waive_type:'quantity',mold_waive_value:1000,size_prices:[{max_size:5,price:1.5,cost:0.8},{max_size:10,price:2.5,cost:1.2}],area_price_per_sqm:800,area_cost_per_sqm:400,min_qty_enabled:false,min_qty_from:1,min_qty_to:1,min_amount_enabled:true,min_amount_from:20,min_amount_to:20,min_area_enabled:false,min_area_from:0.01,min_area_to:0.01,cost_min_qty_enabled:false,cost_min_qty_from:1,cost_min_qty_to:1,cost_min_amount_enabled:true,cost_min_amount_from:10,cost_min_amount_to:10,cost_min_area_enabled:false,cost_min_area_from:0.01,cost_min_area_to:0.01,custom_costs:[{name:'快递费',amount:0},{name:'推广费',amount:0}],min_margin_pct:50}],extraFees:[{name:'设计费',enabled:false,amount:0,allow_client_edit:true,is_percent:false},{name:'税费',enabled:false,amount:1,allow_client_edit:true,is_percent:true}],auth:{users:[]},updatedAt:''};
+let cfg=normalize(JSON.parse(localStorage.getItem('fridge_quote_admin_cfg')||'null')||defaults),activeMat=0;
+let adminLoginUser=localStorage.getItem('fridge_quote_admin_login_user')||'',adminDirty=false,adminSection='all',materialSearch='',trialPreview={length:5,width:7,qty:100},cloudLoadedUpdatedAt=cfg.updatedAt||'';
+
+function normalize(c){
+    c={...structuredClone(defaults),...(c||{})};
+    c.ui={...defaults.ui,...(c.ui||{}),notice:{...defaults.ui.notice,...((c.ui||{}).notice||{})}};
+    c.packageFee={...defaults.packageFee,...(c.packageFee||{})};
+    c.discountPresets=Array.isArray(c.discountPresets)?c.discountPresets:defaults.discountPresets;
+    c.materials=(c.materials&&c.materials.length?c.materials:defaults.materials).map(m=>{
+        let nm = {...defaults.materials[0],...m,mold_cost:m.mold_cost!==undefined?m.mold_cost:(m.mold_fee||0)};
+        nm.size_prices=(nm.size_prices&&nm.size_prices.length?nm.size_prices:defaults.materials[0].size_prices).map(p=>({...p,cost:Number(p.cost)||0}));
+        if(!nm.custom_costs){
+            nm.custom_costs = [];
+            if(nm.express_fee!==undefined) nm.custom_costs.push({name:'快递费', amount:nm.express_fee});
+            if(nm.promo_fee!==undefined) nm.custom_costs.push({name:'推广费', amount:nm.promo_fee});
+        }
+        delete nm.express_fee; delete nm.promo_fee;
+        
+        if(!nm.accessories) {
+            nm.accessories = [];
+            if (nm.has_card !== false && nm.card_paper_price !== undefined) {
+                nm.accessories.push({
+                    name: '卡纸', type: 'qty', enabled: !!nm.has_card,
+                    price: nm.card_paper_price||0, cost: nm.card_cost_price||0,
+                    min_from: nm.card_min_from||50, min_to: nm.card_min_to||50,
+                    cost_min_from: nm.card_cost_min_from||50, cost_min_to: nm.card_cost_min_to||50
+                });
+            }
+            if (nm.has_panel !== false && nm.panel_price_per_sqm !== undefined) {
+                nm.accessories.push({
+                    name: '有机面板', type: 'area', enabled: !!nm.has_panel,
+                    price: nm.panel_price_per_sqm||0, cost: nm.panel_cost_per_sqm||0,
+                    min_from: nm.panel_min_from||0.01, min_to: nm.panel_min_to||0.01,
+                    cost_min_from: nm.panel_cost_min_from||0.01, cost_min_to: nm.panel_cost_min_to||0.01
+                });
+            }
+        }
+        delete nm.has_card; delete nm.card_paper_price; delete nm.card_cost_price; delete nm.card_min_from; delete nm.card_min_to; delete nm.card_cost_min_from; delete nm.card_cost_min_to;
+        delete nm.has_panel; delete nm.panel_price_per_sqm; delete nm.panel_cost_per_sqm; delete nm.panel_min_from; delete nm.panel_min_to; delete nm.panel_cost_min_from; delete nm.panel_cost_min_to;
+        nm.accessories=(nm.accessories||[]).map(a=>({name:'新工艺',type:'qty',enabled:true,required:false,price:0,cost:0,min_from:1,min_to:1,cost_min_from:1,cost_min_to:1,bundle:'',waive_enabled:false,waive_type:'quantity',waive_value:0,...a,bundle:(a.bundle||'').trim(),required:!!a.required,waive_enabled:!!a.waive_enabled,waive_type:a.waive_type==='amount'?'amount':'quantity',waive_value:Number(a.waive_value)||0}));
+        
+        return nm;
+    });
+    c.extraFees=(Array.isArray(c.extraFees)?c.extraFees:[]).map(e=>({...e,is_percent:!!e.is_percent}));
+    c.auth=normalizeAuth(c.auth);c.ai=normalizeAi(c.ai);c.aiKb=normalizeAiKb(c.aiKb);return c;
+}
+
+
+function normalizeAi(ai){
+    const d={enabled:true,provider:'doubao',apiBase:'https://ark.cn-beijing.volces.com/api/v3/chat/completions',model:'ep-20260523170449-vp4jp',visionModel:'ep-20260523170449-vp4jp',apiKey:'ark-4d19b538-2f79-47bc-919e-ffefe60852f5-2c2a2',temperature:0.1,systemPrompt:'你是客服算价助手，只输出严格JSON，不要输出多余解释。'};
+    let merged={...d,...(ai||{}),enabled:(ai?.enabled!==false)};
+    const oldApi=String(merged.apiBase||'');
+    const oldModel=String(merged.model||'');
+    const oldVision=String(merged.visionModel||'');
+    const oldKey=String(merged.apiKey||'');
+    const shouldUseDoubao=!oldApi || /deepseek/i.test(oldApi) || /deepseek/i.test(oldModel) || /deepseek/i.test(oldVision) || oldKey==='sk-d81619049da74199bfd84f1e4cffedd4';
+    if(shouldUseDoubao){
+        merged.provider='doubao';
+        merged.apiBase=d.apiBase;
+        merged.model=d.model;
+        merged.visionModel=d.visionModel;
+        merged.apiKey=d.apiKey;
+        if(!merged.systemPrompt) merged.systemPrompt=d.systemPrompt;
+    }
+    return merged;
+}
+function normalizeAiKb(kb){
+    let items=Array.isArray(kb?.items)?kb.items:[];
+    let pending=Array.isArray(kb?.pendingQuestions)?kb.pendingQuestions:[];
+    let categories=Array.isArray(kb?.categories)?kb.categories:[];
+    const itemCats=items.map(x=>String(x.category||'未分类').trim()||'未分类');
+    categories=[...new Set([...categories.map(x=>String(x||'').trim()).filter(Boolean),...itemCats,'未分类'])];
+    return {
+        pageSize:Number(kb?.pageSize)||20,
+        categories,
+        pendingQuestions:pending.map((x,i)=>({
+            id:String(x.id||('pq_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,7))),
+            question:String(x.question||'').trim(),
+            from:String(x.from||'客服端'),
+            user:String(x.user||''),
+            type:String(x.type||'no_answer'),
+            matchedId:String(x.matchedId||''),
+            matchedQuestion:String(x.matchedQuestion||''),
+            matchedAnswer:String(x.matchedAnswer||''),
+            note:String(x.note||''),
+            status:String(x.status||'pending'),
+            createdAt:x.createdAt||''
+        })).filter(x=>x.question),
+        items:items.map((x,i)=>({
+            id:String(x.id||('kb_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,7))),
+            category:String(x.category||'未分类').trim()||'未分类',
+            question:String(x.question||'').trim(),
+            keywords:Array.isArray(x.keywords)?x.keywords.join(','):String(x.keywords||''),
+            answer:String(x.answer||'').trim(),
+            enabled:x.enabled!==false,
+            updatedAt:x.updatedAt||''
+        })).filter(x=>x.question||x.answer)
+    };
+}
+function normalizeAuth(auth){
+    let users = Array.isArray(auth?.users) ? auth.users : [];
+    return {cloudVersion:2,adminToken:String(auth?.adminToken||''),users: users.map(u=>{
+        const username = cleanUsername(u.username || u.name);
+        let role = u.role || (u.isSuperAdmin?'super_admin':'staff');
+        if(role==='super')role='super_admin';
+        if(!['staff','admin','super_admin'].includes(role))role='staff';
+        return {
+            username,
+            name: String(u.name||username),
+            passwordHash: String(u.passwordHash||''),
+            role,
+            enabled: u.enabled !== false,
+            createdAt: u.createdAt || '',
+            updatedAt: u.updatedAt || ''
+        };
+    }).filter(u=>u.username)};
+}
+function isAdminRole(u){return !!u && (u.role==='admin'||u.role==='super_admin')}
+function isSuperAdmin(u){return !!u && u.role==='super_admin'}
+function roleLabel(u){return u.role==='super_admin'?'超级管理员':(u.role==='admin'?'管理员':'客服')}
+function cleanUsername(s){return String(s||'').trim().toLowerCase()}
+async function hashPassword(text){
+    text=String(text||'');
+    if(window.crypto && crypto.subtle && window.TextEncoder){
+        let buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+        return 'sha256:'+Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    let h=2166136261;
+    for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619)}
+    return 'fnv1a:'+(h>>>0).toString(16);
+}
+function authPayload(){cfg.auth=normalizeAuth(cfg.auth);return cfg.auth}
+function currentAdmin(){cfg.auth=normalizeAuth(cfg.auth);return (cfg.auth.users||[]).find(u=>u.username===adminLoginUser&&u.enabled!==false&&isAdminRole(u))}
+function currentAdminIsSuper(){return isSuperAdmin(currentAdmin())}
+function hasSuperAdmin(){cfg.auth=normalizeAuth(cfg.auth);return (cfg.auth.users||[]).some(u=>u.enabled!==false&&u.role==='super_admin')}
+function requireAdmin(){if(currentAdmin())return true;showAdminGate('请先登录管理员账号。');return false}
+function renderAdminChrome(){let el=document.getElementById('adminLoginStatus');let u=currentAdmin();if(el)el.textContent=u?`${u.name||u.username}｜${roleLabel(u)}`:'未登录';let sel=document.getElementById('newUserRole');if(sel){sel.innerHTML=currentAdminIsSuper()?'<option value="staff">客服</option><option value="admin">管理员</option>':'<option value="staff">客服</option>';}}
+function showAdminGate(msg=''){
+    const gate=document.getElementById('adminAuth'),card=document.getElementById('adminAuthCard');if(!gate||!card)return;
+    const u=currentAdmin();document.body.classList.toggle('adminLocked',!u);
+    if(u){gate.style.display='none';renderAdminChrome();return;}
+    gate.style.display='flex';
+    if(!hasSuperAdmin()){
+        card.innerHTML=`<h2>初始化超级管理员</h2><p>${msg?esc(msg)+'<br>':''}这是新版云端管理端第一次启用。创建后，新版客服端只读取 cloud_v2 云端配置，旧管理端保存到老文件不会影响新版客服端。</p><input id="setupAdminUser" placeholder="超级管理员账号" autocomplete="username"><input id="setupAdminPass" type="password" placeholder="密码，至少4位"><input id="setupAdminPass2" type="password" placeholder="确认密码" onkeydown="if(event.key==='Enter')adminSetupSuper()"><div class="adminAuthActions"><button class="btn blue" onclick="adminSetupSuper()">创建超级管理员</button><button class="btn" onclick="loadCloud(true)">重新加载云端</button></div>`;
+    }else{
+        card.innerHTML=`<h2>管理员登录</h2><p>${msg?esc(msg):'请输入管理员或超级管理员账号。普通客服账号不能进入管理端。'}</p><input id="adminLoginUser" placeholder="管理员账号" autocomplete="username"><input id="adminLoginPass" type="password" placeholder="密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')adminLogin()"><div class="adminAuthActions"><button class="btn blue" onclick="adminLogin()">登录管理端</button><button class="btn" onclick="loadCloud(true)">重新加载云端</button></div>`;
+    }
+    renderAdminChrome();
+}
+async function adminSetupSuper(){
+    let username=cleanUsername(document.getElementById('setupAdminUser')?.value),p=document.getElementById('setupAdminPass')?.value||'',p2=document.getElementById('setupAdminPass2')?.value||'';
+    if(!username||!p||!p2)return toast('请填写完整');if(p.length<4)return toast('密码至少4位');if(p!==p2)return toast('两次密码不一致');
+    try{
+        await loadCloud(false,true);
+        if(hasSuperAdmin())return showAdminGate('云端已经存在超级管理员，请直接登录。');
+        cfg.auth=normalizeAuth(cfg.auth);let now=new Date().toISOString();
+        cfg.auth.adminToken=cfg.auth.adminToken||('adm_'+Date.now().toString(36)+Math.random().toString(36).slice(2));
+        cfg.auth.users=(cfg.auth.users||[]).filter(u=>u.username!==username);
+        cfg.auth.users.unshift({username,name:username,passwordHash:await hashPassword(p),role:'super_admin',enabled:true,createdAt:now,updatedAt:now});
+        await patchAuth(true,true);
+        adminLoginUser=username;localStorage.setItem('fridge_quote_admin_login_user',username);storeLocal();
+        try{await uploadCloud(false)}catch(e){}
+        render();showAdminGate();toast('超级管理员已创建，新版云端配置已启用');
+    }catch(e){toast('创建失败：'+e.message)}
+}
+async function adminLogin(){
+    let username=cleanUsername(document.getElementById('adminLoginUser')?.value),p=document.getElementById('adminLoginPass')?.value||'';
+    if(!username||!p)return toast('请输入账号和密码');
+    try{await loadCloud(false,true);let u=(cfg.auth.users||[]).find(x=>x.username===username&&x.enabled!==false&&isAdminRole(x));if(!u)return showAdminGate('账号不存在、已停用，或没有管理权限。');if(u.passwordHash!==await hashPassword(p))return toast('密码错误');adminLoginUser=username;localStorage.setItem('fridge_quote_admin_login_user',username);render();showAdminGate();toast('登录成功');}catch(e){toast('登录失败：'+e.message)}
+}
+function adminLogout(){adminLoginUser='';localStorage.removeItem('fridge_quote_admin_login_user');showAdminGate('已退出，请重新登录。')}
+function showAdminSection(tab='all',silent=false){adminSection=tab||'all';document.querySelectorAll('.adminTabBtn').forEach(b=>b.classList.toggle('active',b.dataset.adminTab===adminSection));document.querySelectorAll('.adminPanel').forEach(p=>{p.style.display=(adminSection==='all'||p.dataset.panel===adminSection)?'':'none'});if(!silent)window.scrollTo({top:0,behavior:'smooth'})}
+
+function esc(s){return String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}function toast(msg){let t=toastEl();t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),2200)}function toastEl(){return document.getElementById('toast')}function setCloudStatus(text,cls=''){let el=document.getElementById('statusText');if(!el)return;el.textContent=text;el.className='status '+cls}function storeLocal(){localStorage.setItem('fridge_quote_admin_cfg',JSON.stringify(cfg))}function saveLocal(){storeLocal();adminDirty=true;setCloudStatus('本地有修改，未上传','dirty')}
+function render(){renderAdminChrome();renderBasic();renderAuth();renderExtras();renderAiAdmin();renderMaterials();showAdminSection(adminSection,true)}function renderBasic(){adminBrand.textContent=cfg.ui.adminTitle||defaults.ui.adminTitle;adminTitle.value=cfg.ui.adminTitle||'';clientTitle.value=cfg.ui.clientTitle||'';noticeText.value=cfg.ui.notice.text||'';noticeSize.value=cfg.ui.notice.fontSize||16;topTip.value=cfg.ui.topTip||'';discountPresets.value=(cfg.discountPresets||[]).join(',');pkgEnabled.checked=!!cfg.packageFee.enabled;pkgDefault.checked=!!cfg.packageFee.defaultChecked;pkgEdit.checked=!!cfg.packageFee.allowClientEdit;pkgAmount.value=cfg.packageFee.defaultAmount||0}
+function readBasic(){cfg.ui.adminTitle=adminTitle.value;cfg.ui.clientTitle=clientTitle.value;cfg.ui.notice.text=noticeText.value;cfg.ui.notice.fontSize=Number(noticeSize.value)||16;cfg.ui.topTip=topTip.value;cfg.discountPresets=discountPresets.value.split(',').map(x=>Number(x.trim())).filter(Boolean);cfg.packageFee.enabled=pkgEnabled.checked;cfg.packageFee.defaultChecked=pkgDefault.checked;cfg.packageFee.allowClientEdit=pkgEdit.checked;cfg.packageFee.defaultAmount=Number(pkgAmount.value)||0}
+function canManageAccount(u){let me=currentAdmin();if(!me)return false;if(isSuperAdmin(me))return u.username!==me.username;if(u.role==='staff')return true;return false}
+async function resetUserPassword(username){
+    if(!requireAdmin())return;
+    let u=(cfg.auth.users||[]).find(x=>x.username===username);if(!u)return;
+    if(!canManageAccount(u))return toast('没有权限操作该账号');
+    let p=prompt('请输入新密码（至少4位）');if(p===null)return;if(String(p).length<4)return toast('密码至少4位');
+    u.passwordHash=await hashPassword(p);u.updatedAt=new Date().toISOString();
+    await patchAuth(true);renderAuth();
+}
+async function toggleUser(username){
+    if(!requireAdmin())return;
+    let u=(cfg.auth.users||[]).find(x=>x.username===username);if(!u)return;
+    if(!canManageAccount(u))return toast('没有权限操作该账号');
+    u.enabled=!u.enabled;u.updatedAt=new Date().toISOString();
+    await patchAuth(true);renderAuth();
+}
+async function removeUser(username){
+    if(!requireAdmin())return;
+    let u=(cfg.auth.users||[]).find(x=>x.username===username);if(!u)return;
+    if(!canManageAccount(u))return toast('没有权限操作该账号');
+    if(!confirm('确定删除这个账号？删除后将无法登录。'))return;
+    cfg.auth.users=(cfg.auth.users||[]).filter(u=>u.username!==username);
+    await patchAuth(true);renderAuth();
+}
+async function setUserRole(username,role){
+    if(!requireAdmin()||!currentAdminIsSuper())return toast('只有超级管理员可以授权管理员');
+    let u=(cfg.auth.users||[]).find(x=>x.username===username);if(!u||u.role==='super_admin')return;
+    u.role=role==='admin'?'admin':'staff';u.updatedAt=new Date().toISOString();
+    await patchAuth(true);renderAuth();
+}
+
+let aiAdminTab='pending', aiKbPage=1, aiKbSearch='', aiKbCat='', aiKbEditingId=null, aiPendingSourceId='', kbPendingFilter='all', pendingDeleteBusyV27=false, kbDeleteBusyV27=false, kbDuplicateBusyV27=false, kbPolishBusy=false;
+function aiItems(){cfg.aiKb=normalizeAiKb(cfg.aiKb);return cfg.aiKb.items}
+function aiPendingItems(){cfg.aiKb=normalizeAiKb(cfg.aiKb);return cfg.aiKb.pendingQuestions}
+function aiCategories(){cfg.aiKb=normalizeAiKb(cfg.aiKb);return [...new Set([...(cfg.aiKb.categories||[]),'未分类'])].filter(Boolean).sort((a,b)=>a==='未分类'?-1:b==='未分类'?1:a.localeCompare(b,'zh-CN'))}
+function ensureKbCategory(name){cfg.aiKb=normalizeAiKb(cfg.aiKb);name=String(name||'未分类').trim()||'未分类';if(!cfg.aiKb.categories.includes(name))cfg.aiKb.categories.push(name);return name}
+function kbById(id){return aiItems().find(x=>String(x.id)===String(id))}
+function kbIndexById(id){return aiItems().findIndex(x=>String(x.id)===String(id))}
+function pendingById(id){return aiPendingItems().find(x=>String(x.id)===String(id))}
+function pendingIndexById(id){return aiPendingItems().findIndex(x=>String(x.id)===String(id))}
+function safeAttr(s){return esc(String(s||'')).replace(/'/g,'&#39;')}
+function filteredAiItems(){let q=(aiKbSearch||'').trim().toLowerCase(),cat=aiKbCat||'';return aiItems().filter(x=>{let hay=[x.category,x.question,x.keywords,x.answer].join(' ').toLowerCase();return (!cat||x.category===cat)&&(!q||hay.includes(q))})}
+function setAiAdminTab(tab){aiAdminTab=tab||'pending';aiKbEditingId=null;renderAiAdmin()}
+function setAiTabs(){
+    const box=document.querySelector('.aiTabs');if(!box)return;
+    const pending=aiPendingItems(), no=pending.filter(x=>x.type!=='wrong_answer').length, bad=pending.filter(x=>x.type==='wrong_answer').length;
+    const tabs=[['pending',`待处理问题${pending.length?` ${pending.length}`:''}`],['kb','知识库问答'],['category','分类管理'],['import','导入 / 导出'],['api','接口设置']];
+    box.innerHTML=tabs.map(([id,label])=>`<button class="aiTab ${aiAdminTab===id?'active':''}" onclick="setAiAdminTab('${id}')">${label}</button>`).join('');
+}
+function renderAiAdmin(){
+    cfg.aiKb=normalizeAiKb(cfg.aiKb);setAiTabs();
+    const panel=document.getElementById('aiAdminPanel');if(!panel)return;
+    if(aiAdminTab==='pending')return renderPendingPanel(panel);
+    if(aiAdminTab==='category')return renderCategoryPanel(panel);
+    if(aiAdminTab==='import')return renderAiImportAdmin(panel);
+    if(aiAdminTab==='api')return renderAiApi(panel);
+    return renderKnowledgePanel(panel);
+}
+function pendingTypeLabel(x){return x.type==='wrong_answer'?'回答不准':'待解答'}
+function pendingFilteredItems(){let arr=aiPendingItems();if(kbPendingFilter==='no_answer')return arr.filter(x=>x.type!=='wrong_answer');if(kbPendingFilter==='wrong_answer')return arr.filter(x=>x.type==='wrong_answer');return arr}
+function setPendingFilter(f){kbPendingFilter=f||'all';renderAiAdmin()}
+function renderPendingPanel(panel){
+    let all=aiPendingItems(), no=all.filter(x=>x.type!=='wrong_answer').length, bad=all.filter(x=>x.type==='wrong_answer').length, arr=pendingFilteredItems();
+    panel.innerHTML=`<div class="kbPanelHead"><div><div class="kbPanelTitle">客服提问待处理</div><div class="kbPanelSub">客服端提交的“待解答”和“回答不准”会集中在这里。</div></div></div><div class="pendingTabs"><button class="pendingTab ${kbPendingFilter==='all'?'active':''}" onclick="setPendingFilter('all')">全部 ${all.length}</button><button class="pendingTab ${kbPendingFilter==='no_answer'?'active':''}" onclick="setPendingFilter('no_answer')">待解答 ${no}</button><button class="pendingTab ${kbPendingFilter==='wrong_answer'?'active':''}" onclick="setPendingFilter('wrong_answer')">回答不准 ${bad}</button></div><div class="pendingList">${arr.length?arr.map(x=>renderPendingCard(x)).join(''):'<div class="empty">当前没有待处理问题</div>'}</div>`;
+}
+function renderPendingCard(x){
+    const id=safeAttr(x.id);
+    return `<div class="pendingCard" data-pending-id="${id}"><div><div class="pendingQuestion"><span class="pendingType ${x.type==='wrong_answer'?'bad':'no'}">${pendingTypeLabel(x)}</span>${esc(x.question)}</div><div class="pendingMeta"><span>提问人：${esc(x.user||'客服')}</span><span>${esc(x.createdAt?new Date(x.createdAt).toLocaleString():'')}</span></div>${x.matchedQuestion||x.matchedAnswer?`<div class="pendingMatched"><b>原匹配问题：</b>${esc(x.matchedQuestion||'未命名问题')}<br><b>原答案：</b>${esc(x.matchedAnswer||'')}</div>`:''}</div><div class="pendingOps"><button class="btn blue" onclick="startPendingFromButton(this)">整理回答</button><button class="btn red" onclick="removePendingQuestionFromButton(this)">删除</button></div></div>`;
+}
+function startPendingFromButton(btn){const card=btn?.closest?.('.pendingCard');return startKbFromPendingById(card?.dataset?.pendingId||'')}
+function startKbFromPendingById(id){
+    const x=pendingById(id);if(!x)return toast('这条问题已不存在，请重新加载云端');
+    aiKbEditingId='new';aiPendingSourceId=x.id;window.__pendingQuestionDraft=x.question;window.__pendingAnswerDraft=x.type==='wrong_answer'?(x.matchedAnswer||''):'';aiAdminTab='kb';openKbEditModal('new');
+}
+async function removePendingQuestionFromButton(btn){const card=btn?.closest?.('.pendingCard');return removePendingQuestionById(card?.dataset?.pendingId||'',btn)}
+async function removePendingQuestionById(id,btn){
+    id=String(id||'');if(!id)return toast('缺少问题ID，无法删除');if(pendingDeleteBusyV27)return toast('正在删除，请稍等');
+    const idx=pendingIndexById(id);if(idx<0)return toast('这条问题已不存在，请重新加载云端');
+    const item=aiPendingItems()[idx];if(!confirm(`确定删除这条客服提问？\n\n${item.question||''}`))return;
+    pendingDeleteBusyV27=true;if(btn)btn.disabled=true;
+    try{
+        const before=cfg.aiKb.pendingQuestions.length;
+        const removeAt=cfg.aiKb.pendingQuestions.findIndex(x=>String(x.id)===id);
+        if(removeAt<0)return toast('没有找到要删除的问题');
+        cfg.aiKb.pendingQuestions.splice(removeAt,1);
+        saveLocal();renderAiAdmin();await uploadCloud(false);
+        const ok=await verifyPendingDeleted(id);
+        toast(ok===true?'已删除并同步云端':(ok===false?'本地已删除，但云端验证仍存在，请加载云端检查':'已删除并上传，云端验证跳过'));
+    }catch(e){setCloudStatus('删除同步失败','bad');toast(e.message||'删除失败')}finally{pendingDeleteBusyV27=false;if(btn)btn.disabled=false}
+}
+async function verifyPendingDeleted(id){
+    try{const d=await readGist();const cloud=cloudConfigFromGist(d);const kb=normalizeAiKb(cloud?.aiKb||{});return !kb.pendingQuestions.some(x=>String(x.id)===String(id))}catch(e){return null}
+}
+function removePendingQuestion(i){const x=aiPendingItems()[i];return x?removePendingQuestionById(x.id):toast('这条问题已不存在，请重新加载云端')}
+function startKbFromPending(i){const x=aiPendingItems()[i];return x?startKbFromPendingById(x.id):toast('这条问题已不存在，请重新加载云端')}
+function renderKnowledgePanel(panel){
+    cfg.aiKb=normalizeAiKb(cfg.aiKb);
+    const list=filteredAiItems(), total=list.length, size=Number(cfg.aiKb.pageSize)||20, pages=Math.max(1,Math.ceil(total/size));aiKbPage=Math.min(Math.max(1,aiKbPage),pages);
+    const start=(aiKbPage-1)*size, rows=list.slice(start,start+size), cats=aiCategories().map(c=>`<option value="${esc(c)}" ${aiKbCat===c?'selected':''}>${esc(c)}</option>`).join('');
+    panel.innerHTML=`<div class="kbPanelHead"><div><div class="kbPanelTitle">知识库问答</div><div class="kbPanelSub">编辑、复制、停用和删除都按唯一 ID 处理，搜索、分页、筛选后不会错位。</div></div><button class="btn green" onclick="openKbEditModal('new')">＋ 新增问答</button></div><div class="kbToolbarV19"><input class="input" placeholder="搜索问题、答案、分类、关键词" value="${esc(aiKbSearch)}" oninput="aiKbSearch=this.value;aiKbPage=1;renderAiAdmin()"><select class="select" onchange="aiKbCat=this.value;aiKbPage=1;renderAiAdmin()"><option value="">全部分类</option>${cats}</select><span class="hint">共 ${total} 条，每页 ${size} 条</span></div><div class="kbCardList">${rows.length?rows.map(x=>renderKnowledgeCard(x)).join(''):'<div class="empty">没有匹配的问答</div>'}</div><div class="pager"><button class="btn" onclick="aiKbPage=Math.max(1,aiKbPage-1);renderAiAdmin()">上一页</button><span class="hint">第 ${aiKbPage} / ${pages} 页</span><button class="btn" onclick="aiKbPage=Math.min(${pages},aiKbPage+1);renderAiAdmin()">下一页</button></div>`;
+}
+function renderKnowledgeCard(x){
+    const id=safeAttr(x.id);let ans=String(x.answer||'').trim();if(ans.length>130)ans=ans.slice(0,130)+'...';
+    return `<div class="kbCardRow" data-kb-id="${id}"><div><div class="kbCardQ"><span class="ai-badge">${esc(x.category||'未分类')}</span><span class="kbStatus ${x.enabled?'':'off'}">${x.enabled?'启用':'停用'}</span><b>${esc(x.question||'未命名问题')}</b></div><div class="kbCardAnswer">${esc(ans||'暂无答案')}</div><div class="kbCardMeta"><span>关键词：${esc(x.keywords||'—')}</span><span>更新：${esc(x.updatedAt?new Date(x.updatedAt).toLocaleString():'—')}</span></div></div><div class="kbCardOps"><button class="btn blue" onclick="openKbEditModal('${id}')">编辑</button><button class="btn" onclick="duplicateAiKbById('${id}',this)">复制</button><button class="btn" onclick="toggleKbEnabledById('${id}',this)">${x.enabled?'停用':'启用'}</button><button class="btn red" onclick="removeAiKbById('${id}',this)">删除</button></div></div>`;
+}
+function toggleKbEnabledById(id,btn){const x=kbById(id);if(!x)return toast('这条问答已不存在，请刷新');if(btn)btn.disabled=true;x.enabled=!x.enabled;x.updatedAt=new Date().toISOString();saveLocal();renderAiAdmin()}
+function duplicateAiKbById(id,btn){
+    if(kbDuplicateBusyV27)return toast('正在复制，请稍等');
+    const idx=kbIndexById(id);if(idx<0)return toast('这条问答已不存在，请刷新');
+    kbDuplicateBusyV27=true;if(btn)btn.disabled=true;
+    try{const it=aiItems()[idx], cp={...it,id:'kb_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),question:(it.question||'')+'（复制）',updatedAt:new Date().toISOString()};aiItems().splice(idx+1,0,cp);ensureKbCategory(cp.category);saveLocal();openKbEditModal(cp.id);toast('已复制一条问答')}finally{kbDuplicateBusyV27=false;if(btn)btn.disabled=false}
+}
+function removeAiKbById(id,btn){
+    if(kbDeleteBusyV27)return toast('正在删除，请稍等');
+    const idx=kbIndexById(id);if(idx<0)return toast('这条问答已不存在，请刷新');
+    const item=aiItems()[idx];if(!confirm(`确定删除这条问答？\n\n${item.question||''}`))return;
+    kbDeleteBusyV27=true;if(btn)btn.disabled=true;
+    try{const removeAt=cfg.aiKb.items.findIndex(x=>String(x.id)===String(id));if(removeAt>=0)cfg.aiKb.items.splice(removeAt,1);saveLocal();renderAiAdmin();toast('已删除 1 条问答')}finally{kbDeleteBusyV27=false;if(btn)btn.disabled=false}
+}
+function removeAiKb(i){const x=aiItems()[i];return x?removeAiKbById(x.id):toast('这条问答已不存在，请刷新')}
+function duplicateAiKb(i){const x=aiItems()[i];return x?duplicateAiKbById(x.id):toast('这条问答已不存在，请刷新')}
+function startEditAiKb(i){const x=aiItems()[i];return x?openKbEditModal(x.id):toast('这条问答已不存在，请刷新')}
+function currentAiKbEditItem(){
+    if(!aiKbEditingId)return null;
+    if(aiKbEditingId==='new')return {category:window.__kbDraftCategory||aiKbCat||'未分类',question:window.__pendingQuestionDraft||'',keywords:'',answer:window.__pendingAnswerDraft||'',enabled:true};
+    return kbById(aiKbEditingId)||null;
+}
+function setKbCategoryFromSelect(v){const custom=document.getElementById('kbEditCategoryCustom');if(!custom)return;if(v==='__custom__'){custom.style.display='block';custom.focus()}else{custom.style.display='none';custom.value=''}}
+function openKbEditModal(id='new'){
+    aiKbEditingId=id;cfg.aiKb=normalizeAiKb(cfg.aiKb);let it=currentAiKbEditItem();if(!it)return;
+    const body=document.getElementById('kbEditModalBody'), title=document.getElementById('kbEditModalTitle');if(title)title.textContent=id==='new'?'新增问答':'编辑问答';
+    const cats=aiCategories(), current=it.category||aiKbCat||cats[0]||'未分类', opts=cats.map(c=>`<option value="${esc(c)}" ${current===c?'selected':''}>${esc(c)}</option>`).join('');
+    body.innerHTML=`<div class="kbEditGrid v23"><div class="fieldBlock"><div class="kbEditFieldHead"><span class="fieldLabel">分类</span></div><div class="kbCategoryInline"><select class="select" id="kbEditCategorySelect" onchange="setKbCategoryFromSelect(this.value)">${opts}<option value="__custom__">＋ 输入新分类</option></select><button class="btn" onclick="addKbCategoryFromEditor()">新增分类</button></div><input class="input" id="kbEditCategoryCustom" style="display:none;margin-top:8px" placeholder="输入新分类名称"></div><div class="fieldBlock"><div class="kbEditFieldHead"><span class="fieldLabel">问题</span><button class="aiPolishBtn" onclick="aiPolishKbField('question')">AI整理问题</button></div><textarea id="kbEditQuestion" placeholder="例如：可以定制尺寸吗？">${esc(it.question||'')}</textarea></div><div class="fieldBlock"><div class="kbEditFieldHead"><span class="fieldLabel">答案</span><button class="aiPolishBtn" onclick="aiPolishKbField('answer')">AI整理回答</button></div><textarea class="answerArea" id="kbEditAnswer" placeholder="填写客服可参考/复制的标准回答">${esc(it.answer||'')}</textarea></div><div class="fieldBlock"><div class="kbEditFieldHead"><span class="fieldLabel">关键词</span></div><input class="input" id="kbEditKeywords" value="${esc(it.keywords||'')}" placeholder="用逗号分隔，例如：定制,尺寸,大小"></div><div class="aiPolishHint">AI整理只优化表达和关键词，不会自动保存；确认内容后再点“保存问答”。</div><div class="fieldBlock"><label class="toggle"><input type="checkbox" id="kbEditEnabled" ${it.enabled!==false?'checked':''}>启用这条问答</label></div></div><div class="kbEditActions"><button class="btn" onclick="closeKbEditModal()">取消</button><button class="btn blue" onclick="saveAiKbEditor()">保存问答</button></div>`;
+    document.getElementById('kbEditModal')?.classList.add('show');setTimeout(()=>document.getElementById(id==='new'?'kbEditQuestion':'kbEditAnswer')?.focus(),30);
+}
+function closeKbEditModal(e){const modal=document.getElementById('kbEditModal');if(e&&e.target&&e.target!==modal)return;modal?.classList.remove('show');aiKbEditingId=null;aiPendingSourceId='';window.__pendingQuestionDraft='';window.__pendingAnswerDraft='';window.__kbDraftCategory=''}
+function addKbCategoryFromEditor(){
+    let name=prompt('请输入新分类名称');if(name===null)return;name=String(name||'').trim();if(!name)return toast('分类名称不能为空');
+    ensureKbCategory(name);saveLocal();openKbEditModal(aiKbEditingId||'new');setTimeout(()=>{let sel=document.getElementById('kbEditCategorySelect');if(sel)sel.value=name},0);toast('分类已加入预设');
+}
+async function saveAiKbEditor(){
+    cfg.aiKb=normalizeAiKb(cfg.aiKb);
+    let sel=document.getElementById('kbEditCategorySelect'), custom=(document.getElementById('kbEditCategoryCustom')?.value||'').trim();
+    let cat=(sel?.value==='__custom__'?custom:sel?.value)||aiKbCat||'未分类';cat=ensureKbCategory(cat);
+    let item={category:cat,question:(document.getElementById('kbEditQuestion')?.value||'').trim(),answer:(document.getElementById('kbEditAnswer')?.value||'').trim(),keywords:(document.getElementById('kbEditKeywords')?.value||'').trim(),enabled:!!document.getElementById('kbEditEnabled')?.checked,updatedAt:new Date().toISOString()};
+    if(!item.question&&!item.answer)return toast('请至少填写问题或答案');
+    if(aiKbEditingId==='new'){aiItems().unshift({id:'kb_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),...item});aiKbPage=1;toast('已新增问答')}else{let old=kbById(aiKbEditingId);if(old)Object.assign(old,item);else aiItems().unshift({id:'kb_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),...item});toast('已保存问答')}
+    aiKbCat=item.category;
+    if(aiPendingSourceId){let idx=cfg.aiKb.pendingQuestions.findIndex(x=>String(x.id)===String(aiPendingSourceId));if(idx>=0)cfg.aiKb.pendingQuestions.splice(idx,1)}
+    let wasPending=!!aiPendingSourceId;closeKbEditModal();saveLocal();renderAiAdmin();
+    try{await uploadCloud(false);toast(wasPending?'回答已保存，客服端同步后可用':'问答已保存并上传')}catch(e){toast(e.message||'已保存本地，请点击保存上传')}
+}
+function startAddAiKb(){window.__kbDraftCategory=aiKbCat||'未分类';openKbEditModal('new')}
+function addAiKbItem(){startAddAiKb()}
+async function addKbCategory(){
+    let name=prompt('请输入新分类名称');if(name===null)return;name=String(name||'').trim();if(!name)return toast('分类名称不能为空');if(aiCategories().includes(name))return toast('这个分类已存在');
+    ensureKbCategory(name);aiKbCat=name;saveLocal();renderAiAdmin();try{await uploadCloud(false);toast('分类已新增并上传')}catch(e){toast(e.message||'分类已新增，记得保存上传')}
+}
+function renameKbCategory(old){
+    old=String(old||'').trim();if(!old)return;let name=prompt('请输入新的分类名称',old);if(name===null)return;name=String(name||'').trim();if(!name)return toast('分类名称不能为空');if(name===old)return;if(aiCategories().includes(name))return toast('这个分类已存在');
+    cfg.aiKb=normalizeAiKb(cfg.aiKb);cfg.aiKb.categories=(cfg.aiKb.categories||[]).map(c=>c===old?name:c);ensureKbCategory(name);let count=0;aiItems().forEach(x=>{if(x.category===old){x.category=name;x.updatedAt=new Date().toISOString();count++}});if(aiKbCat===old)aiKbCat=name;saveLocal();renderAiAdmin();toast(`已重命名分类，更新 ${count} 条问答`);
+}
+function deleteKbCategory(cat){
+    cat=String(cat||'').trim();if(!cat)return;if(cat==='未分类')return toast('未分类不能删除');let list=aiItems().filter(x=>x.category===cat);
+    if(!confirm(`确定删除分类“${cat}”吗？\n分类会从分类列表移除；该分类中 ${list.length} 条问答会移动到“未分类”。`))return;
+    cfg.aiKb=normalizeAiKb(cfg.aiKb);cfg.aiKb.categories=(cfg.aiKb.categories||[]).filter(c=>c!==cat);ensureKbCategory('未分类');list.forEach(x=>{x.category='未分类';x.updatedAt=new Date().toISOString()});if(aiKbCat===cat)aiKbCat='';saveLocal();renderAiAdmin();toast('分类已删除，相关问答已移动到未分类');
+}
+function renderCategoryPanel(panel){
+    const cats=aiCategories();
+    panel.innerHTML=`<div class="kbPanelHead"><div><div class="kbPanelTitle">分类管理</div><div class="kbPanelSub">分类唯一来源是 aiKb.categories；问答只引用分类名。</div></div><button class="btn green" onclick="addKbCategory()">＋ 新增分类</button></div><div class="categoryGrid">${cats.length?cats.map(c=>renderCategoryCard(c)).join(''):'<div class="empty">暂无分类</div>'}</div>`;
+}
+function renderCategoryCard(cat){
+    let count=aiItems().filter(x=>x.category===cat).length,id=safeAttr(cat);
+    return `<div class="categoryCard ${count?'':'emptyCat'}"><div class="categoryName">${esc(cat)}</div><div class="categoryCount">${count} 条问答${count?'':' · 空分类'}</div><div class="categoryOps"><button class="btn" onclick="renameKbCategory('${id}')">重命名</button><button class="btn" onclick="aiKbCat='${id}';aiAdminTab='kb';renderAiAdmin()">查看</button><button class="btn red" onclick="deleteKbCategory('${id}')">删除</button></div></div>`;
+}
+async function aiPolishKbField(field){
+    if(kbPolishBusy)return toast('AI正在整理，请稍等');
+    const qEl=document.getElementById('kbEditQuestion'), aEl=document.getElementById('kbEditAnswer'), kEl=document.getElementById('kbEditKeywords');if(!qEl||!aEl)return;
+    const q=qEl.value.trim(), a=aEl.value.trim(), kws=kEl?.value.trim()||'';if(field==='question'&&!q)return toast('请先填写问题');if(field==='answer'&&!a)return toast('请先填写答案');if(!cfg.ai?.enabled||!cfg.ai?.apiKey)return toast('请先在接口设置里配置AI');
+    kbPolishBusy=true;document.querySelectorAll('.aiPolishBtn').forEach(b=>b.disabled=true);
+    try{const result=await callKbPolishAI(field,q,a,kws);if(result.question!==undefined&&field==='question')qEl.value=String(result.question||'');if(result.answer!==undefined&&field==='answer')aEl.value=String(result.answer||'');if(result.keywords!==undefined&&kEl)kEl.value=String(result.keywords||'');toast(field==='question'?'问题已整理':'回答已整理')}catch(e){toast('AI整理失败：'+(e.message||e))}finally{kbPolishBusy=false;document.querySelectorAll('.aiPolishBtn').forEach(b=>b.disabled=false)}
+}
+async function callKbPolishAI(field,question,answer,keywords){
+    const ai=normalizeAi(cfg.ai);
+    const prompt=field==='question'?`请把下面的客服知识库“问题”整理成更容易被搜索和AI匹配的标准问法。只输出JSON：{"question":"整理后的问题","keywords":"关键词,关键词"}\n\n原问题：${question}\n现有答案：${answer||'无'}\n现有关键词：${keywords||'无'}`:`请把下面的客服知识库“回答”整理成适合客服复制使用的标准回答。只输出JSON：{"answer":"整理后的回答","keywords":"关键词,关键词"}\n\n问题：${question||'无'}\n原回答：${answer}\n现有关键词：${keywords||'无'}`;
+    const body={model:ai.model,temperature:0.2,messages:[{role:'system',content:'你是客服知识库整理助手。只能输出严格JSON，不要输出解释。'},{role:'user',content:prompt}]};
+    const r=await fetch(ai.apiBase,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ai.apiKey},body:JSON.stringify(body)});if(!r.ok)throw new Error('接口返回 '+r.status);
+    const d=await r.json();let raw=(d.choices?.[0]?.message?.content||'').trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();try{return JSON.parse(raw)}catch(e){let m=raw.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);throw new Error('AI返回格式无法识别')}
+}
+function renderAiApi(panel){cfg.ai=normalizeAi(cfg.ai);panel.innerHTML=`<div class="aiSettingGrid"><label>启用AI</label><label class="toggle"><input type="checkbox" ${cfg.ai.enabled?'checked':''} onchange="cfg.ai.enabled=this.checked;saveLocal()">启用客服端图片识别和产品知识AI匹配</label><label>接口地址</label><input class="input" value="${esc(cfg.ai.apiBase)}" onchange="cfg.ai.apiBase=this.value.trim();saveLocal()"><label>文本模型</label><input class="input" value="${esc(cfg.ai.model)}" onchange="cfg.ai.model=this.value.trim();saveLocal()"><label>图片模型</label><input class="input" value="${esc(cfg.ai.visionModel)}" onchange="cfg.ai.visionModel=this.value.trim();saveLocal()"><label>API Key</label><input class="input" type="password" value="${esc(cfg.ai.apiKey)}" onchange="cfg.ai.apiKey=this.value.trim();saveLocal()"><label>系统提示词</label><textarea onchange="cfg.ai.systemPrompt=this.value;saveLocal()">${esc(cfg.ai.systemPrompt||'')}</textarea></div><div class="secretTip">提示：当前系统是纯前端网页，API Key 会随配置下发到客服端，内部使用可以先这样做；如果后续对安全要求更高，建议改成后端代理接口。</div>`}
+function renderAiImportAdmin(panel){panel.innerHTML=`<div class="aiImportGrid"><div class="aiImportBox"><h3 class="sub">批量导入</h3><div class="hint" style="white-space:normal">JSON 可恢复完整 aiKb；CSV、TSV、TXT 只追加正式问答。</div><input type="file" accept=".json,.csv,.txt,.tsv" onchange="importAiKbFile(event)" style="margin:8px 0"><textarea id="aiKbPaste" placeholder="可粘贴完整 JSON；或 问题<Tab>答案<Tab>分类<Tab>关键词" style="height:150px"></textarea><div class="rule-row"><button class="btn green" onclick="importAiKbText(aiKbPaste.value)">导入文本</button><button class="btn" onclick="aiKbPaste.value=''">清空</button></div></div><div class="aiImportBox"><h3 class="sub">导出 / 分页设置</h3><div class="rule-row"><button class="btn" onclick="exportAiKbJson()">导出完整JSON</button><button class="btn" onclick="exportAiKbCsv()">导出CSV（仅问答）</button></div><div class="rule-row"><span class="lbl">每页条数</span><input class="input mini" type="number" value="${Number(cfg.aiKb.pageSize)||20}" onchange="cfg.aiKb.pageSize=Number(this.value)||20;saveLocal();renderAiAdmin()"></div><div class="hint" style="white-space:normal">完整 JSON 包含分类、待处理问题和正式问答；CSV 不含待处理问题和分类配置。</div></div></div>`}
+async function importAiKbFile(ev){let f=ev.target.files[0];if(!f)return;let txt=await f.text();importAiKbText(txt);ev.target.value=''}
+function importAiKbText(txt){txt=String(txt||'').trim();if(!txt)return toast('没有识别到可导入的内容');try{let j=JSON.parse(txt);let kb=j.aiKb||j;if(kb&&typeof kb==='object'&&(Array.isArray(kb.items)||Array.isArray(kb.categories)||Array.isArray(kb.pendingQuestions))&&!Array.isArray(j)){cfg.aiKb=normalizeAiKb(kb);saveLocal();renderAiAdmin();return toast('已导入完整知识库 JSON')}}catch(e){}let arr=parseKbImport(txt);if(!arr.length)return toast('没有识别到可导入的问答');let now=new Date().toISOString();arr.forEach(x=>{let category=ensureKbCategory(x.category||'未分类');aiItems().push({id:'kb_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),category,question:x.question||'',keywords:x.keywords||'',answer:x.answer||'',enabled:true,updatedAt:now})});saveLocal();aiKbPage=Math.ceil(aiItems().length/(Number(cfg.aiKb.pageSize)||20));renderAiAdmin();toast('已导入 '+arr.length+' 条')}
+function parseKbImport(txt){txt=String(txt||'').trim();if(!txt)return[];try{let j=JSON.parse(txt);let a=Array.isArray(j)?j:(j.items||[]);return a.map(x=>({question:x.question||x.q||'',answer:x.answer||x.a||'',category:x.category||x.cat||'未分类',keywords:Array.isArray(x.keywords)?x.keywords.join(','):(x.keywords||'')})).filter(x=>x.question||x.answer)}catch(e){}
+    let lines=txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean), out=[];
+    let sep=txt.includes('\t')?'\t':',';
+    if(lines.some(l=>l.includes('\t')||l.includes(','))){let start=0;let head=splitCsvLine(lines[0],sep).map(h=>h.toLowerCase());let hasHead=head.some(h=>/question|问题|答案|answer|分类|category/.test(h));if(hasHead)start=1;for(let i=start;i<lines.length;i++){let p=splitCsvLine(lines[i],sep);if(p.length>=2){out.push({question:p[head.indexOf('question')]||p[head.indexOf('问题')]||p[0]||'',answer:p[head.indexOf('answer')]||p[head.indexOf('答案')]||p[1]||'',category:p[head.indexOf('category')]||p[head.indexOf('分类')]||p[2]||'未分类',keywords:p[head.indexOf('keywords')]||p[head.indexOf('关键词')]||p[3]||''})}}if(out.length)return out.filter(x=>x.question||x.answer)}
+    let blocks=txt.split(/\n\s*\n/);blocks.forEach(b=>{let q=(b.match(/(?:问|问题|Q)[:：]\s*([^\n]+)/i)||[])[1]||'';let a=(b.match(/(?:答|答案|A)[:：]\s*([\s\S]+)/i)||[])[1]||'';if(q||a)out.push({question:q,answer:a.trim(),category:'未分类',keywords:''})});return out}
+function splitCsvLine(line,sep){let out=[],cur='',q=false;for(let i=0;i<line.length;i++){let ch=line[i];if(ch==='"'){q=!q;continue}if(ch===sep&&!q){out.push(cur.trim());cur=''}else cur+=ch}out.push(cur.trim());return out}
+function downloadText(name,content,type='text/plain'){let blob=new Blob([content],{type});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),800)}
+function exportAiKbJson(){cfg.aiKb=normalizeAiKb(cfg.aiKb);downloadText('ai_knowledge_base_full.json',JSON.stringify(cfg.aiKb,null,2),'application/json')}
+function exportAiKbCsv(){let rows=[['category','question','keywords','answer','enabled']].concat(aiItems().map(x=>[x.category,x.question,x.keywords,x.answer,x.enabled?'1':'0']));downloadText('ai_knowledge_base.csv',rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n'),'text/csv')}
+
+function renderExtras(){extraFeesBox.innerHTML=(cfg.extraFees||[]).map((e,i)=>`<div class="rule-row"><input class="input" style="flex:1" value="${esc(e.name)}" onchange="cfg.extraFees[${i}].name=this.value;saveLocal()"><input class="input mini" type="number" value="${e.amount||0}" onchange="cfg.extraFees[${i}].amount=Number(this.value)||0;saveLocal()"><label class="toggle"><input type="checkbox" ${e.is_percent?'checked':''} onchange="cfg.extraFees[${i}].is_percent=this.checked;saveLocal()">按%</label><label class="toggle"><input type="checkbox" ${e.enabled?'checked':''} onchange="cfg.extraFees[${i}].enabled=this.checked;saveLocal()">启用</label><label class="toggle"><input type="checkbox" ${e.allow_client_edit?'checked':''} onchange="cfg.extraFees[${i}].allow_client_edit=this.checked;saveLocal()">可改</label><button class="btn red pbtn" onclick="cfg.extraFees.splice(${i},1);saveLocal();renderExtras()">删</button></div>`).join('')||'<div class="empty">暂无单项目费用</div>'}function addExtraFee(){cfg.extraFees.push({name:'新费用',enabled:true,amount:0,allow_client_edit:true,is_percent:false});saveLocal();renderExtras()}
+
+let dragIdx = null;
+function dragStart(e, i){ dragIdx = i; e.dataTransfer.effectAllowed = 'move'; }
+function dragOver(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+function drop(e, i){
+    e.preventDefault();
+    if(dragIdx === null || dragIdx === i) return;
+    let draggedMat = cfg.materials.splice(dragIdx, 1)[0];
+    cfg.materials.splice(i, 0, draggedMat);
+    activeMat = i;
+    saveLocal();
+    renderMaterials();
+}
+
+function renderMaterials(){
+    if(activeMat>=cfg.materials.length)activeMat=cfg.materials.length-1;if(activeMat<0)activeMat=0;
+    const q=(materialSearch||'').trim().toLowerCase();
+    const filtered=cfg.materials.map((m,i)=>({m,i})).filter(x=>!q||String(x.m.name||'').toLowerCase().includes(q));
+    matBtns.innerHTML=`<input class="input matSearch" placeholder="搜索材质" value="${esc(materialSearch)}" oninput="materialSearch=this.value;renderMaterials()">`+(
+        filtered.length?filtered.map(({m,i})=>`
+        <button class="matBtn ${i===activeMat?'active':''}" 
+            draggable="true" 
+            ondragstart="dragStart(event,${i})" 
+            ondragover="dragOver(event)" 
+            ondrop="drop(event,${i})" 
+            onclick="activeMat=${i};renderMaterials()"
+            title="按住左右拖拽可调整排序">${esc(m.name)}</button>
+    `).join(''):'<span class="empty" style="padding:5px 10px">没有匹配材质</span>');
+    materialsBox.innerHTML=cfg.materials.length?matHTML(cfg.materials[activeMat],activeMat):'<div class="empty">暂无材质</div>';
+}
+function billByRules(m,mode,length,width,qty,isCost=false){
+    qty=Math.max(0,parseInt(qty)||0);length=Number(length)||0;width=Number(width)||0;
+    const areaEach=Math.max(0,length*width/10000), longSide=Math.max(length,width);
+    let amount=0;
+    if(mode==='area'){
+        let area=areaEach*qty, from=isCost?m.cost_min_area_from:m.min_area_from, to=isCost?m.cost_min_area_to:m.min_area_to, enabled=isCost?m.cost_min_area_enabled:m.min_area_enabled;
+        if(enabled&&area<Number(from||0))area=Number(to||area)||area;
+        amount=area*Number(isCost?m.area_cost_per_sqm:m.area_price_per_sqm||0);
+    }else{
+        let q=qty, from=isCost?m.cost_min_qty_from:m.min_qty_from, to=isCost?m.cost_min_qty_to:m.min_qty_to, enabled=isCost?m.cost_min_qty_enabled:m.min_qty_enabled;
+        if(enabled&&q<Number(from||0))q=Number(to||q)||q;
+        let tiers=(m.size_prices||[]).slice().sort((a,b)=>Number(a.max_size)-Number(b.max_size));
+        let p=tiers.find(x=>longSide<=Number(x.max_size))||tiers[tiers.length-1]||{price:0,cost:0};
+        amount=q*Number(isCost?p.cost:p.price||0);
+    }
+    let minEnabled=isCost?m.cost_min_amount_enabled:m.min_amount_enabled, minFrom=isCost?m.cost_min_amount_from:m.min_amount_from, minTo=isCost?m.cost_min_amount_to:m.min_amount_to;
+    if(minEnabled&&amount<Number(minFrom||0))amount=Number(minTo||amount)||amount;
+    return Math.round(amount);
+}
+function materialPreviewCalc(i){
+    let m=cfg.materials[i]||defaults.materials[0],l=Number(trialPreview.length)||0,w=Number(trialPreview.width)||0,q=parseInt(trialPreview.qty)||0,mode=m.defaultMode||'longest_side';
+    let sale=billByRules(m,mode,l,w,q,false),cost=billByRules(m,mode,l,w,q,true);
+    let waived=false;if(m.has_mold){waived=m.mold_waive_type==='amount'?sale>=Number(m.mold_waive_value||0):q>=Number(m.mold_waive_value||0);if(!waived){sale+=Math.round(Number(m.mold_fee)||0);cost+=Math.round(Number(m.mold_cost??m.mold_fee)||0)}}
+    let margin=sale-cost, pct=sale?Math.round(margin/sale*100):0, unit=q? sale/q:0;
+    return {m,l,w,q,mode,sale,cost,margin,pct,unit,waived};
+}
+function renderMaterialPreview(i){
+    let p=materialPreviewCalc(i);
+    return `<div class="previewBox"><h3 class="sub">试算预览</h3><div class="previewForm"><div class="previewField"><span>模式</span><div class="previewStatic">${p.mode==='area'?'面积':'最长边'}</div></div><div class="previewField"><span>尺寸(cm)</span><div class="previewDims"><input class="input" type="number" value="${p.l||''}" onchange="trialPreview.length=Number(this.value)||0;renderMaterials()"><div class="sizeX">×</div><input class="input" type="number" value="${p.w||''}" onchange="trialPreview.width=Number(this.value)||0;renderMaterials()"></div></div><div class="previewField"><span>数量</span><input class="input" type="number" value="${p.q||''}" onchange="trialPreview.qty=Number(this.value)||0;renderMaterials()"></div></div><div class="previewKpiWrap"><div class="previewKpi"><span>销售价</span><b>¥${p.sale}</b></div><div class="previewKpi"><span>成本</span><b>¥${p.cost}</b></div><div class="previewKpi ${p.pct<Number(p.m.min_margin_pct||0)?'warn':''}"><span>毛利率</span><b>${p.pct}%</b></div><div class="previewKpi"><span>约单价</span><b>¥${p.unit.toFixed(2)}</b></div><div class="previewKpi"><span>模具状态</span><b>${p.m.has_mold?(p.waived?'已免模具费':'需计模具费'):'无模具费'}</b></div></div></div>`;
+}
+
+function matHTML(m,i){
+let priceLines=(m.size_prices||[]).map((p,j)=>`
+    <div class="tier-row">
+        <span class="lbl">≤ cm</span><input class="input mini" type="number" value="${p.max_size}" onchange="cfg.materials[${i}].size_prices[${j}].max_size=Number(this.value)||0;saveLocal()">
+        <span class="lbl green">卖价</span><input class="input mini" type="number" value="${p.price}" onchange="cfg.materials[${i}].size_prices[${j}].price=Number(this.value)||0;saveLocal()">
+        <span class="lbl orange">成本</span><input class="input mini" type="number" value="${p.cost||0}" onchange="cfg.materials[${i}].size_prices[${j}].cost=Number(this.value)||0;saveLocal()">
+        <button class="btn red pbtn" style="width:100%;height:28px" onclick="removePrice(${i},${j})">删</button>
+    </div>`).join('');
+let customCostLines=(m.custom_costs||[]).map((cc,j)=>`
+    <div class="rule-row">
+        <input class="input" style="flex:1" value="${esc(cc.name)}" placeholder="成本名称" onchange="cfg.materials[${i}].custom_costs[${j}].name=this.value;saveLocal()">
+        <input class="input mini" type="number" value="${cc.amount||0}" onchange="cfg.materials[${i}].custom_costs[${j}].amount=Number(this.value)||0;saveLocal()">
+        <button class="btn red pbtn" onclick="cfg.materials[${i}].custom_costs.splice(${j},1);saveLocal();renderMaterials()">删</button>
+    </div>`).join('');
+
+let accLines = (m.accessories||[]).map((acc, j) => `
+    <div class="rule-row" style="background:#f8fafc; padding:8px; border-radius:6px; margin-bottom:8px; border:1px solid var(--bd);">
+        <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
+            <div class="rule-row">
+                <label class="toggle"><input type="checkbox" ${acc.enabled?'checked':''} onchange="cfg.materials[${i}].accessories[${j}].enabled=this.checked;saveLocal();renderMaterials()">启用</label>
+                <label class="toggle"><input type="checkbox" ${acc.required?'checked':''} onchange="cfg.materials[${i}].accessories[${j}].required=this.checked;saveLocal();renderMaterials()">必选</label>
+                <input class="input" style="flex:1; margin-left:6px" value="${esc(acc.name)}" placeholder="工艺名称" onchange="cfg.materials[${i}].accessories[${j}].name=this.value;saveLocal()">
+                <select class="select" style="width:82px" onchange="cfg.materials[${i}].accessories[${j}].type=this.value;saveLocal();renderMaterials()">
+                    <option value="qty" ${acc.type==='qty'?'selected':''}>按个</option>
+                    <option value="area" ${acc.type==='area'?'selected':''}>按面积</option>
+                    <option value="meter" ${acc.type==='meter'?'selected':''}>按米</option>
+                    <option value="row" ${acc.type==='row'?'selected':''}>按行</option>
+                </select>
+                <button class="btn red pbtn" onclick="cfg.materials[${i}].accessories.splice(${j},1);saveLocal();renderMaterials()">删</button>
+            </div>
+            ${acc.type==='row'?'<div class="hint" style="white-space:normal;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:6px 8px">按行：该工艺每一行报价只收一次，适合开模费、制版费、打样费等一次性费用。</div>':''}
+            <div style="display:${acc.enabled?'block':'none'}">
+                <div class="rule-row" style="padding-left:4px;">
+                    <span class="lbl green">卖价</span><input class="input mini" type="number" value="${acc.price||0}" onchange="cfg.materials[${i}].accessories[${j}].price=Number(this.value)||0;saveLocal()">
+                    <span class="lbl">/${acc.type==='area'?'㎡':acc.type==='meter'?'米':acc.type==='row'?'行':'个'}</span>
+                    <span class="lbl orange" style="margin-left:12px">成本</span><input class="input mini" type="number" value="${acc.cost||0}" onchange="cfg.materials[${i}].accessories[${j}].cost=Number(this.value)||0;saveLocal()">
+                    <span class="lbl">/${acc.type==='area'?'㎡':acc.type==='meter'?'米':acc.type==='row'?'行':'个'}</span>
+                </div>
+                <div class="rule-row" style="padding-left:4px; margin-top:8px">
+                    <span class="lbl">组合组</span><input class="input" style="flex:1" value="${esc(acc.bundle||'')}" placeholder="例如：挂轴套装；同名自动捆绑" onchange="cfg.materials[${i}].accessories[${j}].bundle=this.value.trim();saveLocal()">
+                </div>
+                <div class="rule-row" style="padding-left:4px; margin-top:8px; background:#fff; border:1px dashed #bfdbfe; border-radius:8px; padding-top:7px; padding-bottom:7px;">
+                    <label class="toggle"><input type="checkbox" ${acc.waive_enabled?'checked':''} onchange="cfg.materials[${i}].accessories[${j}].waive_enabled=this.checked;saveLocal();renderMaterials()">达标减免</label>
+                    <span class="lbl">满</span><input class="input mini" type="number" value="${acc.waive_value||0}" onchange="cfg.materials[${i}].accessories[${j}].waive_value=Number(this.value)||0;saveLocal()">
+                    <select class="select" style="width:92px" onchange="cfg.materials[${i}].accessories[${j}].waive_type=this.value;saveLocal()">
+                        <option value="quantity" ${acc.waive_type==='quantity'?'selected':''}>数量减免</option>
+                        <option value="amount" ${acc.waive_type==='amount'?'selected':''}>金额减免</option>
+                    </select>
+                    <span class="hint" style="white-space:nowrap">达到门槛自动减免</span>
+                </div>
+                <div class="rule-row" style="padding-left:4px; margin-top:8px">
+                    <span class="lbl">单个卖不足</span><input class="input micro" type="number" value="${acc.min_from||0}" onchange="cfg.materials[${i}].accessories[${j}].min_from=Number(this.value)||0;saveLocal()">
+                    <span class="lbl">按</span><input class="input micro" type="number" value="${acc.min_to||0}" onchange="cfg.materials[${i}].accessories[${j}].min_to=Number(this.value)||0;saveLocal()"> <span class="lbl" style="width:14px">${acc.type==='area'?'㎡':acc.type==='meter'?'米':acc.type==='row'?'行':'个'}</span>
+                    <span class="lbl" style="margin-left:12px">单个成不足</span><input class="input micro" type="number" value="${acc.cost_min_from||0}" onchange="cfg.materials[${i}].accessories[${j}].cost_min_from=Number(this.value)||0;saveLocal()">
+                    <span class="lbl">按</span><input class="input micro" type="number" value="${acc.cost_min_to||0}" onchange="cfg.materials[${i}].accessories[${j}].cost_min_to=Number(this.value)||0;saveLocal()"> <span class="lbl" style="width:14px">${acc.type==='area'?'㎡':acc.type==='meter'?'米':acc.type==='row'?'行':'个'}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+`).join('');
+
+return `<div class="matPage"><div class="matHead"><div class="matName">${esc(m.name)}</div><details class="dangerMenu"><summary class="btn">更多</summary><div class="dangerDrop"><button class="btn red" style="width:100%" onclick="deleteMaterial(${i})">删除材质</button></div></details></div>${renderMaterialPreview(i)}<div class="matBody"><div class="compactGrid">
+
+<div class="box"><h3 class="sub">基础属性</h3><div class="form"><label>材质名称</label><input class="input" value="${esc(m.name)}" onchange="cfg.materials[${i}].name=this.value;saveLocal();renderMaterials()"><label>默认模式</label><select class="select" onchange="cfg.materials[${i}].defaultMode=this.value;saveLocal()"><option value="longest_side" ${m.defaultMode==='longest_side'?'selected':''}>最长边</option><option value="area" ${m.defaultMode==='area'?'selected':''}>面积</option></select><label>单位名称</label><input class="input" value="${esc(m.unitName||'个')}" onchange="cfg.materials[${i}].unitName=this.value;saveLocal()"></div></div>
+
+<div class="box"><h3 class="sub">最长边 & 面积定价</h3>
+    <div class="area-row">
+        <div class="area-item"><span class="lbl green">面积卖价</span><input class="input mini" type="number" value="${m.area_price_per_sqm||0}" onchange="cfg.materials[${i}].area_price_per_sqm=Number(this.value)||0;saveLocal()"></div>
+        <div class="area-item"><span class="lbl orange">面积成本</span><input class="input mini" type="number" value="${m.area_cost_per_sqm||0}" onchange="cfg.materials[${i}].area_cost_per_sqm=Number(this.value)||0;saveLocal()"></div>
+    </div>
+    ${priceLines}
+    <button class="btn" style="width:100%;margin-top:6px" onclick="addPrice(${i})">＋ 添加最长边档位</button>
+</div>
+
+<div class="box"><h3 class="sub" style="color:var(--green)">卖价起算规则</h3>
+    <div class="rule-row"><label class="toggle" style="width:54px"><input type="checkbox" ${m.min_qty_enabled?'checked':''} onchange="cfg.materials[${i}].min_qty_enabled=this.checked;saveLocal()">数量</label><span class="lbl">不足</span><input class="input mini" type="number" value="${m.min_qty_from||1}" onchange="cfg.materials[${i}].min_qty_from=Number(this.value)||0;saveLocal()"><span class="lbl">按</span><input class="input mini" type="number" value="${m.min_qty_to||1}" onchange="cfg.materials[${i}].min_qty_to=Number(this.value)||0;saveLocal()"><span class="lbl">计</span></div>
+    <div class="rule-row"><label class="toggle" style="width:54px"><input type="checkbox" ${m.min_amount_enabled?'checked':''} onchange="cfg.materials[${i}].min_amount_enabled=this.checked;saveLocal()">单个金额</label><span class="lbl">不足</span><input class="input mini" type="number" value="${m.min_amount_from||20}" onchange="cfg.materials[${i}].min_amount_from=Number(this.value)||0;saveLocal()"><span class="lbl">按</span><input class="input mini" type="number" value="${m.min_amount_to||20}" onchange="cfg.materials[${i}].min_amount_to=Number(this.value)||0;saveLocal()"><span class="lbl">元计</span></div>
+    <div class="rule-row"><label class="toggle" style="width:54px"><input type="checkbox" ${m.min_area_enabled?'checked':''} onchange="cfg.materials[${i}].min_area_enabled=this.checked;saveLocal()">单个面积</label><span class="lbl">不足</span><input class="input mini" type="number" step="0.0001" value="${m.min_area_from||0.01}" onchange="cfg.materials[${i}].min_area_from=Number(this.value)||0;saveLocal()"><span class="lbl">按</span><input class="input mini" type="number" step="0.0001" value="${m.min_area_to||0.01}" onchange="cfg.materials[${i}].min_area_to=Number(this.value)||0;saveLocal()"><span class="lbl">㎡计</span></div>
+</div>
+
+<div class="box"><h3 class="sub" style="color:var(--orange)">成本起算规则</h3>
+    <div class="rule-row"><label class="toggle" style="width:54px"><input type="checkbox" ${m.cost_min_qty_enabled?'checked':''} onchange="cfg.materials[${i}].cost_min_qty_enabled=this.checked;saveLocal()">数量</label><span class="lbl">不足</span><input class="input mini" type="number" value="${m.cost_min_qty_from||1}" onchange="cfg.materials[${i}].cost_min_qty_from=Number(this.value)||0;saveLocal()"><span class="lbl">按</span><input class="input mini" type="number" value="${m.cost_min_qty_to||1}" onchange="cfg.materials[${i}].cost_min_qty_to=Number(this.value)||0;saveLocal()"><span class="lbl">计</span></div>
+    <div class="rule-row"><label class="toggle" style="width:54px"><input type="checkbox" ${m.cost_min_amount_enabled?'checked':''} onchange="cfg.materials[${i}].cost_min_amount_enabled=this.checked;saveLocal()">单个金额</label><span class="lbl">不足</span><input class="input mini" type="number" value="${m.cost_min_amount_from||10}" onchange="cfg.materials[${i}].cost_min_amount_from=Number(this.value)||0;saveLocal()"><span class="lbl">按</span><input class="input mini" type="number" value="${m.cost_min_amount_to||10}" onchange="cfg.materials[${i}].cost_min_amount_to=Number(this.value)||0;saveLocal()"><span class="lbl">元计</span></div>
+    <div class="rule-row"><label class="toggle" style="width:54px"><input type="checkbox" ${m.cost_min_area_enabled?'checked':''} onchange="cfg.materials[${i}].cost_min_area_enabled=this.checked;saveLocal()">单个面积</label><span class="lbl">不足</span><input class="input mini" type="number" step="0.0001" value="${m.cost_min_area_from||0.01}" onchange="cfg.materials[${i}].cost_min_area_from=Number(this.value)||0;saveLocal()"><span class="lbl">按</span><input class="input mini" type="number" step="0.0001" value="${m.cost_min_area_to||0.01}" onchange="cfg.materials[${i}].cost_min_area_to=Number(this.value)||0;saveLocal()"><span class="lbl">㎡计</span></div>
+</div>
+
+<div class="box"><h3 class="sub">工艺配套</h3>
+    ${accLines}
+    <button class="btn" style="width:100%;margin-bottom:12px" onclick="cfg.materials[${i}].accessories.push({name:'新工艺', type:'qty', enabled:true, required:false, price:0, cost:0, min_from:1, min_to:1, cost_min_from:1, cost_min_to:1, bundle:'', waive_enabled:false, waive_type:'quantity', waive_value:0});saveLocal();renderMaterials()">＋ 添加配套工艺</button>
+</div>
+
+<div class="box"><h3 class="sub" style="color:var(--blue)">💼 综合成本设定</h3>
+    <div class="rule-row" style="margin-bottom:12px">
+        <span class="lbl">最低毛利要求</span><input class="input mini" type="number" value="${m.min_margin_pct||50}" onchange="cfg.materials[${i}].min_margin_pct=Number(this.value)||0;saveLocal()"> <span class="lbl">%</span>
+    </div>
+    <hr style="margin:10px 0;border:0;border-top:1px dashed var(--bd)">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600">📦 单笔固定成本 (全窗同名取最高)</div>
+    ${customCostLines}
+    <button class="btn" style="width:100%;margin-top:6px" onclick="cfg.materials[${i}].custom_costs.push({name:'新成本',amount:0});saveLocal();renderMaterials()">＋ 添加固定成本</button>
+</div>
+
+</div></div></div>`}
+function addPrice(i){let arr=cfg.materials[i].size_prices;let last=arr[arr.length-1]||{max_size:10,price:5,cost:2};arr.push({max_size:Number(last.max_size)+5,price:Number(last.price)+2,cost:Number(last.cost)+1});saveLocal();renderMaterials()}function removePrice(i,j){if(cfg.materials[i].size_prices.length<=1)return toast('至少保留一个档位');cfg.materials[i].size_prices.splice(j,1);saveLocal();renderMaterials()}
+function addMaterial(){
+    let newMat = structuredClone(cfg.materials[activeMat] || defaults.materials[0]);
+    newMat.name = '新材质';
+    cfg.materials.push(newMat);
+    activeMat = cfg.materials.length - 1;
+    saveLocal();
+    renderMaterials();
+}
+function deleteMaterial(i){if(cfg.materials.length<=1)return toast('至少保留一个材质');if(confirm('确定删除这个材质？')){cfg.materials.splice(i,1);activeMat=Math.max(0,i-1);saveLocal();renderMaterials()}}
+async function readGist(){let r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}?t=${Date.now()}`,{cache:'no-store',headers:authHeaders()});if(!r.ok)throw new Error('读取失败:'+r.status);return await r.json()}
+async function loadCloud(show=false,internal=false){
+    try{
+        let d=await readGist();
+        let f=d.files?.[FILE]||d.files?.[LEGACY_FILE];
+        if(f&&f.content){cfg=normalize(JSON.parse(f.content));}
+        cloudLoadedUpdatedAt=cfg.updatedAt||'';
+        let af=d.files?.[AUTH_FILE]||d.files?.[LEGACY_AUTH_FILE];
+        cfg.auth=af&&af.content?normalizeAuth(JSON.parse(af.content)):normalizeAuth(cfg.auth);
+        storeLocal();adminDirty=false;
+        const loadedText='已加载云端：'+new Date().toLocaleString();
+        setCloudStatus(cfg.updatedAt?`${loadedText}｜云端版本：${cfg.updatedAt}`:loadedText,'ok');
+        render();showAdminGate();
+        if(show)toast(cfg.updatedAt?'已加载云端，云端版本：'+cfg.updatedAt:(d.files?.[FILE]?'已加载云端':'已从旧配置读取，请保存上传到新版云端'));
+    }catch(e){setCloudStatus('加载失败','bad');if(show)toast('加载失败:'+e.message);showAdminGate();if(!internal)render();}
+}
+function cloudConfigFromGist(d){
+    let f=d.files?.[FILE]||d.files?.[LEGACY_FILE];
+    return f&&f.content?normalize(JSON.parse(f.content)):null;
+}
+function isCloudNewerThanLoaded(cloudUpdatedAt){
+    if(!cloudUpdatedAt||!cloudLoadedUpdatedAt)return false;
+    let cloudTime=Date.parse(cloudUpdatedAt),loadedTime=Date.parse(cloudLoadedUpdatedAt);
+    if(Number.isFinite(cloudTime)&&Number.isFinite(loadedTime))return cloudTime>loadedTime;
+    return String(cloudUpdatedAt)>String(cloudLoadedUpdatedAt);
+}
+async function backupCloudConfig(d){
+    const f=d.files?.[FILE];
+    if(!f||!f.content)throw new Error('备份失败，已取消上传');
+    const r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`,{method:'PATCH',headers:{Authorization:`token ${GITHUB_CONFIG.token}`,'Content-Type':'application/json',Accept:'application/vnd.github.v3+json'},body:JSON.stringify({files:{[BACKUP_FILE]:{content:f.content}}})});
+    if(!r.ok)throw new Error('备份失败，已取消上传');
+}
+async function uploadCloud(show=false){
+    if(!requireAdmin())return;
+    try{
+        let d=await readGist();
+        let cloudCfg=cloudConfigFromGist(d);
+        if(cloudCfg&&isCloudNewerThanLoaded(cloudCfg.updatedAt)){
+            setCloudStatus('云端已有别人更新','bad');
+            toast('云端已有别人更新，请先加载云端再修改。');
+            throw new Error('云端已有别人更新，请先加载云端再修改。');
+        }
+        try{await backupCloudConfig(d)}catch(e){setCloudStatus('备份失败','bad');toast('备份失败，已取消上传');throw e}
+        readBasic();cfg.aiKb=normalizeAiKb(cfg.aiKb);cfg.updatedAt=new Date().toISOString();
+        let configCopy=JSON.parse(JSON.stringify(cfg));delete configCopy.auth;
+        let r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`,{method:'PATCH',headers:{Authorization:`token ${GITHUB_CONFIG.token}`,'Content-Type':'application/json',Accept:'application/vnd.github.v3+json'},body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(configCopy,null,2)}}})});
+        if(!r.ok)throw new Error('上传失败:'+r.status);
+        cloudLoadedUpdatedAt=cfg.updatedAt||'';
+        storeLocal();adminDirty=false;setCloudStatus('已上传新版云端 '+new Date().toLocaleTimeString(),'ok');if(show)toast('已上传配置到新版云端；旧管理端保存不会影响新版客服端')
+    }catch(e){
+        const msg=e.message||'上传失败';
+        if(msg.includes('备份失败'))setCloudStatus('备份失败','bad');
+        else if(msg.includes('云端已有别人更新'))setCloudStatus('云端已有别人更新','bad');
+        else setCloudStatus('上传失败','bad');
+        toast(msg);
+        throw e
+    }
+}
+async function restoreBackupCloud(){
+    if(!requireAdmin())return;
+    try{
+        let d=await readGist();
+        let f=d.files?.[BACKUP_FILE];
+        if(!f||!f.content)return toast('暂无备份');
+        cfg=normalize(JSON.parse(f.content));
+        cloudLoadedUpdatedAt=cfg.updatedAt||'';
+        storeLocal();adminDirty=true;
+        render();showAdminGate();
+        setCloudStatus('已恢复到上一版备份，检查无误后请点保存上传','dirty');
+        toast('已恢复到上一版备份');
+    }catch(e){setCloudStatus('恢复备份失败','bad');toast('恢复备份失败:'+e.message)}
+}
+function exportJson(){if(!requireAdmin())return;readBasic();let blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fridge_magnet_config_cloud_v2.json';a.click()}
+function importJson(ev){if(!requireAdmin()){ev.target.value='';return}let f=ev.target.files[0];if(!f)return;if(!confirm('导入配置会覆盖当前材质、费用、知识库、分类和待处理问题。建议先导出备份。是否继续？')){ev.target.value='';return}let rd=new FileReader();rd.onload=()=>{try{cfg=normalize(JSON.parse(rd.result));saveLocal();render();toast('导入成功')}catch(e){toast('JSON格式错误')}};rd.readAsText(f);ev.target.value=''}
+
+/* account ui v5 */
+let accountFilterText='';
+function setAccountFilter(v){accountFilterText=String(v||'').trim().toLowerCase();renderAuth()}
+function roleBadgeClass(u){return u.role==='super_admin'?'super':(u.role==='admin'?'admin':'staff')}
+async function patchAuth(show=false,allowInit=false){
+    try{
+        if(!allowInit&&!requireAdmin())return;
+        cfg.auth=normalizeAuth(cfg.auth);
+        let r=await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`,{method:'PATCH',headers:{Authorization:`token ${GITHUB_CONFIG.token}`,'Content-Type':'application/json',Accept:'application/vnd.github.v3+json'},body:JSON.stringify({files:{[AUTH_FILE]:{content:JSON.stringify(cfg.auth,null,2)}}})});
+        if(!r.ok)throw new Error('失败:'+r.status);
+        storeLocal();
+        setCloudStatus('账号权限已自动上传 '+new Date().toLocaleTimeString(),'ok');
+        if(show)toast('账号权限已自动上传');
+    }catch(e){setCloudStatus('账号上传失败','bad');toast(e.message);throw e}
+}
+function accountMatches(u){
+    let q=accountFilterText;
+    if(!q)return true;
+    return [u.username,u.name,roleLabel(u),u.enabled?'启用':'停用'].join(' ').toLowerCase().includes(q);
+}
+function renderUserRow(u){
+    let can=canManageAccount(u), superMe=currentAdminIsSuper();
+    let roleOps='';
+    if(superMe && u.role!=='super_admin') roleOps+=`<button class="btn" onclick="setUserRole('${u.username}','${u.role==='admin'?'staff':'admin'}')">${u.role==='admin'?'设为客服':'设为管理员'}</button>`;
+    let ops = can ? `${roleOps}<button class="btn" onclick="resetUserPassword('${u.username}')">重置密码</button><button class="btn" onclick="toggleUser('${u.username}')">${u.enabled?'停用':'启用'}</button><button class="btn red" onclick="removeUser('${u.username}')">删除</button>` : '<span class="hint">不可操作</span>';
+    return `<details class="userCard"><summary><span class="userCardName"><span class="userStatusDot ${u.enabled?'':'off'}"></span><b title="${esc(u.username)}">${esc(u.name||u.username)}</b></span><span class="userMiniRole">${roleLabel(u)}</span></summary><div class="userCardBody"><div class="userCardMeta"><span class="roleBadge ${roleBadgeClass(u)}">${roleLabel(u)}</span> <span class="${u.enabled?'':'badge warn'}">${u.enabled?'启用':'停用'}</span><div class="code">登录账号：${esc(u.username)}</div><div>更新：${esc(u.updatedAt?new Date(u.updatedAt).toLocaleString():'—')}</div></div><div class="userOps">${ops}</div></div></details>`;
+}
+function renderAccountGroup(title, list, emptyText, open=false){
+    return `<details class="accountGroup" ${open?'open':''}><summary><span>${title}</span><span class="count">${list.length} 个</span></summary><div class="accountList">${list.length?list.map(renderUserRow).join(''):`<div class="empty">${emptyText}</div>`}</div></details>`;
+}
+async function initAdminApp(){render();await loadCloud(false,true);showAdminGate();}
+initAdminApp();
+
+/* v11 account create modal */
+function openAccountCreatePanel(){
+    if(!requireAdmin())return;
+    const overlay=document.getElementById('accountCreateOverlay');
+    const role=document.getElementById('accountModalRole');
+    role.innerHTML=currentAdminIsSuper()?'<option value="staff">客服</option><option value="admin">管理员</option>':'<option value="staff">客服</option>';
+    document.getElementById('accountModalUser').value='';
+    document.getElementById('accountModalPass').value='';
+    overlay.classList.add('show');
+    setTimeout(()=>document.getElementById('accountModalUser')?.focus(),50);
+}
+function closeAccountCreatePanel(ev){
+    const overlay=document.getElementById('accountCreateOverlay');
+    if(ev&&ev.target!==overlay)return;
+    overlay?.classList.remove('show');
+}
+async function addUser(){
+    if(!requireAdmin())return;
+    const modalOpen=document.getElementById('accountCreateOverlay')?.classList.contains('show');
+    let username,password,role;
+    if(modalOpen){
+        username=cleanUsername(document.getElementById('accountModalUser').value);
+        password=document.getElementById('accountModalPass').value||'';
+        role=currentAdminIsSuper()?document.getElementById('accountModalRole').value:'staff';
+    }else{
+        username=cleanUsername(newUserAccount?.value);
+        password=newUserPassword?.value||'';
+        role=currentAdminIsSuper()?(newUserRole?.value||'staff'):'staff';
+    }
+    if(!['staff','admin'].includes(role))role='staff';
+    if(!username||!password)return toast('请输入账号和密码');
+    if(username.length<1||username.length>30)return toast('账号长度需为1-30位');
+    if(/\s/.test(username))return toast('账号不要包含空格');
+    if(password.length<4)return toast('密码至少4位');
+    cfg.auth=normalizeAuth(cfg.auth);
+    if(cfg.auth.users.some(u=>u.username===username))return toast('账号已存在');
+    let now=new Date().toISOString();
+    cfg.auth.users.push({username,name:username,passwordHash:await hashPassword(password),role,enabled:true,createdAt:now,updatedAt:now});
+    await patchAuth(true);
+    closeAccountCreatePanel();
+    renderAuth();
+}
+/* v12 account panel cleanup */
+function renderAuth(){
+    cfg.auth=normalizeAuth(cfg.auth);renderAdminChrome();
+    const box=document.getElementById('authUsers');if(!box)return;
+    const all=cfg.auth.users||[];
+    const users=all.filter(accountMatches);
+    const admins=users.filter(u=>u.role==='admin'||u.role==='super_admin');
+    const staffs=users.filter(u=>u.role==='staff');
+    const totalStaff=all.filter(u=>u.role==='staff').length;
+    const totalAdmin=all.filter(u=>u.role==='admin'||u.role==='super_admin').length;
+    box.innerHTML=`<div class="accountTop"><input class="accountSearch" value="${esc(accountFilterText)}" placeholder="搜索账号 / 姓名 / 角色" oninput="setAccountFilter(this.value)"><button class="btn green" onclick="openAccountCreatePanel()">＋ 新增</button></div><div class="accountStatsLine"><span>管理员 <b>${totalAdmin}</b> 个</span><span>客服 <b>${totalStaff}</b> 个</span></div>${renderAccountGroup('管理员账号',admins,'暂无管理员。首次初始化会创建超级管理员。',true)}${renderAccountGroup('客服账号',staffs,'暂无客服账号',false)}`;
+}
+
+
+
+</script></body></html>
